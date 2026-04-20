@@ -1,7 +1,11 @@
 """Tests for src/data_loader.py — HuggingFace calls are mocked."""
 
+import os
 import sys
-from unittest.mock import MagicMock, patch, call
+import tempfile
+import zipfile
+from unittest.mock import MagicMock, patch
+
 import pytest
 
 if "datasets" not in sys.modules:
@@ -10,101 +14,124 @@ if "huggingface_hub" not in sys.modules:
     sys.modules["huggingface_hub"] = MagicMock()
 
 _FPB_LABELS = ["negative", "neutral", "positive"]
+_REPO_FILES  = ["data/FinancialPhraseBank-v1.0.zip"]
 
 
-def _make_info_response():
-    m = MagicMock()
-    m.json.return_value = {
-        "dataset_info": {
-            "features": {
-                "label": {"names": _FPB_LABELS}
-            }
-        }
-    }
-    return m
-
-
-def _make_rows_response(n: int, done: bool = True):
-    rows = [
-        {"row": {"sentence": f"sentence {i}", "label": i % 3}}
-        for i in range(n)
-    ]
-    m = MagicMock()
-    m.json.return_value = {"rows": rows, "num_rows_total": n}
-    return m
+def _make_test_zip(n: int) -> str:
+    """Create a temp zip with n FPB sentences in Sentences_75Agree.txt; return path."""
+    lines = [f"sentence {i}@{_FPB_LABELS[i % 3]}" for i in range(n)]
+    content = "\n".join(lines)
+    tmp = tempfile.NamedTemporaryFile(suffix=".zip", delete=False)
+    tmp.close()
+    with zipfile.ZipFile(tmp.name, "w") as zf:
+        zf.writestr(
+            "FinancialPhraseBank-v1.0/Sentences_75Agree.txt",
+            content.encode("latin-1"),
+        )
+    return tmp.name
 
 
 def _fake_fiqa_rows():
     return [
-        {"sentence": "strong gains", "score": 0.8},
-        {"sentence": "minor losses", "score": -0.5},
-        {"sentence": "filed report", "score": 0.0},
-        {"sentence": "revenue down slightly", "score": -0.05},
-        {"sentence": "massive profit", "score": 0.95},
-        {"sentence": "dividend cut", "score": -0.3},
+        {"sentence": "strong gains",          "score":  0.8},
+        {"sentence": "minor losses",           "score": -0.5},
+        {"sentence": "filed report",           "score":  0.0},
+        {"sentence": "revenue down slightly",  "score": -0.05},
+        {"sentence": "massive profit",         "score":  0.95},
+        {"sentence": "dividend cut",           "score": -0.3},
     ]
 
 
 # ---------------------------------------------------------------------------
-# FPB tests — mock requests.get
+# FPB tests — mock huggingface_hub.list_repo_files + hf_hub_download
 # ---------------------------------------------------------------------------
 
-def _fpb_get_side_effect(n):
-    """Return info response on first call, rows response on second."""
-    responses = [_make_info_response(), _make_rows_response(n)]
-    return iter(responses).__next__
+@patch("huggingface_hub.hf_hub_download")
+@patch("huggingface_hub.list_repo_files")
+def test_fpb_returns_two_splits(mock_list, mock_dl):
+    zp = _make_test_zip(20)
+    try:
+        mock_list.return_value = _REPO_FILES
+        mock_dl.return_value = zp
+        from src.data_loader import load_fpb
+        train, test = load_fpb()
+        assert len(train) + len(test) == 20
+    finally:
+        os.unlink(zp)
 
 
-@patch("requests.get")
-def test_fpb_returns_two_splits(mock_get):
-    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
-    from src.data_loader import load_fpb
-    train, test = load_fpb()
-    assert len(train) + len(test) == 20
+@patch("huggingface_hub.hf_hub_download")
+@patch("huggingface_hub.list_repo_files")
+def test_fpb_test_fraction(mock_list, mock_dl):
+    zp = _make_test_zip(20)
+    try:
+        mock_list.return_value = _REPO_FILES
+        mock_dl.return_value = zp
+        from src.data_loader import load_fpb
+        train, test = load_fpb(test_fraction=0.20, seed=42)
+        assert len(test) == 4
+        assert len(train) == 16
+    finally:
+        os.unlink(zp)
 
 
-@patch("requests.get")
-def test_fpb_test_fraction(mock_get):
-    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
-    from src.data_loader import load_fpb
-    train, test = load_fpb(test_fraction=0.20, seed=42)
-    assert len(test) == 4
-    assert len(train) == 16
+@patch("huggingface_hub.hf_hub_download")
+@patch("huggingface_hub.list_repo_files")
+def test_fpb_splits_tagged(mock_list, mock_dl):
+    zp = _make_test_zip(20)
+    try:
+        mock_list.return_value = _REPO_FILES
+        mock_dl.return_value = zp
+        from src.data_loader import load_fpb
+        train, test = load_fpb()
+        assert all(s["split"] == "train" for s in train)
+        assert all(s["split"] == "test" for s in test)
+    finally:
+        os.unlink(zp)
 
 
-@patch("requests.get")
-def test_fpb_splits_tagged(mock_get):
-    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
-    from src.data_loader import load_fpb
-    train, test = load_fpb()
-    assert all(s["split"] == "train" for s in train)
-    assert all(s["split"] == "test" for s in test)
+@patch("huggingface_hub.hf_hub_download")
+@patch("huggingface_hub.list_repo_files")
+def test_fpb_label_mapping(mock_list, mock_dl):
+    zp = _make_test_zip(3)
+    try:
+        mock_list.return_value = _REPO_FILES
+        mock_dl.return_value = zp
+        from src.data_loader import load_fpb
+        train, test = load_fpb(test_fraction=0.0, seed=0)
+        labels = {s["label"] for s in train}
+        assert labels == {"negative", "neutral", "positive"}
+    finally:
+        os.unlink(zp)
 
 
-@patch("requests.get")
-def test_fpb_label_mapping(mock_get):
-    mock_get.side_effect = [_make_info_response(), _make_rows_response(3)]
-    from src.data_loader import load_fpb
-    train, test = load_fpb(test_fraction=0.0, seed=0)
-    labels = {s["label"] for s in train}
-    assert labels == {"negative", "neutral", "positive"}
+@patch("huggingface_hub.hf_hub_download")
+@patch("huggingface_hub.list_repo_files")
+def test_fpb_ids_unique(mock_list, mock_dl):
+    zp = _make_test_zip(20)
+    try:
+        mock_list.return_value = _REPO_FILES
+        mock_dl.return_value = zp
+        from src.data_loader import load_fpb
+        train, test = load_fpb()
+        all_ids = [s["id"] for s in train + test]
+        assert len(all_ids) == len(set(all_ids))
+    finally:
+        os.unlink(zp)
 
 
-@patch("requests.get")
-def test_fpb_ids_unique(mock_get):
-    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
-    from src.data_loader import load_fpb
-    train, test = load_fpb()
-    all_ids = [s["id"] for s in train + test]
-    assert len(all_ids) == len(set(all_ids))
-
-
-@patch("requests.get")
-def test_fpb_dataset_field(mock_get):
-    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
-    from src.data_loader import load_fpb
-    train, test = load_fpb()
-    assert all(s["dataset"] == "FPB" for s in train + test)
+@patch("huggingface_hub.hf_hub_download")
+@patch("huggingface_hub.list_repo_files")
+def test_fpb_dataset_field(mock_list, mock_dl):
+    zp = _make_test_zip(20)
+    try:
+        mock_list.return_value = _REPO_FILES
+        mock_dl.return_value = zp
+        from src.data_loader import load_fpb
+        train, test = load_fpb()
+        assert all(s["dataset"] == "FPB" for s in train + test)
+    finally:
+        os.unlink(zp)
 
 
 # ---------------------------------------------------------------------------
