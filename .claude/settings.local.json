@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(py --version)",
+      "Bash(py -c ' *)",
+      "Bash(py -m pytest tests/test_parser.py -v)",
+      "Bash(py -m pytest tests/test_parser.py tests/test_prompts.py tests/test_data_loader.py -v)",
+      "Bash(py -m pytest tests/ -v)",
+      "Bash(py -m pytest tests/test_evaluation.py -v)",
+      "Bash(py -m pytest tests/test_runners.py -v)",
+      "Bash(py -m pytest tests/ -v --tb=short)"
+    ]
+  }
+}

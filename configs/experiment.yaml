@@ -1,0 +1,36 @@
+seed: 42
+
+models:
+  finllama:
+    hf_id: TheFinAI/FinLLaMA-instruct
+    load_in_4bit: true
+  llama31:
+    hf_id: meta-llama/Llama-3.1-8B-Instruct
+    load_in_4bit: true
+  finbert:
+    hf_id: ProsusAI/finbert
+  vader: {}
+
+inference:
+  temperature: 0.0
+  max_new_tokens: 20
+  do_sample: false
+  batch_size: 8
+
+datasets:
+  fpb:
+    hf_id: takala/financial_phrasebank
+    config: sentences_75agree
+    test_fraction: 0.20
+  fiqa:
+    hf_id: ChanceFocus/fiqa-sentiment-classification
+    neutral_band: 0.10
+
+prompts:
+  templates: [A, B]
+  shots: [0, 3, 5]
+  fewshot_source: fpb_train
+
+paths:
+  predictions_dir: results/predictions
+  summary_dir: results/summary

@@ -1,0 +1,133 @@
+"""Tests for src/data_loader.py — HuggingFace calls are mocked."""
+
+import sys
+from unittest.mock import MagicMock, patch
+import pytest
+
+# Stub out 'datasets' so the lazy `from datasets import load_dataset`
+# inside functions resolves without the package being installed.
+if "datasets" not in sys.modules:
+    sys.modules["datasets"] = MagicMock()
+
+
+def _fake_fpb_rows():
+    return [{"sentence": f"FPB sentence {i}", "label": i % 3} for i in range(20)]
+
+
+def _fake_fiqa_rows():
+    return [
+        {"sentence": "strong gains", "score": 0.8},
+        {"sentence": "minor losses", "score": -0.5},
+        {"sentence": "filed report", "score": 0.0},
+        {"sentence": "revenue down slightly", "score": -0.05},
+        {"sentence": "massive profit", "score": 0.95},
+        {"sentence": "dividend cut", "score": -0.3},
+    ]
+
+
+# ---------------------------------------------------------------------------
+# FPB tests
+# ---------------------------------------------------------------------------
+
+@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+def test_fpb_returns_two_splits(_):
+    from src.data_loader import load_fpb
+    train, test = load_fpb()
+    assert len(train) + len(test) == 20
+
+
+@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+def test_fpb_test_fraction(_):
+    from src.data_loader import load_fpb
+    train, test = load_fpb(test_fraction=0.20, seed=42)
+    assert len(test) == 4
+    assert len(train) == 16
+
+
+@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+def test_fpb_splits_tagged(_):
+    from src.data_loader import load_fpb
+    train, test = load_fpb()
+    assert all(s["split"] == "train" for s in train)
+    assert all(s["split"] == "test" for s in test)
+
+
+@patch("datasets.load_dataset", return_value={"train": [
+    {"sentence": "a", "label": 0},
+    {"sentence": "b", "label": 1},
+    {"sentence": "c", "label": 2},
+]})
+def test_fpb_label_mapping(_):
+    from src.data_loader import load_fpb
+    train, test = load_fpb(test_fraction=0.0, seed=0)
+    labels = {s["label"] for s in train}
+    assert labels == {"negative", "neutral", "positive"}
+
+
+@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+def test_fpb_ids_unique(_):
+    from src.data_loader import load_fpb
+    train, test = load_fpb()
+    all_ids = [s["id"] for s in train + test]
+    assert len(all_ids) == len(set(all_ids))
+
+
+@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+def test_fpb_dataset_field(_):
+    from src.data_loader import load_fpb
+    train, test = load_fpb()
+    assert all(s["dataset"] == "FPB" for s in train + test)
+
+
+# ---------------------------------------------------------------------------
+# FiQA tests
+# ---------------------------------------------------------------------------
+
+@patch("datasets.load_dataset", return_value={"test": _fake_fiqa_rows()})
+def test_fiqa_count(_):
+    from src.data_loader import load_fiqa
+    assert len(load_fiqa()) == 6
+
+
+@patch("datasets.load_dataset", return_value={"test": _fake_fiqa_rows()})
+def test_fiqa_all_test_split(_):
+    from src.data_loader import load_fiqa
+    assert all(s["split"] == "test" for s in load_fiqa())
+
+
+@patch("datasets.load_dataset", return_value={"test": [{"sentence": "x", "score": 0.8}]})
+def test_fiqa_positive_mapping(_):
+    from src.data_loader import load_fiqa
+    assert load_fiqa()[0]["label"] == "positive"
+
+
+@patch("datasets.load_dataset", return_value={"test": [{"sentence": "x", "score": -0.5}]})
+def test_fiqa_negative_mapping(_):
+    from src.data_loader import load_fiqa
+    assert load_fiqa()[0]["label"] == "negative"
+
+
+@patch("datasets.load_dataset", return_value={"test": [{"sentence": "x", "score": 0.0}]})
+def test_fiqa_neutral_mapping(_):
+    from src.data_loader import load_fiqa
+    assert load_fiqa()[0]["label"] == "neutral"
+
+
+@patch("datasets.load_dataset", return_value={"test": [{"sentence": "x", "score": -0.05}]})
+def test_fiqa_neutral_band_edge(_):
+    # -0.05 is inside default band ±0.10 → neutral
+    from src.data_loader import load_fiqa
+    assert load_fiqa(neutral_band=0.10)[0]["label"] == "neutral"
+
+
+@patch("datasets.load_dataset", return_value={"test": _fake_fiqa_rows()})
+def test_fiqa_dataset_field(_):
+    from src.data_loader import load_fiqa
+    assert all(s["dataset"] == "FiQA" for s in load_fiqa())
+
+
+@patch("datasets.load_dataset", return_value={"test": _fake_fiqa_rows()})
+def test_fiqa_ids_unique(_):
+    from src.data_loader import load_fiqa
+    ids = [s["id"] for s in load_fiqa()]
+    assert len(ids) == len(set(ids))
