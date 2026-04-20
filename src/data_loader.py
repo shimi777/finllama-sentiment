@@ -28,15 +28,20 @@ def load_fpb(
 ) -> tuple[list[Sample], list[Sample]]:
     """Return (train, test) splits from Financial PhraseBank.
 
-    Uses TheFinAI/en-fpb (Parquet, no loading script required).
-    The `config` parameter is kept for API compatibility but ignored.
+    Loads from takala/financial_phrasebank via its auto-generated Parquet
+    export (revision='refs/convert/parquet'), which avoids the loading-script
+    restriction in datasets>=3.0.
     The dataset has only a 'train' split, so we carve out test_fraction
     ourselves using a reproducible random seed.
     """
     from datasets import load_dataset
 
-    logger.info("Loading FPB (TheFinAI/en-fpb)…")
-    ds = load_dataset("TheFinAI/en-fpb")
+    logger.info("Loading FPB via Parquet export (takala/financial_phrasebank, %s)…", config)
+    ds = load_dataset(
+        "takala/financial_phrasebank",
+        config,
+        revision="refs/convert/parquet",
+    )
     raw = ds["train"]
 
     all_samples: list[Sample] = []
