@@ -1,19 +1,34 @@
 """Tests for src/data_loader.py — HuggingFace calls are mocked."""
 
+import io
 import sys
+import tempfile
+import zipfile
 from unittest.mock import MagicMock, patch
 import pytest
 
-# Stub out 'datasets' so the lazy `from datasets import load_dataset`
-# inside functions resolves without the package being installed.
 if "datasets" not in sys.modules:
     sys.modules["datasets"] = MagicMock()
-
+if "huggingface_hub" not in sys.modules:
+    sys.modules["huggingface_hub"] = MagicMock()
 
 _FPB_LABELS = ["negative", "neutral", "positive"]
 
-def _fake_fpb_rows():
-    return [{"sentence": f"FPB sentence {i}", "label": _FPB_LABELS[i % 3]} for i in range(20)]
+
+def _make_fpb_zip(n: int = 20) -> str:
+    """Write a fake Sentences_75Agree.txt inside a zip and return the path."""
+    lines = [f"Sentence number {i}@{_FPB_LABELS[i % 3]}" for i in range(n)]
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        zf.writestr(
+            "FinancialPhraseBank-v1.0/Sentences_75Agree.txt",
+            "\n".join(lines),
+        )
+    buf.seek(0)
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".zip")
+    tmp.write(buf.read())
+    tmp.close()
+    return tmp.name
 
 
 def _fake_fiqa_rows():
@@ -31,14 +46,14 @@ def _fake_fiqa_rows():
 # FPB tests
 # ---------------------------------------------------------------------------
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+@patch("huggingface_hub.hf_hub_download", return_value=_make_fpb_zip(20))
 def test_fpb_returns_two_splits(_):
     from src.data_loader import load_fpb
     train, test = load_fpb()
     assert len(train) + len(test) == 20
 
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+@patch("huggingface_hub.hf_hub_download", return_value=_make_fpb_zip(20))
 def test_fpb_test_fraction(_):
     from src.data_loader import load_fpb
     train, test = load_fpb(test_fraction=0.20, seed=42)
@@ -46,7 +61,7 @@ def test_fpb_test_fraction(_):
     assert len(train) == 16
 
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+@patch("huggingface_hub.hf_hub_download", return_value=_make_fpb_zip(20))
 def test_fpb_splits_tagged(_):
     from src.data_loader import load_fpb
     train, test = load_fpb()
@@ -54,11 +69,7 @@ def test_fpb_splits_tagged(_):
     assert all(s["split"] == "test" for s in test)
 
 
-@patch("datasets.load_dataset", return_value={"train": [
-    {"sentence": "a", "label": "negative"},
-    {"sentence": "b", "label": "neutral"},
-    {"sentence": "c", "label": "positive"},
-]})
+@patch("huggingface_hub.hf_hub_download", return_value=_make_fpb_zip(3))
 def test_fpb_label_mapping(_):
     from src.data_loader import load_fpb
     train, test = load_fpb(test_fraction=0.0, seed=0)
@@ -66,7 +77,7 @@ def test_fpb_label_mapping(_):
     assert labels == {"negative", "neutral", "positive"}
 
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+@patch("huggingface_hub.hf_hub_download", return_value=_make_fpb_zip(20))
 def test_fpb_ids_unique(_):
     from src.data_loader import load_fpb
     train, test = load_fpb()
@@ -74,7 +85,7 @@ def test_fpb_ids_unique(_):
     assert len(all_ids) == len(set(all_ids))
 
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
+@patch("huggingface_hub.hf_hub_download", return_value=_make_fpb_zip(20))
 def test_fpb_dataset_field(_):
     from src.data_loader import load_fpb
     train, test = load_fpb()
@@ -117,7 +128,6 @@ def test_fiqa_neutral_mapping(_):
 
 @patch("datasets.load_dataset", return_value={"test": [{"sentence": "x", "score": -0.05}]})
 def test_fiqa_neutral_band_edge(_):
-    # -0.05 is inside default band ±0.10 → neutral
     from src.data_loader import load_fiqa
     assert load_fiqa(neutral_band=0.10)[0]["label"] == "neutral"
 

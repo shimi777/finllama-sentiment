@@ -17,8 +17,44 @@ class Sample(TypedDict):
     split: str        # "train" | "test"
 
 
-# TheFinAI/en-fpb uses string labels directly; no int mapping needed.
-_FPB_LABEL_MAP = {0: "negative", 1: "neutral", 2: "positive"}
+_CONFIG_TO_FILE = {
+    "sentences_50agree": "Sentences_50Agree.txt",
+    "sentences_66agree": "Sentences_66Agree.txt",
+    "sentences_75agree": "Sentences_75Agree.txt",
+    "sentences_allagree": "Sentences_AllAgree.txt",
+}
+
+
+def _parse_fpb_zip(zip_path: str, filename: str) -> list[dict]:
+    """Extract sentence/label rows from the FPB zip file."""
+    import zipfile
+
+    candidates = [
+        f"FinancialPhraseBank-v1.0/{filename}",
+        filename,
+    ]
+    with zipfile.ZipFile(zip_path) as zf:
+        names = zf.namelist()
+        target = next((c for c in candidates if c in names), None)
+        if target is None:
+            # fuzzy match — case-insensitive
+            lower = filename.lower()
+            target = next((n for n in names if n.lower().endswith(lower)), None)
+        if target is None:
+            raise FileNotFoundError(
+                f"Could not find {filename} in zip. Contents: {names}"
+            )
+        with zf.open(target) as f:
+            content = f.read().decode("latin-1")
+
+    rows = []
+    for line in content.strip().splitlines():
+        line = line.strip()
+        if "@" not in line:
+            continue
+        sentence, label = line.rsplit("@", 1)
+        rows.append({"sentence": sentence.strip(), "label": label.strip().lower()})
+    return rows
 
 
 def load_fpb(
@@ -28,33 +64,28 @@ def load_fpb(
 ) -> tuple[list[Sample], list[Sample]]:
     """Return (train, test) splits from Financial PhraseBank.
 
-    Loads from takala/financial_phrasebank via its auto-generated Parquet
-    export (revision='refs/convert/parquet'), which avoids the loading-script
-    restriction in datasets>=3.0.
-    The dataset has only a 'train' split, so we carve out test_fraction
-    ourselves using a reproducible random seed.
+    Downloads the raw ZIP from takala/financial_phrasebank via hf_hub_download,
+    bypassing the loading script entirely (works with datasets>=3.0).
     """
-    from datasets import load_dataset
+    from huggingface_hub import hf_hub_download
 
-    logger.info("Loading FPB via Parquet export (takala/financial_phrasebank, %s)…", config)
-    ds = load_dataset(
-        "takala/financial_phrasebank",
-        config,
-        revision="refs/convert/parquet",
+    filename = _CONFIG_TO_FILE.get(config.lower(), "Sentences_75Agree.txt")
+    logger.info("Loading FPB (%s) from raw ZIP…", filename)
+
+    zip_path = hf_hub_download(
+        repo_id="takala/financial_phrasebank",
+        filename="FinancialPhraseBank-v1.0.zip",
+        repo_type="dataset",
     )
-    raw = ds["train"]
+    rows = _parse_fpb_zip(zip_path, filename)
 
     all_samples: list[Sample] = []
-    for i, row in enumerate(raw):
-        # TheFinAI/en-fpb uses string labels; fall back to int map for safety
-        raw_label = row["label"]
-        label = (raw_label.lower().strip() if isinstance(raw_label, str)
-                 else _FPB_LABEL_MAP[int(raw_label)])
+    for i, row in enumerate(rows):
         all_samples.append(
             Sample(
                 id=f"FPB_{i:05d}",
                 text=row["sentence"],
-                label=label,
+                label=row["label"],
                 dataset="FPB",
                 split="",  # filled below
             )
