@@ -17,6 +17,7 @@ class Sample(TypedDict):
     split: str        # "train" | "test"
 
 
+# TheFinAI/en-fpb uses string labels directly; no int mapping needed.
 _FPB_LABEL_MAP = {0: "negative", 1: "neutral", 2: "positive"}
 
 
@@ -27,22 +28,28 @@ def load_fpb(
 ) -> tuple[list[Sample], list[Sample]]:
     """Return (train, test) splits from Financial PhraseBank.
 
-    The HuggingFace dataset has only a 'train' split, so we carve out
-    test_fraction ourselves using a reproducible random seed.
+    Uses TheFinAI/en-fpb (Parquet, no loading script required).
+    The `config` parameter is kept for API compatibility but ignored.
+    The dataset has only a 'train' split, so we carve out test_fraction
+    ourselves using a reproducible random seed.
     """
-    from datasets import load_dataset  # lazy import — not available on all envs
+    from datasets import load_dataset
 
-    logger.info("Loading FPB (%s)…", config)
-    ds = load_dataset("takala/financial_phrasebank", config, trust_remote_code=True)
+    logger.info("Loading FPB (TheFinAI/en-fpb)…")
+    ds = load_dataset("TheFinAI/en-fpb")
     raw = ds["train"]
 
     all_samples: list[Sample] = []
     for i, row in enumerate(raw):
+        # TheFinAI/en-fpb uses string labels; fall back to int map for safety
+        raw_label = row["label"]
+        label = (raw_label.lower().strip() if isinstance(raw_label, str)
+                 else _FPB_LABEL_MAP[int(raw_label)])
         all_samples.append(
             Sample(
                 id=f"FPB_{i:05d}",
                 text=row["sentence"],
-                label=_FPB_LABEL_MAP[row["label"]],
+                label=label,
                 dataset="FPB",
                 split="",  # filled below
             )

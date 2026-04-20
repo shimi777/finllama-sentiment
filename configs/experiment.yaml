@@ -19,8 +19,8 @@ inference:
 
 datasets:
   fpb:
-    hf_id: takala/financial_phrasebank
-    config: sentences_75agree
+    hf_id: TheFinAI/en-fpb
+    config: sentences_75agree   # kept for compat, ignored by loader
     test_fraction: 0.20
   fiqa:
     hf_id: ChanceFocus/fiqa-sentiment-classification

@@ -10,8 +10,10 @@ if "datasets" not in sys.modules:
     sys.modules["datasets"] = MagicMock()
 
 
+_FPB_LABELS = ["negative", "neutral", "positive"]
+
 def _fake_fpb_rows():
-    return [{"sentence": f"FPB sentence {i}", "label": i % 3} for i in range(20)]
+    return [{"sentence": f"FPB sentence {i}", "label": _FPB_LABELS[i % 3]} for i in range(20)]
 
 
 def _fake_fiqa_rows():
@@ -53,9 +55,9 @@ def test_fpb_splits_tagged(_):
 
 
 @patch("datasets.load_dataset", return_value={"train": [
-    {"sentence": "a", "label": 0},
-    {"sentence": "b", "label": 1},
-    {"sentence": "c", "label": 2},
+    {"sentence": "a", "label": "negative"},
+    {"sentence": "b", "label": "neutral"},
+    {"sentence": "c", "label": "positive"},
 ]})
 def test_fpb_label_mapping(_):
     from src.data_loader import load_fpb
