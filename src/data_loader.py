@@ -118,7 +118,7 @@ def load_fiqa(neutral_band: float = 0.10) -> list[Sample]:
     from datasets import load_dataset
 
     logger.info("Loading FiQA-SA…")
-    ds = load_dataset("ChanceFocus/fiqa-sentiment-classification")
+    ds = load_dataset("TheFinAI/fiqa-sentiment-classification")
 
     samples: list[Sample] = []
     idx = 0

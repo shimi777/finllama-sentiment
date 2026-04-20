@@ -9,7 +9,14 @@
       "Bash(py -m pytest tests/ -v)",
       "Bash(py -m pytest tests/test_evaluation.py -v)",
       "Bash(py -m pytest tests/test_runners.py -v)",
-      "Bash(py -m pytest tests/ -v --tb=short)"
+      "Bash(py -m pytest tests/ -v --tb=short)",
+      "Bash(py -m pytest tests/test_data_loader.py -v --tb=short)",
+      "Bash(py -m pytest tests/ --tb=short -q)",
+      "Bash(py -m pytest tests/test_data_loader.py -v)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "WebSearch"
     ]
   }
 }
