@@ -1,7 +1,7 @@
 """Tests for src/data_loader.py — HuggingFace calls are mocked."""
 
 import sys
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, call
 import pytest
 
 if "datasets" not in sys.modules:
@@ -12,9 +12,26 @@ if "huggingface_hub" not in sys.modules:
 _FPB_LABELS = ["negative", "neutral", "positive"]
 
 
-def _fake_fpb_rows(n: int = 20):
-    return [{"sentence": f"FPB sentence {i}", "label": _FPB_LABELS[i % 3]}
-            for i in range(n)]
+def _make_info_response():
+    m = MagicMock()
+    m.json.return_value = {
+        "dataset_info": {
+            "features": {
+                "label": {"names": _FPB_LABELS}
+            }
+        }
+    }
+    return m
+
+
+def _make_rows_response(n: int, done: bool = True):
+    rows = [
+        {"row": {"sentence": f"sentence {i}", "label": i % 3}}
+        for i in range(n)
+    ]
+    m = MagicMock()
+    m.json.return_value = {"rows": rows, "num_rows_total": n}
+    return m
 
 
 def _fake_fiqa_rows():
@@ -29,50 +46,62 @@ def _fake_fiqa_rows():
 
 
 # ---------------------------------------------------------------------------
-# FPB tests
+# FPB tests — mock requests.get
 # ---------------------------------------------------------------------------
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
-def test_fpb_returns_two_splits(_):
+def _fpb_get_side_effect(n):
+    """Return info response on first call, rows response on second."""
+    responses = [_make_info_response(), _make_rows_response(n)]
+    return iter(responses).__next__
+
+
+@patch("requests.get")
+def test_fpb_returns_two_splits(mock_get):
+    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
     from src.data_loader import load_fpb
     train, test = load_fpb()
     assert len(train) + len(test) == 20
 
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
-def test_fpb_test_fraction(_):
+@patch("requests.get")
+def test_fpb_test_fraction(mock_get):
+    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
     from src.data_loader import load_fpb
     train, test = load_fpb(test_fraction=0.20, seed=42)
     assert len(test) == 4
     assert len(train) == 16
 
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
-def test_fpb_splits_tagged(_):
+@patch("requests.get")
+def test_fpb_splits_tagged(mock_get):
+    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
     from src.data_loader import load_fpb
     train, test = load_fpb()
     assert all(s["split"] == "train" for s in train)
     assert all(s["split"] == "test" for s in test)
 
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows(3)})
-def test_fpb_label_mapping(_):
+@patch("requests.get")
+def test_fpb_label_mapping(mock_get):
+    mock_get.side_effect = [_make_info_response(), _make_rows_response(3)]
     from src.data_loader import load_fpb
     train, test = load_fpb(test_fraction=0.0, seed=0)
     labels = {s["label"] for s in train}
     assert labels == {"negative", "neutral", "positive"}
 
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
-def test_fpb_ids_unique(_):
+@patch("requests.get")
+def test_fpb_ids_unique(mock_get):
+    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
     from src.data_loader import load_fpb
     train, test = load_fpb()
     all_ids = [s["id"] for s in train + test]
     assert len(all_ids) == len(set(all_ids))
 
 
-@patch("datasets.load_dataset", return_value={"train": _fake_fpb_rows()})
-def test_fpb_dataset_field(_):
+@patch("requests.get")
+def test_fpb_dataset_field(mock_get):
+    mock_get.side_effect = [_make_info_response(), _make_rows_response(20)]
     from src.data_loader import load_fpb
     train, test = load_fpb()
     assert all(s["dataset"] == "FPB" for s in train + test)

@@ -17,7 +17,48 @@ class Sample(TypedDict):
     split: str        # "train" | "test"
 
 
-_FPB_LABEL_MAP = {0: "negative", 1: "neutral", 2: "positive"}
+_DS_SERVER = "https://datasets-server.huggingface.co"
+_PAGE_SIZE = 100
+
+
+def _fpb_label_names(config: str, headers: dict) -> list[str]:
+    import requests
+    resp = requests.get(
+        f"{_DS_SERVER}/info",
+        params={"dataset": "takala/financial_phrasebank", "config": config},
+        headers=headers,
+        timeout=30,
+    )
+    resp.raise_for_status()
+    return resp.json()["dataset_info"]["features"]["label"]["names"]
+
+
+def _fpb_fetch_rows(config: str, headers: dict) -> list[dict]:
+    import requests
+    rows, offset = [], 0
+    while True:
+        resp = requests.get(
+            f"{_DS_SERVER}/rows",
+            params={
+                "dataset": "takala/financial_phrasebank",
+                "config": config,
+                "split": "train",
+                "offset": offset,
+                "length": _PAGE_SIZE,
+            },
+            headers=headers,
+            timeout=30,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        page = data.get("rows", [])
+        if not page:
+            break
+        rows.extend(page)
+        offset += len(page)
+        if offset >= data.get("num_rows_total", offset + 1):
+            break
+    return rows
 
 
 def load_fpb(
@@ -27,31 +68,33 @@ def load_fpb(
 ) -> tuple[list[Sample], list[Sample]]:
     """Return (train, test) splits from Financial PhraseBank.
 
-    Requires datasets==2.x (loading-script support). Pin datasets==2.20.0
-    in requirements.txt to guarantee compatibility.
+    Uses HuggingFace's Datasets Server REST API — no loading script,
+    no version dependency on the `datasets` package.
+    Reads HF_TOKEN from the environment for auth (optional but recommended).
     """
-    from datasets import load_dataset
+    import os
 
-    logger.info("Loading FPB (%s)…", config)
-    ds = load_dataset(
-        "takala/financial_phrasebank",
-        config,
-        trust_remote_code=True,
-    )
-    raw = ds["train"]
+    token = os.environ.get("HF_TOKEN", "")
+    headers = {"Authorization": f"Bearer {token}"} if token else {}
+
+    logger.info("Loading FPB (%s) via Datasets Server API…", config)
+    label_names = _fpb_label_names(config, headers)
+    raw_rows = _fpb_fetch_rows(config, headers)
+    logger.info("Fetched %d rows", len(raw_rows))
 
     all_samples: list[Sample] = []
-    for i, row in enumerate(raw):
+    for i, r in enumerate(raw_rows):
+        row = r["row"]
         raw_label = row["label"]
-        label = (raw_label.lower().strip() if isinstance(raw_label, str)
-                 else _FPB_LABEL_MAP[int(raw_label)])
+        label = (label_names[int(raw_label)] if isinstance(raw_label, int)
+                 else raw_label.lower().strip())
         all_samples.append(
             Sample(
                 id=f"FPB_{i:05d}",
                 text=row["sentence"],
                 label=label,
                 dataset="FPB",
-                split="",  # filled below
+                split="",
             )
         )
 
