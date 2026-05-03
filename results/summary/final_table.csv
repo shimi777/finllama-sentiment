@@ -1,0 +1,11 @@
+model,model_hf_id,dataset,template,shots,seed,n_samples,accuracy,f1_macro,f1_weighted,coverage,runtime_s
+finbert,ProsusAI/finbert,FPB,-,0,42,690,0.9348,0.9254,0.9357,1.0,24.23
+qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPB,A,0,42,300,0.82,0.7638,0.7987,1.0,224.66
+qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPB,A,3,42,300,0.86,0.8324,0.8517,1.0,194.82
+qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPB,B,0,42,300,0.84,0.8061,0.8331,1.0,180.98
+qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPB,B,3,42,300,0.8367,0.7923,0.8284,1.0,206.85
+vader,vaderSentiment,FPB,-,0,42,690,0.5536,0.4694,0.558,1.0,0.05
+finbert,ProsusAI/finbert,FiQA,-,0,42,1173,0.4979,0.482,0.5729,1.0,25.59
+qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FiQA,A,0,42,300,0.5733,0.5785,0.6305,1.0,163.34
+qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FiQA,A,3,42,300,0.54,0.5468,0.6003,1.0,191.7
+vader,vaderSentiment,FiQA,-,0,42,1173,0.4228,0.3863,0.4874,1.0,0.06

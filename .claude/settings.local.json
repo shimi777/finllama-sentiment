@@ -16,7 +16,29 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(py -m pip install --user filelock vaderSentiment modal)",
+      "Bash(py -m pip install --user fsspec networkx sympy regex)",
+      "Bash(py -c \"import transformers, vaderSentiment; print\\('transformers', transformers.__version__, '| vader ok'\\)\")",
+      "Bash(py -c \"from src.data_loader import load_fpb, load_fiqa; tr, te = load_fpb\\(\\); print\\('FPB train/test:', len\\(tr\\), len\\(te\\)\\)\")",
+      "Bash(py scripts/run_baselines.py)",
+      "Bash(py -m pip install --user \"datasets>=2.20.0\")",
+      "Bash(py -m pip install --user wrapt h5py)",
+      "Bash(.venv/Scripts/python.exe -m pip install --upgrade pip)",
+      "Bash(.venv/Scripts/python.exe -m pip install -r requirements.txt)",
+      "Bash(.venv/Scripts/python.exe -m pip install modal)",
+      "Bash(.venv/Scripts/python.exe -m modal secret create huggingface HF_TOKEN=hf_REDACTED)",
+      "Bash(.venv/Scripts/python.exe -m modal run scripts/modal_app.py::smoke)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe -m modal run scripts/modal_app.py::smoke)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe -m modal app list)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/run_llm_matrix.py)",
+      "Bash(.venv/Scripts/python.exe scripts/aggregate.py)",
+      "Bash(.venv/Scripts/python.exe -m pip install streamlit)",
+      "Bash(.venv/Scripts/python.exe -c \"import ast; ast.parse\\(open\\('dashboard/app.py'\\).read\\(\\)\\); print\\('syntax OK'\\)\")",
+      "Bash(.venv/Scripts/python.exe scripts/modal_budget.py)",
+      "Bash(.venv/Scripts/python.exe scripts/make_figures.py)",
+      "Bash(gh repo *)",
+      "Bash(git commit *)"
     ]
   }
 }

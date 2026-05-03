@@ -1,0 +1,47 @@
+{
+  "run_id": "qwen25_7b__FPB__B__3shot__seed42",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      38,
+      7,
+      0
+    ],
+    [
+      5,
+      174,
+      6
+    ],
+    [
+      6,
+      25,
+      39
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.7755102040816326,
+      "recall": 0.8444444444444444,
+      "f1": 0.8085106382978723,
+      "support": 45
+    },
+    "neutral": {
+      "precision": 0.8446601941747572,
+      "recall": 0.9405405405405406,
+      "f1": 0.8900255754475703,
+      "support": 185
+    },
+    "positive": {
+      "precision": 0.8666666666666667,
+      "recall": 0.5571428571428572,
+      "f1": 0.6782608695652174,
+      "support": 70
+    }
+  },
+  "n_samples": 300,
+  "coverage": 1.0
+}

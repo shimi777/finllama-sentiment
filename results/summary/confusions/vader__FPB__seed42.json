@@ -1,0 +1,47 @@
+{
+  "run_id": "vader__FPB__seed42",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      20,
+      35,
+      47
+    ],
+    [
+      29,
+      239,
+      156
+    ],
+    [
+      7,
+      34,
+      123
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.35714285714285715,
+      "recall": 0.19607843137254902,
+      "f1": 0.25316455696202533,
+      "support": 102
+    },
+    "neutral": {
+      "precision": 0.775974025974026,
+      "recall": 0.5636792452830188,
+      "f1": 0.6530054644808743,
+      "support": 424
+    },
+    "positive": {
+      "precision": 0.3773006134969325,
+      "recall": 0.75,
+      "f1": 0.5020408163265306,
+      "support": 164
+    }
+  },
+  "n_samples": 690,
+  "coverage": 1.0
+}

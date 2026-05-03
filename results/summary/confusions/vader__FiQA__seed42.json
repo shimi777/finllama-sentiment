@@ -1,0 +1,47 @@
+{
+  "run_id": "vader__FiQA__seed42",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      148,
+      115,
+      100
+    ],
+    [
+      19,
+      40,
+      34
+    ],
+    [
+      74,
+      335,
+      308
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.6141078838174274,
+      "recall": 0.40771349862258954,
+      "f1": 0.4900662251655629,
+      "support": 363
+    },
+    "neutral": {
+      "precision": 0.08163265306122448,
+      "recall": 0.43010752688172044,
+      "f1": 0.137221269296741,
+      "support": 93
+    },
+    "positive": {
+      "precision": 0.6968325791855203,
+      "recall": 0.4295676429567643,
+      "f1": 0.5314926660914582,
+      "support": 717
+    }
+  },
+  "n_samples": 1173,
+  "coverage": 1.0
+}

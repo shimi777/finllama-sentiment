@@ -1,0 +1,47 @@
+{
+  "run_id": "finbert__FiQA__seed42",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      216,
+      125,
+      22
+    ],
+    [
+      16,
+      67,
+      10
+    ],
+    [
+      54,
+      362,
+      301
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.7552447552447552,
+      "recall": 0.5950413223140496,
+      "f1": 0.6656394453004623,
+      "support": 363
+    },
+    "neutral": {
+      "precision": 0.12093862815884476,
+      "recall": 0.7204301075268817,
+      "f1": 0.2071097372488408,
+      "support": 93
+    },
+    "positive": {
+      "precision": 0.9039039039039038,
+      "recall": 0.4198047419804742,
+      "f1": 0.5733333333333334,
+      "support": 717
+    }
+  },
+  "n_samples": 1173,
+  "coverage": 1.0
+}
