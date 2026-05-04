@@ -44,10 +44,19 @@ GPU = "T4"
 # Order matters: same-model runs are batched on the same warm container.
 # Plutus replaces the now-unpublished TheFinAI/FinLLaMA-instruct as the focal
 # financial-instruction-tuned 8B model from the same research group.
+# Per-model flags. `chat`: wrap prompts using the tokenizer's chat template before
+# generation. Required for instruct models trained with a strict chat format
+# (e.g. plutus-8B-instruct emits EOS immediately on raw classification prompts).
 MODELS = [
-    ("qwen25_7b", "Qwen/Qwen2.5-7B-Instruct"),
-    ("mistral7b", "mistralai/Mistral-7B-Instruct-v0.3"),
-    ("plutus8b", "TheFinAI/plutus-8B-instruct"),
+    ("qwen25_7b", "Qwen/Qwen2.5-7B-Instruct",          {"chat": False}),
+    ("mistral7b", "mistralai/Mistral-7B-Instruct-v0.3", {"chat": False}),
+    ("plutus8b",  "TheFinAI/plutus-8B-instruct",        {"chat": True}),
+    # Newer-generation 8B from the Qwen family (April 2025) — added at lecturer's
+    # recommendation to test whether a more recent base catches up with FinBERT.
+    ("qwen3_8b",  "Qwen/Qwen3-8B",                      {"chat": True}),
+    # Predecessor of FinLLaMA from TheFinAI (gated; included for reference but
+    # blocked unless TheFinAI grants access).
+    ("finma_7b",  "TheFinAI/finma-7b-full",             {"chat": False}),
 ]
 DATASETS = ["FPB", "FiQA"]
 TEMPLATES = ["A", "B"]
@@ -99,6 +108,22 @@ def write_run(run_dir: str, run_id: str, hf_id: str, ds: str, tpl: str, shots: i
 
 
 def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--only",
+        nargs="+",
+        help="Only run these model short names (e.g. --only plutus8b). "
+             "Useful for running the rest of the matrix in parallel with a long-running first job.",
+    )
+    args = parser.parse_args()
+
+    global MODELS
+    if args.only:
+        keep = set(args.only)
+        MODELS = [m for m in MODELS if m[0] in keep]
+        logger.info("--only filter: running %s", [m[0] for m in MODELS])
+
     set_seed(SEED)
     logger.info("Budget at start: %s", budget_summary())
     logger.info("Cap: $%.2f  | remaining: $%.4f", CAP_USD, remaining_usd(CAP_USD))
@@ -118,18 +143,20 @@ def main() -> None:
 
     # --- Plan ordering: group by model so the Modal container can keep weights warm ---
     plan = []
-    for model_short, hf_id in MODELS:
+    for entry in MODELS:
+        model_short, hf_id = entry[0], entry[1]
+        flags = entry[2] if len(entry) > 2 else {}
         for ds in DATASETS:
             for tpl in TEMPLATES:
                 for shots in SHOTS:
-                    plan.append((model_short, hf_id, ds, tpl, shots))
+                    plan.append((model_short, hf_id, ds, tpl, shots, flags))
 
     skipped, ran, aborted = 0, 0, 0
 
     with app.run():
         runner = LLMRunner()  # one persistent container shared across all runs
 
-        for (model_short, hf_id, ds, tpl, shots) in plan:
+        for (model_short, hf_id, ds, tpl, shots, flags) in plan:
             rid = run_id_for(model_short, ds, tpl, shots)
             run_dir = os.path.join(pred_dir, rid)
             samples = test_by_ds[ds]
@@ -158,6 +185,7 @@ def main() -> None:
             try:
                 raw_outputs = runner.generate.remote(
                     hf_id=hf_id, prompts=prompts, max_new_tokens=20, batch_size=8,
+                    use_chat_template=flags.get("chat", False),
                 )
             except Exception as e:
                 logger.error("[fail] %s: %s", rid, e)

@@ -1,0 +1,47 @@
+{
+  "run_id": "mistral7b__FPB__A__0shot__seed42",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      40,
+      5,
+      0
+    ],
+    [
+      4,
+      179,
+      2
+    ],
+    [
+      2,
+      34,
+      34
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.8695652173913043,
+      "recall": 0.8888888888888888,
+      "f1": 0.8791208791208791,
+      "support": 45
+    },
+    "neutral": {
+      "precision": 0.8211009174311926,
+      "recall": 0.9675675675675676,
+      "f1": 0.8883374689826302,
+      "support": 185
+    },
+    "positive": {
+      "precision": 0.9444444444444444,
+      "recall": 0.4857142857142857,
+      "f1": 0.6415094339622641,
+      "support": 70
+    }
+  },
+  "n_samples": 300,
+  "coverage": 1.0
+}

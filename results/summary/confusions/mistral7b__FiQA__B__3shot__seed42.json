@@ -1,0 +1,47 @@
+{
+  "run_id": "mistral7b__FiQA__B__3shot__seed42",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      29,
+      56,
+      7
+    ],
+    [
+      1,
+      31,
+      4
+    ],
+    [
+      1,
+      72,
+      99
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.9354838709677419,
+      "recall": 0.31521739130434784,
+      "f1": 0.4715447154471545,
+      "support": 92
+    },
+    "neutral": {
+      "precision": 0.1949685534591195,
+      "recall": 0.8611111111111112,
+      "f1": 0.31794871794871793,
+      "support": 36
+    },
+    "positive": {
+      "precision": 0.9,
+      "recall": 0.5755813953488372,
+      "f1": 0.7021276595744681,
+      "support": 172
+    }
+  },
+  "n_samples": 300,
+  "coverage": 1.0
+}

@@ -38,7 +38,19 @@
       "Bash(.venv/Scripts/python.exe scripts/modal_budget.py)",
       "Bash(.venv/Scripts/python.exe scripts/make_figures.py)",
       "Bash(gh repo *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/run_llm_matrix.py --only plutus8b)",
+      "Bash(npm --version)",
+      "Bash(npm list *)",
+      "Bash(npm install *)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/run_llm_matrix.py --only finma_7b)",
+      "Bash(node build_deck.js)",
+      "Bash(node presentation/build_deck.js)",
+      "Bash(.venv/Scripts/python.exe -m pip install playwright)",
+      "Bash(.venv/Scripts/python.exe -m playwright install chromium)",
+      "Bash(.venv/Scripts/python.exe scripts/screenshot_dashboard.py)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/run_llm_matrix.py --only qwen3_8b)",
+      "Bash(.venv/Scripts/python.exe scripts/error_analysis.py)"
     ]
   }
 }

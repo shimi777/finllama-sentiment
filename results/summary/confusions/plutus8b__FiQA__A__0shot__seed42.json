@@ -1,0 +1,47 @@
+{
+  "run_id": "plutus8b__FiQA__A__0shot__seed42",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      86,
+      4,
+      2
+    ],
+    [
+      17,
+      17,
+      2
+    ],
+    [
+      22,
+      56,
+      94
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.688,
+      "recall": 0.9347826086956522,
+      "f1": 0.7926267281105991,
+      "support": 92
+    },
+    "neutral": {
+      "precision": 0.22077922077922077,
+      "recall": 0.4722222222222222,
+      "f1": 0.3008849557522124,
+      "support": 36
+    },
+    "positive": {
+      "precision": 0.9591836734693877,
+      "recall": 0.5465116279069767,
+      "f1": 0.6962962962962963,
+      "support": 172
+    }
+  },
+  "n_samples": 300,
+  "coverage": 1.0
+}

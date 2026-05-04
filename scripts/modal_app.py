@@ -27,11 +27,12 @@ image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install(
         "torch==2.4.0",
-        "transformers==4.44.2",
+        "transformers==4.50.0",      # bumped: tokenizers 0.21+ for newer tokenizer.json formats (plutus, etc.)
+        "tokenizers==0.21.0",
         "accelerate==0.33.0",
         "bitsandbytes==0.43.3",
-        "huggingface_hub==0.24.6",
-        "sentencepiece==0.2.0",  # required by Mistral / some tokenizers
+        "huggingface_hub==0.26.0",
+        "sentencepiece==0.2.0",       # required by Mistral / some tokenizers
         "protobuf==4.25.4",
     )
     .env({"HF_HOME": "/cache/hf", "TRANSFORMERS_CACHE": "/cache/hf"})
@@ -53,7 +54,7 @@ except modal.exception.NotFoundError:
     secrets=SECRETS,
     timeout=60 * 30,           # 30 min per call ceiling
     scaledown_window=120,      # idle 2 min then shut down
-    max_containers=1,          # single container to avoid blowing budget
+    max_containers=3,          # allow parallel runs across 3 containers
 )
 class LLMRunner:
     """Persistent T4 container that loads/swaps 7-8B LLMs in 4-bit and runs inference."""
@@ -116,16 +117,36 @@ class LLMRunner:
         prompts: list[str],
         max_new_tokens: int = 20,
         batch_size: int = 8,
+        use_chat_template: bool = False,
     ) -> list[str]:
         """Generate one continuation per prompt. Returns just the new tokens decoded.
 
         Greedy (do_sample=False, deterministic). Latency is reported by caller from wall time.
+
+        If `use_chat_template=True` and the tokenizer ships a chat template (Llama-3 / Qwen / Mistral
+        instruct flavours), the prompt is wrapped as a single user-turn before tokenization. This is
+        required for some instruction-tuned models (e.g. plutus-8B-instruct) that otherwise emit EOS
+        immediately when handed a raw classification prompt.
         """
         import time
         import torch
 
         if self._loaded_id != hf_id:
             self._load(hf_id)
+
+        # Optional chat-template wrap.
+        chat_tpl = getattr(self._tokenizer, "chat_template", None)
+        if use_chat_template and chat_tpl:
+            wrapped = []
+            for p in prompts:
+                msg = [{"role": "user", "content": p}]
+                wrapped.append(
+                    self._tokenizer.apply_chat_template(
+                        msg, tokenize=False, add_generation_prompt=True
+                    )
+                )
+            prompts = wrapped
+            print(f"[modal] applied chat template to {len(prompts)} prompts")
 
         out: list[str] = []
         n = len(prompts)

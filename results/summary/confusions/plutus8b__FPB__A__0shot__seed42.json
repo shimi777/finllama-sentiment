@@ -1,0 +1,47 @@
+{
+  "run_id": "plutus8b__FPB__A__0shot__seed42",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      44,
+      1,
+      0
+    ],
+    [
+      38,
+      137,
+      10
+    ],
+    [
+      14,
+      24,
+      32
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.4583333333333333,
+      "recall": 0.9777777777777777,
+      "f1": 0.624113475177305,
+      "support": 45
+    },
+    "neutral": {
+      "precision": 0.845679012345679,
+      "recall": 0.7405405405405405,
+      "f1": 0.7896253602305475,
+      "support": 185
+    },
+    "positive": {
+      "precision": 0.7619047619047619,
+      "recall": 0.45714285714285713,
+      "f1": 0.5714285714285714,
+      "support": 70
+    }
+  },
+  "n_samples": 300,
+  "coverage": 1.0
+}
