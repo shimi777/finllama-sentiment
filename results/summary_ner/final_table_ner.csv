@@ -1,0 +1,6 @@
+model,model_hf_id,dataset,template,shots,seed,backend,n_samples,coverage,strict_p,strict_r,strict_f1,partial_f1,type_only_f1,f1_PER,f1_LOC,f1_ORG,runtime_s,avg_latency_ms,input_tokens,output_tokens,cost_usd,price_in_per_M,price_out_per_M
+gliner-large,urchade/gliner_large-v2.1,FiNER-ORD,-,0,42,local,300,1.0,0.4323,0.7834,0.5572,0.6441,0.6441,0.5412,0.6239,0.5317,64.0,617.92,0,0,0.0,0.0,0.0
+gliner-small,urchade/gliner_small-v2.1,FiNER-ORD,-,0,42,local,300,1.0,0.4766,0.7771,0.5908,0.6691,0.6691,0.5939,0.6321,0.5662,13.76,123.45,0,0,0.0,0.0,0.0
+mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FiNER-ORD,A,0,42,modal,200,1.0,0.4305,0.6533,0.519,0.5885,0.5885,0.6667,0.5735,0.41,447.77,2238.83,0,0,0.073434,0.0,0.0
+plutus8b,TheFinAI/plutus-8B-instruct,FiNER-ORD,A,0,42,modal,200,0.835,0.2881,0.5231,0.3716,0.4029,0.4029,0.3739,0.4923,0.2857,438.57,2192.86,0,0,0.071926,0.0,0.0
+qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FiNER-ORD,A,0,42,modal,200,1.0,0.5537,0.6734,0.6077,0.6817,0.6817,0.7826,0.5241,0.5635,346.15,1730.76,0,0,0.056769,0.0,0.0

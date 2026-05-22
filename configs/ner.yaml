@@ -1,0 +1,65 @@
+seed: 42
+
+dataset:
+  name: FiNER-ORD
+  hf_id: gtfintechlab/finer-ord-bio
+  split: test
+  # Cap test set so a full matrix is cheap. 200 examples * 8 models < $1.
+  max_samples: 200
+
+# Cost guard: hard cap on cumulative API spend across all runs.
+# Tracked in results/_ner_spend.json — survives process restarts.
+budget:
+  cap_usd: 2.00
+  cheap_models_only: false  # if true, skip claude-haiku-4-5 and gemini-2.5-flash
+  frontier_subset: 50       # for the frontier-ceiling reference run
+
+prompts:
+  templates: [A]            # add 'B' for prompt-sensitivity ablation
+  shots: [0]                # 0 keeps cost minimal; bump to 3 for fewshot study
+
+inference:
+  max_output_tokens: 200    # JSON for 1 short sentence rarely needs more
+
+models:
+  # ---- Local (free) ----
+  gliner-large:
+    backend: local
+    hf_id: urchade/gliner_large-v2.1
+    threshold: 0.5
+  gliner-small:
+    backend: local
+    hf_id: urchade/gliner_small-v2.1
+    threshold: 0.5
+
+  # ---- API (cheap) ----
+  gpt-4.1-nano:
+    backend: api
+    note: "OpenAI cheapest tier; needs OPENAI_API_KEY"
+  gemini-2.5-flash-lite:
+    backend: api
+    note: "Google cheapest tier; needs GOOGLE_API_KEY"
+  gpt-4o-mini:
+    backend: api
+    note: "OpenAI mid; stable reference; needs OPENAI_API_KEY"
+
+  # ---- API (mid-tier; optional) ----
+  gemini-2.5-flash:
+    backend: api
+    optional: true
+    note: "More capable; runs only if --include-mid passed"
+  claude-haiku-4-5:
+    backend: api
+    optional: true
+    note: "Anthropic small; runs only if --include-mid passed"
+
+  # ---- Frontier ceiling (50-example subset only) ----
+  claude-sonnet-4-6:
+    backend: api
+    optional: true
+    frontier: true
+    note: "Frontier ceiling on small subset; --include-frontier"
+
+paths:
+  predictions_dir: results/predictions
+  summary_dir: results/summary_ner

@@ -27,11 +27,13 @@ image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install(
         "torch==2.4.0",
-        "transformers==4.50.0",      # bumped: tokenizers 0.21+ for newer tokenizer.json formats (plutus, etc.)
-        "tokenizers==0.21.0",
-        "accelerate==0.33.0",
-        "bitsandbytes==0.43.3",
-        "huggingface_hub==0.26.0",
+        # 4.55 adds Qwen3 + Gemma-2 support. Pinning only transformers and
+        # letting pip resolve compatible tokenizers/accelerate/bitsandbytes
+        # avoids version-pin churn each time we bump models.
+        "transformers==4.55.0",
+        "accelerate>=0.33.0",
+        "bitsandbytes>=0.43.3",
+        "huggingface_hub>=0.26.0",
         "sentencepiece==0.2.0",       # required by Mistral / some tokenizers
         "protobuf==4.25.4",
     )
@@ -138,15 +140,37 @@ class LLMRunner:
         chat_tpl = getattr(self._tokenizer, "chat_template", None)
         if use_chat_template and chat_tpl:
             wrapped = []
+            # Qwen3's chat template defaults to enable_thinking=True, which
+            # emits a <think>...</think> block before the answer and chews
+            # through max_new_tokens. We disable it for classification/NER
+            # where we want a single short JSON answer. apply_chat_template
+            # silently ignores unknown kwargs on models that don't support it.
+            extra_kwargs = {}
+            try:
+                # Best-effort feature-detect: peek at template source for "enable_thinking".
+                if "enable_thinking" in (chat_tpl or ""):
+                    extra_kwargs["enable_thinking"] = False
+            except Exception:
+                pass
             for p in prompts:
                 msg = [{"role": "user", "content": p}]
-                wrapped.append(
-                    self._tokenizer.apply_chat_template(
-                        msg, tokenize=False, add_generation_prompt=True
+                try:
+                    wrapped.append(
+                        self._tokenizer.apply_chat_template(
+                            msg, tokenize=False, add_generation_prompt=True,
+                            **extra_kwargs,
+                        )
                     )
-                )
+                except TypeError:
+                    # Template didn't accept the kwarg — fall back to plain call.
+                    wrapped.append(
+                        self._tokenizer.apply_chat_template(
+                            msg, tokenize=False, add_generation_prompt=True
+                        )
+                    )
             prompts = wrapped
-            print(f"[modal] applied chat template to {len(prompts)} prompts")
+            print(f"[modal] applied chat template to {len(prompts)} prompts "
+                  f"(extra={extra_kwargs})")
 
         out: list[str] = []
         n = len(prompts)

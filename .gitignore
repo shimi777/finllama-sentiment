@@ -16,6 +16,8 @@ results/predictions/
 results/**/*.json
 !results/summary/
 !results/summary/**
+!results/summary_ner/
+!results/summary_ner/**
 
 # Models / caches
 *.bin
