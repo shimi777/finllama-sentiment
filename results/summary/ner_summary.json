@@ -1,0 +1,73 @@
+{
+  "model_hf_id": "dslim/bert-base-NER",
+  "aggregation_strategy": "simple",
+  "seed": 42,
+  "datasets": [
+    {
+      "dataset": "FPB",
+      "n_samples": 690,
+      "total_entities": 1552,
+      "avg_entities_per_sample": 2.249,
+      "pct_samples_with_entity": 79.0,
+      "entities_by_type": {
+        "ORG": 750,
+        "LOC": 236,
+        "MISC": 456,
+        "PER": 110
+      },
+      "entities_by_sentiment_then_type": {
+        "positive": {
+          "ORG": 184,
+          "LOC": 40,
+          "MISC": 178,
+          "PER": 21
+        },
+        "negative": {
+          "MISC": 109,
+          "ORG": 76,
+          "LOC": 18,
+          "PER": 6
+        },
+        "neutral": {
+          "ORG": 490,
+          "LOC": 178,
+          "MISC": 169,
+          "PER": 83
+        }
+      }
+    },
+    {
+      "dataset": "FiQA",
+      "n_samples": 1173,
+      "total_entities": 1779,
+      "avg_entities_per_sample": 1.517,
+      "pct_samples_with_entity": 67.8,
+      "entities_by_type": {
+        "ORG": 1303,
+        "PER": 126,
+        "MISC": 230,
+        "LOC": 120
+      },
+      "entities_by_sentiment_then_type": {
+        "negative": {
+          "ORG": 372,
+          "PER": 18,
+          "LOC": 24,
+          "MISC": 80
+        },
+        "positive": {
+          "ORG": 811,
+          "MISC": 135,
+          "PER": 75,
+          "LOC": 88
+        },
+        "neutral": {
+          "ORG": 120,
+          "MISC": 15,
+          "PER": 33,
+          "LOC": 8
+        }
+      }
+    }
+  ]
+}

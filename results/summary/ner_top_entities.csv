@@ -1,0 +1,161 @@
+dataset,entity_group,rank,word,count
+FPB,ORG,1,Nokia,9
+FPB,ORG,2,OMX Helsinki,8
+FPB,ORG,3,Elcoteq,7
+FPB,ORG,4,Group,7
+FPB,ORG,5,CapMan,6
+FPB,ORG,6,Alma Media,6
+FPB,ORG,7,Cencorp,5
+FPB,ORG,8,UPM,5
+FPB,ORG,9,Teleste,4
+FPB,ORG,10,Aspo,4
+FPB,ORG,11,Nordea,4
+FPB,ORG,12,Scanfil,4
+FPB,ORG,13,R,4
+FPB,ORG,14,Company,4
+FPB,ORG,15,Stockmann,4
+FPB,ORG,16,Nokia Siemens Networks,4
+FPB,ORG,17,V,4
+FPB,ORG,18,E,4
+FPB,ORG,19,Kemira,4
+FPB,ORG,20,TeliaSonera,4
+FPB,LOC,1,Finland,44
+FPB,LOC,2,Russia,8
+FPB,LOC,3,Helsinki,7
+FPB,LOC,4,Germany,5
+FPB,LOC,5,China,5
+FPB,LOC,6,Latin America,5
+FPB,LOC,7,Norway,4
+FPB,LOC,8,Sweden,4
+FPB,LOC,9,Estonia,4
+FPB,LOC,10,Poland,4
+FPB,LOC,11,ALEXANDRIA,4
+FPB,LOC,12,Va,4
+FPB,LOC,13,North America,3
+FPB,LOC,14,UAE,3
+FPB,LOC,15,Europe,3
+FPB,LOC,16,USA,2
+FPB,LOC,17,Slovakia,2
+FPB,LOC,18,Denmark,2
+FPB,LOC,19,Munich,2
+FPB,LOC,20,France,2
+FPB,MISC,1,EU,237
+FPB,MISC,2,Finnish,51
+FPB,MISC,3,EUR,17
+FPB,MISC,4,Swedish,11
+FPB,MISC,5,Baltic,9
+FPB,MISC,6,US,5
+FPB,MISC,7,Nordic,4
+FPB,MISC,8,General Meeting,3
+FPB,MISC,9,Norwegian,3
+FPB,MISC,10,Euro,2
+FPB,MISC,11,Internet,2
+FPB,MISC,12,Annual Report,2
+FPB,MISC,13,SE,2
+FPB,MISC,14,ME,2
+FPB,MISC,15,IT,2
+FPB,MISC,16,Danish,2
+FPB,MISC,17,Dutch,2
+FPB,MISC,18,WIG,2
+FPB,MISC,19,CA,2
+FPB,MISC,20,Estonian,2
+FPB,PER,1,Ju,2
+FPB,PER,2,##k,2
+FPB,PER,3,##ko,2
+FPB,PER,4,Jon Risfelt,2
+FPB,PER,5,R,2
+FPB,PER,6,Ka,2
+FPB,PER,7,Mets,2
+FPB,PER,8,Thomas Hoyer,2
+FPB,PER,9,J,2
+FPB,PER,10,O,2
+FPB,PER,11,Lynn Shanahan,1
+FPB,PER,12,##kka Niemi,1
+FPB,PER,13,Marime,1
+FPB,PER,14,Harple,1
+FPB,PER,15,Hans Dalborg,1
+FPB,PER,16,Peter Hervy,1
+FPB,PER,17,Seppo Rantakari,1
+FPB,PER,18,Rautaruuk,1
+FPB,PER,19,E,1
+FPB,PER,20,##ero Mertano,1
+FiQA,ORG,1,Tesco,34
+FiQA,ORG,2,AstraZeneca,22
+FiQA,ORG,3,Barclays,22
+FiQA,ORG,4,SABMiller,22
+FiQA,ORG,5,FTSE,20
+FiQA,ORG,6,Shire,15
+FiQA,ORG,7,AB InBev,14
+FiQA,ORG,8,Shell,14
+FiQA,ORG,9,Morrisons,13
+FiQA,ORG,10,BP,13
+FiQA,ORG,11,LSE,13
+FiQA,ORG,12,FDA,12
+FiQA,ORG,13,Glencore,12
+FiQA,ORG,14,As,12
+FiQA,ORG,15,RBS,12
+FiQA,ORG,16,Apple,12
+FiQA,ORG,17,Aviva,11
+FiQA,ORG,18,##traZeneca,9
+FiQA,ORG,19,Standard Chartered,9
+FiQA,ORG,20,HSBC,9
+FiQA,PER,1,Paul Compton,3
+FiQA,PER,2,Johnson Matthey,3
+FiQA,PER,3,A,2
+FiQA,PER,4,Acerta,2
+FiQA,PER,5,Ki,2
+FiQA,PER,6,Per,2
+FiQA,PER,7,C,2
+FiQA,PER,8,Sage,2
+FiQA,PER,9,John Allan,2
+FiQA,PER,10,Walden,2
+FiQA,PER,11,Dai,2
+FiQA,PER,12,Sanky,2
+FiQA,PER,13,T,2
+FiQA,PER,14,Roy Gardner,2
+FiQA,PER,15,Mondi,2
+FiQA,PER,16,Barratt,2
+FiQA,PER,17,My,2
+FiQA,PER,18,StanChart,2
+FiQA,PER,19,Sai,2
+FiQA,PER,20,Donald Brydon,1
+FiQA,MISC,1,Model X,14
+FiQA,MISC,2,Â,9
+FiQA,MISC,3,NFL,9
+FiQA,MISC,4,D,7
+FiQA,MISC,5,Brexit,4
+FiQA,MISC,6,FTSE 100,4
+FiQA,MISC,7,MA,4
+FiQA,MISC,8,B,4
+FiQA,MISC,9,Bre,3
+FiQA,MISC,10,US,3
+FiQA,MISC,11,GM,3
+FiQA,MISC,12,NFLX,3
+FiQA,MISC,13,iPhone,3
+FiQA,MISC,14,European,2
+FiQA,MISC,15,##mbo,2
+FiQA,MISC,16,Deutsche,2
+FiQA,MISC,17,Me,2
+FiQA,MISC,18,Irish,2
+FiQA,MISC,19,Gira,2
+FiQA,MISC,20,Ade,2
+FiQA,LOC,1,UK,16
+FiQA,LOC,2,Britain,12
+FiQA,LOC,3,China,8
+FiQA,LOC,4,London,7
+FiQA,LOC,5,US,6
+FiQA,LOC,6,Germany,4
+FiQA,LOC,7,##tead,3
+FiQA,LOC,8,U. K,3
+FiQA,LOC,9,Z,3
+FiQA,LOC,10,Philippines,2
+FiQA,LOC,11,Japan,2
+FiQA,LOC,12,Barclays,2
+FiQA,LOC,13,Spain,2
+FiQA,LOC,14,Canada,2
+FiQA,LOC,15,Hong Kong,2
+FiQA,LOC,16,Springleaf,2
+FiQA,LOC,17,The US,2
+FiQA,LOC,18,##ide,2
+FiQA,LOC,19,CO,2
+FiQA,LOC,20,Gleneagles Hotel,2
