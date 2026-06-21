@@ -1,0 +1,56 @@
+{
+  "run_id": "plutus8b__FPB__E4",
+  "ensemble": "E4",
+  "method": "unweighted",
+  "members": [
+    "plutus8b__FPB__A__0shot__seed42",
+    "plutus8b__FPB__A__3shot__seed42",
+    "plutus8b__FPB__B__0shot__seed42",
+    "plutus8b__FPB__B__3shot__seed42"
+  ],
+  "tie_break": "abstain",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      43,
+      1,
+      0
+    ],
+    [
+      8,
+      167,
+      1
+    ],
+    [
+      4,
+      25,
+      21
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.7818181818181819,
+      "recall": 0.9772727272727273,
+      "f1": 0.8686868686868687,
+      "support": 44
+    },
+    "neutral": {
+      "precision": 0.8652849740932642,
+      "recall": 0.9488636363636364,
+      "f1": 0.9051490514905149,
+      "support": 176
+    },
+    "positive": {
+      "precision": 0.9545454545454546,
+      "recall": 0.42,
+      "f1": 0.5833333333333334,
+      "support": 50
+    }
+  },
+  "n_samples": 300,
+  "coverage": 0.9
+}

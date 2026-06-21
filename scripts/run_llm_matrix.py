@@ -1,4 +1,5 @@
-"""Drive the LLM matrix on Modal: 3 models x 2 datasets x 2 templates x {0,3}-shot.
+"""Drive the LLM matrix on Modal: models x 2 datasets x templates A/B x {0,3}-shot,
+plus template C x 0-shot (the prompt-ensemble's third member for E3/E5, project_plan §16).
 
 Subsamples 300 from each dataset's test split for LLM runs (baselines used full test sets).
 Writes per-run dirs under results/predictions/{run_id}/ per project_plan.md §14.
@@ -59,8 +60,14 @@ MODELS = [
     ("finma_7b",  "TheFinAI/finma-7b-full",             {"chat": False}),
 ]
 DATASETS = ["FPB", "FiQA"]
-TEMPLATES = ["A", "B"]
+TEMPLATES = ["A", "B", "C"]
 SHOTS = [0, 3]
+# Per-template shot grids. A/B keep the full {0,3} grid; C is the ensemble's third
+# 0-shot member (E3/E5) — run it 0-shot only, so it costs just 1 extra run per
+# (model, dataset). To run only the C pass cheaply for the ensemble models:
+#   python scripts/run_llm_matrix.py --only qwen25_7b mistral7b plutus8b
+# (existing A/B runs are skipped via progress.json; only the new C0 runs execute).
+TEMPLATE_SHOTS = {"A": [0, 3], "B": [0, 3], "C": [0]}
 
 
 def subsample(samples: list, n: int, seed: int) -> list:
@@ -148,7 +155,7 @@ def main() -> None:
         flags = entry[2] if len(entry) > 2 else {}
         for ds in DATASETS:
             for tpl in TEMPLATES:
-                for shots in SHOTS:
+                for shots in TEMPLATE_SHOTS.get(tpl, SHOTS):
                     plan.append((model_short, hf_id, ds, tpl, shots, flags))
 
     skipped, ran, aborted = 0, 0, 0
