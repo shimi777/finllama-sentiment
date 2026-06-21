@@ -23,6 +23,17 @@ TEMPLATES: dict[str, str] = {
         "Text: {text}\n"
         "Answer with one word only (positive / negative / neutral):"
     ),
+    # Template C — market-reaction framing. Deliberately diverse from A (minimalist)
+    # and B (definition list): it anchors on the *directional* effect on an investor's
+    # outlook (bullish / bearish), a third independent angle for the prompt ensemble.
+    "C": (
+        "Read the financial statement and judge how it would move an investor's outlook.\n"
+        "If it points to a better outlook it is bullish; to a worse outlook, bearish; "
+        "if there is no clear directional signal, neutral.\n"
+        "{fewshot_block}"
+        "Text: {text}\n"
+        "Reply with exactly one word — positive, negative, or neutral:"
+    ),
 }
 
 _LABEL_ORDER = ["negative", "neutral", "positive"]

@@ -481,3 +481,95 @@ import gc, torch
 gc.collect(); torch.cuda.empty_cache()
 ```
 Otherwise 4-bit + 4-bit won't fit on 16GB T4.
+
+---
+
+## 16. שיפור: Prompt-Ensemble Voting (multi-prompt)
+
+**הקשר:** הפרופ' ביקש שיפור שמשתמש ב-multiple prompts כדי להגיע ל-accuracy/performance טובים יותר. הסעיף הזה הוא ה-source of truth לשיפור הזה.
+
+### 16.1 מוטיבציה — מתוך התוצאות שלנו
+
+ה-`final_table.csv` מראה **prompt sensitivity קיצונית**: על אותו מודל, רק החלפת ה-prompt מזיזה accuracy עד **26 נקודות** (plutus8b · FiQA: A/0-shot=0.657 מול B/0-shot=0.400). כדי לדעת איזה prompt הוא "הטוב ביותר" צריך להציץ ב-test labels — **וזה leakage**. למשתמש אמיתי אין דרך עקבית לבחור מראש.
+
+**הטענה:** majority vote על כמה prompts קבועים ומגוונים מבטל את ההימור של בחירת ה-prompt — בלי להציץ ב-test — ובכך נותן תוצאה (א) טובה מהממוצע של prompt בודד, (ב) יציבה (variance≈0), ו-(ג) שואפת ל/עוקפת את ה-prompt הטוב ביותר. בונוס: מאפשר השוואת מודלים *הוגנת* (בלי prompt-luck) — תורם לשאלה המרכזית "האם ה-tuning הפיננסי של plutus8b באמת עוזר".
+
+### 16.2 השיטה
+
+לכל דוגמה: אוספים את התווית המפוענחת מכל ensemble member ומבצעים **majority vote**. חברים עם `parse_ok=False` נמנעים (לא מצביעים) — שומר על ה-invariant של הפרויקט "לא לכפות parse-failure לתווית". מימוש: `src/ensemble.py::aggregate(votes, tie_break)`, פלט תואם ל-`compute_metrics`.
+
+### 16.3 וריאנטים של ה-ensemble
+
+- **E4 (חינמי, מהקיים):** vote על 4 התאים שכבר רצנו — `{A,B} × {0,3}-shot`. אפס inference חדש; מחושב מ-`results/predictions/`.
+- **E3 (headline, נקי):** שלושה ניסוחי prompt מגוונים ב-0-shot — `{A, B, C}`. מספר אי-זוגי → פחות תיקו; 0-shot → ריאליסטי ל-deployment ועובד גם ל-FiQA שאין לו train. **דורש template C חדש.**
+- **E5 (extended):** `{A0, B0, C0, A3, B3}` — מוסיף few-shot members למקסימום גיוון.
+
+### 16.4 Aggregation ו-tie-break
+
+ברירת מחדל: plurality; **תיקו → abstain** (`parse_ok=False`, נספר ב-coverage). זה הישר וה-leakage-free. אלטרנטיבות שנבדקו: `order` (לפי [neg,neu,pos]) ו-`neutral` (majority-class prior) — שתיהן מחזירות coverage ל-1.0 אבל **פוגעות ב-F1** (ראה 16.6), כי דוגמאות התיקו באמת עמומות. ב-E3 (3 חברים) תיקו 2-2 לא קיים כך ש-coverage עולה ממילא.
+
+### 16.5 Evaluation protocol
+
+לכל (model × dataset) מדווחים זה לצד זה: **mean-single**, **worst-single**, **best-single (oracle = חסם עליון שדורש leakage)**, ו-**ensemble**, בתוספת **std של accuracy בין ה-prompts** (לכימות ה-variance שנמחק). מטריקה ראשית: F1-macro. סקריפט: `scripts/aggregate_ensemble.py` → `results/summary/ensemble_table.csv`.
+
+### 16.6 תוצאות PoC — E4 (2026-06-21, tie→abstain)
+
+| model | dataset | ens_f1 | mean_f1 | best_f1 | Δ vs mean | Δ vs best | ens_acc | std(single) | cov |
+|---|---|---|---|---|---|---|---|---|---|
+| mistral7b | FPB | 0.8306 | 0.7585 | 0.8897 | **+0.072** | −0.059 | 0.875 | 0.057 | 0.88 |
+| plutus8b | FPB | 0.7857 | 0.7210 | 0.8291 | **+0.065** | −0.043 | 0.856 | 0.053 | 0.90 |
+| qwen25_7b | FPB | 0.8316 | 0.7986 | 0.8324 | **+0.033** | −0.001 | 0.868 | 0.014 | 0.96 |
+| mistral7b | FiQA | 0.5945 | 0.5589 | 0.5989 | **+0.036** | −0.004 | 0.616 | 0.039 | 0.86 |
+| plutus8b | FiQA | 0.5094 | 0.4877 | 0.5966 | **+0.022** | −0.087 | 0.496 | 0.099 | 0.85 |
+| qwen25_7b | FiQA | 0.6395 | 0.5800 | 0.6727 | **+0.060** | −0.033 | 0.651 | 0.068 | 0.87 |
+
+**Tie-break ablation (ממוצע על 6 התאים):** abstain → F1=0.699, cov=0.89 · order → F1=0.665, cov=1.0 · neutral → F1=0.634, cov=1.0. → **abstain עדיף ל-accuracy; כפיית coverage עם order/neutral עולה ב-F1.**
+
+**מסקנות (unweighted):**
+1. ✅ **מנצח את הממוצע (blind-pick) ב-6/6** — +0.02 עד +0.07 F1. זה ה-win המוצק.
+2. ❌ **לא מנצח את ה-oracle best ב-0/6** (אך qwen·FPB בתוך 0.001, mistral·FiQA בתוך 0.004).
+3. ✅ **Variance נמחק** — מחליף הגרלה עם std≈0.055 בערך דטרמיניסטי יחיד שתמיד מעל הממוצע.
+
+### 16.6.1 תוצאות weighted voting — cv_weighted מול oracle (tie→abstain)
+
+cv_weighted = soft vote עם משקלי-חברים שנלמדים ב-**k-fold (k=5) leakage-free** (משקל של חבר אף פעם לא רואה את הדוגמה שהוא שופט). oracle_weighted = משקלים לפי accuracy על *כל* ה-eval set (משתמש ב-test labels — חסם עליון בלבד, לא deployable).
+
+| dataset | model | unweighted | cv_weighted | oracle_weighted | best_single |
+|---|---|---|---|---|---|
+| FPB | mistral7b | 0.8306 | 0.8428 | 0.8428 | 0.8897 |
+| FPB | plutus8b | 0.7857 | 0.7519 | 0.7622 | 0.8291 |
+| FPB | qwen25_7b | 0.8316 | 0.8167 | 0.8252 | 0.8324 |
+| FiQA | mistral7b | 0.5945 | 0.5993 | **0.6044** | 0.5989 |
+| FiQA | plutus8b | 0.5094 | 0.5235 | 0.5235 | 0.5966 |
+| FiQA | qwen25_7b | 0.6395 | 0.6267 | 0.6267 | 0.6727 |
+
+ממוצע על 6 תאים: unweighted F1=0.699 @ cov=0.887 · cv_weighted F1=0.693 @ cov=**0.996** · oracle F1=0.698 @ cov=1.0.
+
+**שתי מסקנות מפתיעות וחשובות:**
+1. **weighting הוא בעיקר פתרון ל-coverage, לא ל-F1.** משקלים רציפים מבטלים תיקו (2-2) ולכן coverage קופץ 0.887→0.996 כמעט בלי לאבד F1. cv_weighted **שולט (Pareto)** על כל דרך אחרת להגיע ל-coverage מלא: 0.693 מול 0.665 (order) ו-0.634 (neutral).
+2. **אפילו ה-oracle ceiling עוקף את best single רק ב-1/6 תאים.** כלומר עם ה-pool הזה (A/B × 0/3-shot), **שום aggregation — משוקלל או לא — לא יכול לעקוף באופן עקבי את ה-prompt הבודד הטוב ביותר.** הסיבה עקרונית: vote לא יכול לעלות על החבר הטוב ביותר כשהתשובות הנכונות שלו הן עמדת מיעוט. ⇒ כדי לעקוף את ה-oracle צריך **חברים חדשים ומגוונים יותר** (template C / E3-E5), לא aggregation חכם יותר.
+
+### 16.7 Success criteria (מעודכן לפי הממצאים)
+
+- **Phase A — E4 unweighted (חינמי):** ens F1 > mean single ב-**6/6** ✅ · variance מבוטל ✅. *(הושג.)*
+- **Phase B-agg — weighted voting (חינמי):** aggregator עם coverage מלא ש**שולט** על tie-break כפוי — cv_weighted F1=0.693 @ cov=0.996 מול 0.665/0.634. ✅ *(הושג; "ה-best deployable aggregator".)*
+- **Phase B-div — member diversity (GPU, טרם):** ens F1 ≥ best single ב-**≥ 3 מתוך 6** תאים. הוכח אנליטית שלא ניתן עם ה-4 חברים הקיימים → דורש **E3 = שלישיית 0-shot `{A,B,C}`** (template C כבר קיים ב-`src/prompts.py`, צריך הרצת Colab) ואולי E5.
+
+### 16.8 צעדים הבאים
+
+1. ✅ **template C** נוסף ל-`src/prompts.py` ו**מחווט ל-matrix** (`run_llm_matrix.py`, `TEMPLATE_SHOTS` → C ב-0-shot בלבד = ריצה אחת נוספת לכל model×dataset). הדרייבר כבר מחשב E3/E5 אוטומטית ברגע שתחזיות C קיימות. **נותר רק:** הרצת GPU/Modal —
+   ```
+   python scripts/run_llm_matrix.py --only qwen25_7b mistral7b plutus8b
+   ```
+   (ריצות A/B קיימות מדולגות דרך progress.json; רק 6 ריצות C0 חדשות) ואז `python scripts/aggregate_ensemble.py`.
+2. ✅ **weighted / cv_weighted voting** מומש ב-`aggregate` + driver. שדרוג אופציונלי: **soft voting לפי first-token logprob** (דורש שינוי קטן ב-`llm_runner`) במקום משקלי-accuracy.
+3. אופציונלי — **cascade** לחיסכון: prompt זול קודם, escalation ל-vote מלא רק על דוגמאות עם disagreement → accuracy של ensemble בעלות חלקית (ה-"performance" angle).
+4. ✅ **figures** נוצרו (ראה 16.9).
+
+### 16.9 Deliverables
+
+- `src/ensemble.py` — `aggregate(votes, tie_break, weights)` (+ `tests/test_ensemble.py`, 16 בדיקות).
+- `scripts/aggregate_ensemble.py` — driver: unweighted + tie-break ablation + cv_weighted + oracle ceiling.
+- `scripts/make_ensemble_figures.py` → `presentation/key_figures/ensemble_vs_single.png`, `ensemble_coverage_tradeoff.png`.
+- `results/summary/ensemble_table.csv` (30 שורות) + `results/summary/confusions_ensemble/`.
+- template C ב-`src/prompts.py` (Phase B-div, ממתין להרצת GPU).
