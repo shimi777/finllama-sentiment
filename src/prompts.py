@@ -34,6 +34,40 @@ TEMPLATES: dict[str, str] = {
         "Text: {text}\n"
         "Reply with exactly one word — positive, negative, or neutral:"
     ),
+    # Template D — strict structured single-token output (parse-robustness +
+    # label-order neutrality). Isolates B's "one word only" constraint from its
+    # misleading neutral definition list (review/evidence/prompt_design_critique.md §2).
+    "D": (
+        "Classify the sentiment of the financial text toward the company or asset it describes.\n"
+        "Choose exactly one label from this set: [negative, neutral, positive].\n"
+        "Respond with only the label as a single lowercase word. No explanation, no punctuation.\n"
+        "{fewshot_block}"
+        "Text: {text}\n"
+        "Label:"
+    ),
+    # Template F — A's minimal body + an explicit neutral tie-break rule. Directly
+    # attacks the "factual ⇒ neutral" magnet identified in B (see critique §0/§1).
+    "F": (
+        "Classify the sentiment of the financial text as positive, negative, or neutral.\n"
+        "Rule: only choose neutral if the text has no positive or negative implication at all. "
+        "If the text leans even slightly toward gains or losses, choose positive or negative accordingly.\n"
+        "{fewshot_block}"
+        "Text: {text}\n"
+        "Sentiment:"
+    ),
+    # Template H — contrastive anchor + forced choice, order-counterbalanced. B's
+    # rubric *structure* with the factual-neutral magnet surgically removed and
+    # neutral demoted to "last resort" (critique §2).
+    "H": (
+        "Task: label the financial text's sentiment toward the company or asset.\n"
+        "positive = clearly better prospects (growth, gains, gains for investors)\n"
+        "negative = clearly worse prospects (losses, risk, decline)\n"
+        "neutral = genuinely no directional signal (choose this only as a last resort)\n"
+        "Pick the single best-fitting label. Output only that one word.\n"
+        "{fewshot_block}"
+        "Text: {text}\n"
+        "Answer:"
+    ),
 }
 
 _LABEL_ORDER = ["negative", "neutral", "positive"]

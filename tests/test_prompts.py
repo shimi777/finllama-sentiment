@@ -42,6 +42,53 @@ def test_template_c_fewshot_block():
     # 3 examples + 1 query
     assert p.count("Text:") == 4
 
+def test_template_d_contains_text():
+    p = build_prompt("D", "earnings beat estimates")
+    assert "earnings beat estimates" in p
+
+def test_template_d_has_label_colon():
+    p = build_prompt("D", "some text")
+    assert "Label:" in p
+
+def test_template_d_fewshot_block():
+    p = build_prompt("D", "query", few_shot=_POOL[:3])
+    assert p.count("Text:") == 4
+
+def test_template_f_contains_text():
+    p = build_prompt("F", "earnings beat estimates")
+    assert "earnings beat estimates" in p
+
+def test_template_f_has_sentiment_colon():
+    p = build_prompt("F", "some text")
+    assert "Sentiment:" in p
+
+def test_template_f_has_neutral_tiebreak_rule():
+    p = build_prompt("F", "some text")
+    assert "only choose neutral" in p
+
+def test_template_f_fewshot_block():
+    p = build_prompt("F", "query", few_shot=_POOL[:3])
+    assert p.count("Text:") == 4
+
+def test_template_h_contains_text():
+    p = build_prompt("H", "earnings beat estimates")
+    assert "earnings beat estimates" in p
+
+def test_template_h_has_answer_colon():
+    p = build_prompt("H", "some text")
+    assert "Answer:" in p
+
+def test_template_h_neutral_last_resort():
+    p = build_prompt("H", "some text")
+    assert "last resort" in p
+
+def test_template_h_fewshot_block():
+    p = build_prompt("H", "query", few_shot=_POOL[:3])
+    assert p.count("Text:") == 4
+
+def test_templates_keys_are_a_b_c_d_f_h():
+    assert set(TEMPLATES.keys()) == {"A", "B", "C", "D", "F", "H"}
+
 def test_unknown_template_raises():
     with pytest.raises(ValueError):
         build_prompt("Z", "text")
