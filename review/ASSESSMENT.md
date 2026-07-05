@@ -82,6 +82,7 @@ This is well above a minimum reproduction.
 3. **[minor] Self-reported numbers slightly off.** Cost "~$1.3"→~$1.2, "~130"→~120 GPU-min, "200–300"→300. **Fix:** three number edits in the docx (the report otherwise verifies at 367/420 exact).
 4. **[minor, fixed] Fresh-clone friction.** `pip install` resolved into a torch-2.11/scipy-1.17 combo that failed 11 tests; README quickstart was a `TODO` stub. **Fixed this branch** (scipy pin + real README); the report already flags the test issue in §10 (though it misattributes the cause to "test ordering" rather than the dependency combo — worth a one-word correction).
 5. **[minor] FiQA neutral-band robustness unexamined.** Add a one-line ±0.05/±0.15 sensitivity note or acknowledge it as future work.
+6. **[minor] Submission `4_code.zip` is stale and carries trace files.** It predates every fix above (no templates D/F/H, old README, failing tests) and contains `CLAUDE.md` — the Claude-Code agent-instruction file — which should not be handed to a grader. **Fix:** after the report-prose edits, rebuild the zip from the live tree excluding `CLAUDE.md`, `__pycache__`, `.gstack/`, `node_modules/`, `.venv/`, and `review/`. (Left for you — the zip is a submission deliverable, not auto-regenerated.)
 
 ---
 
