@@ -442,7 +442,7 @@ function caption(slide, text, x = 0.4, y = 5.05, w = 9.2) {
 {
   const s = lightSlide();
   slideTitle(s, "Experimental matrix and defenses");
-  slideSubtitle(s, "12 LLM runs (3 models × 2 datasets × 2 templates × {0, 3}-shot) + 4 baseline runs.");
+  slideSubtitle(s, "24 LLM runs (3 models × 2 datasets × 2 templates × {0, 3}-shot) + 6 baseline runs (FinBERT, FinBERT-tone, VADER × 2 datasets).");
 
   bullets(s, [
     "Deterministic decode (temperature=0, do_sample=False) — same input ⇒ same output",
@@ -707,33 +707,32 @@ function caption(slide, text, x = 0.4, y = 5.05, w = 9.2) {
   slideSubtitle(s, "Strengths grounded in our numbers and confusion matrices.");
 
   bullets(s, [
-    "FinBERT on FPB: clean labels + matching domain ⇒ 0.925 F1m and ≥0.93 on every class — strongest result anywhere in the matrix.",
+    "FinBERT on FPB: clean labels + matching domain ⇒ 0.925 F1m and 0.91–0.95 per-class F1 — strongest result anywhere in the matrix.",
     "Mistral-7B on FPB with 3-shot Template A: 0.890 F1m, 0.903 accuracy — closes most of the FinBERT gap and shows that a general-purpose 7B can match a specialist when shown 3 in-context examples.",
     "Qwen2.5-7B on FiQA Template B 0-shot: 0.673 F1m on the noisy/conversational FiQA where FinBERT collapses to 0.482 — generalist beats specialist out-of-domain.",
-    "All LLMs hit 100% parsing coverage with our greedy + synonym-aware parser — no run was poisoned by 'bullish'/'bearish'-style outputs that would have force-mapped to neutral.",
+    "Parsing coverage ≥97% everywhere; only plutus-8B dipped below 100% (2 of 24 runs) — no run was poisoned by 'bullish'/'bearish'-style outputs that would have force-mapped to neutral.",
     "VADER on FPB at 0.469 F1m provides a useful 'no-learning floor' — every other model is at least 17 points above it, validating the comparison.",
   ], { x: 0.5, y: 1.6, w: 9, h: 3.4, fontSize: 12.5 });
 }
 
-// 3.9 — Error categories (hand-tagging placeholder)
+// 3.9 — Error categories (hand-tagged, 30 plutus-8B FPB misses; report §8.1)
 {
   const s = lightSlide();
   slideTitle(s, "Error categories — focal model misses (hand-categorized)");
-  slideSubtitle(s, "Open results/summary/focal_error_sample.csv, fill the 'category' column, paste the breakdown here.");
+  slideSubtitle(s, "30 hand-tagged plutus-8B errors on FPB (results/summary/focal_error_sample.csv).");
 
   bullets(s, [
-    "Negation — model treats a negated negative as positive (e.g. 'did not miss expectations')",
-    "Numerical reasoning — small revenue beat treated as 'positive' on noise",
-    "Domain jargon / ambiguity — regulator commentary, hedged policy language",
-    "Factual neutrals → mistaken for positive — calm news flagged as upbeat by default",
-    "[+ any additional category that emerges during your hand review]",
+    "Missed positive cue — 15 (50%): mild/forward-looking positives read as neutral (neutral-bias), e.g. 'plans to expand internationally'",
+    "Numerical reasoning — 8 (27%): needs comparing figures, e.g. 'loss narrowed 3.7→1.8mn' misread as negative",
+    "Factual neutral misclassed — 6 (20%): a neutral fact (appointment, M&A, delisting) read as positive/negative",
+    "Ambiguous / out-of-domain — 1 (3%): genuinely unclear sentence",
   ], { x: 0.5, y: 1.6, w: 9, h: 2.5, fontSize: 14 });
 
   s.addShape(pres.shapes.RECTANGLE, {
     x: 0.5, y: 4.3, w: 9, h: 0.8, fill: { color: ICE }, line: { color: ICE },
   });
   s.addText(
-    "Tip: when hand-tagging, look for cases where plutus-8B is right but Mistral/Qwen are wrong — those are the real evidence for or against the financial-tuning hypothesis.",
+    "Takeaway: half the misses are a conservative neutral-bias, not random noise — only 1 of 30 errors is genuinely ambiguous label noise.",
     { x: 0.7, y: 4.4, w: 8.6, h: 0.6,
       fontSize: 12, italic: true, fontFace: FACE_B, color: NAVY, margin: 0, valign: "middle" }
   );
@@ -797,10 +796,10 @@ function caption(slide, text, x = 0.4, y = 5.05, w = 9.2) {
   const s = lightSlide();
   slideTitle(s, "Five lessons");
   const lessons = [
-    ["Reproducibility cost is real", "Notebook → script split, run-dir schema with checkpoint/resume, parser as a tested module, Modal Volume for cached weights — without these, a 12-run matrix isn't redoable."],
+    ["Reproducibility cost is real", "Notebook → script split, run-dir schema with checkpoint/resume, parser as a tested module, Modal Volume for cached weights — without these, a 24-run matrix isn't redoable."],
     ["Models can vanish", "TheFinAI/FinLLaMA-instruct was unpublished between paper and our run. Benchmark results are only as durable as the artifacts they reference."],
-    ["Prompt sensitivity ≥ model choice (often)", "ΔF1 between Template A and B was [NUM] points — comparable to gaps between models. Single-prompt LLM benchmarks should not be trusted."],
-    ["Coverage matters more than people report", "Force-mapping parse failures to 'neutral' would overstate accuracy by [NUM] points. Most papers don't report it."],
+    ["Prompt sensitivity ≥ model choice (often)", "ΔF1 between Template A and B was up to 16 points on the same model and dataset — comparable to gaps between models. Single-prompt LLM benchmarks should not be trusted."],
+    ["Coverage matters more than people report", "Force-mapping plutus-8B's unparsed outputs to 'neutral' would overstate accuracy by up to 1.25 points (FPB, Template A, 3-shot). Most papers don't report it."],
     ["Data leakage caveat", "FPB (2014) and FiQA (2018) almost certainly leaked into pretraining. Numbers here are an upper bound on real-world generalisation — a 2025 hold-out would be the honest test."],
   ];
   lessons.forEach((l, i) => {
