@@ -1,0 +1,6 @@
+model,f1_75agree,cfg_75,f1_allagree,cfg_all,delta
+FinBERT,0.9254,-/0shot,0.977,-/0shot,0.0516
+Mistral-7B,0.8897,A/3shot,0.9371,A/3shot,0.0474
+Qwen2.5-7B,0.8324,A/3shot,0.9281,A/3shot,0.0957
+plutus-8B,0.8291,A/3shot,0.8508,A/3shot,0.0217
+VADER,0.4694,-/0shot,0.4832,-/0shot,0.0138

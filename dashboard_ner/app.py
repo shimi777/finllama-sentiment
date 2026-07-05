@@ -76,6 +76,14 @@ TIER_COLOR = {
     "article-llm": "#a569bd",   # purple
     "modern-llm":  "#52be80",   # green
 }
+# Readable tier names — used in legends, the leaderboard, and verdict cards
+# so the UI never shows raw slugs like "article-llm".
+TIER_LABEL = {
+    "local":       "Local NER",
+    "api":         "API LLM",
+    "article-llm": "Article LLM (7-9B)",
+    "modern-llm":  "Modern LLM (7-9B)",
+}
 
 
 # ---------- data loaders (cached) ----------
@@ -219,6 +227,59 @@ if not filt.empty:
         )
 
 
+# ---------- leaderboard: head-to-head model comparison ----------
+
+st.subheader("🏆 Model leaderboard")
+st.caption(
+    "One row per model (its single best run), ranked by **strict span-F1** — the "
+    "strictest metric: exact boundary *and* correct type. Green = better. "
+    "Per-type columns (PER / LOC / ORG) show where each model is strong or weak; "
+    "cost is per 100 examples."
+)
+if not filt.empty:
+    # Collapse to the best-scoring run per model so the ranking is unambiguous.
+    board = (
+        filt.sort_values("strict_f1", ascending=False)
+        .groupby("model", as_index=False)
+        .first()
+        .sort_values("strict_f1", ascending=False)
+        .reset_index(drop=True)
+    )
+    board.insert(0, "rank", board.index + 1)
+    board["type"] = board["tier"].map(TIER_LABEL).fillna(board["tier"])
+    board["config"] = board.apply(
+        lambda r: "—" if r["backend"] == "local"
+        else f"tmpl {r['template']} · {int(r['shots'])}-shot",
+        axis=1,
+    )
+    lb_rename = {
+        "rank": "#",
+        "model_label": "Model",
+        "type": "Type",
+        "config": "Config",
+        "strict_f1": "Strict-F1",
+        "partial_f1": "Partial-F1",
+        "f1_PER": "PER",
+        "f1_LOC": "LOC",
+        "f1_ORG": "ORG",
+        "coverage": "Coverage",
+        "cost_per_100": "Cost/100",
+    }
+    lb_present = [c for c in lb_rename if c in board.columns]
+    show = board[lb_present].rename(columns=lb_rename)
+    grad_cols = [c for c in ["Strict-F1", "Partial-F1", "PER", "LOC", "ORG"] if c in show.columns]
+    styler = (
+        show.style
+        .format({
+            "Strict-F1": "{:.3f}", "Partial-F1": "{:.3f}",
+            "PER": "{:.3f}", "LOC": "{:.3f}", "ORG": "{:.3f}",
+            "Coverage": "{:.0%}", "Cost/100": "${:.4f}",
+        })
+        .background_gradient(cmap="RdYlGn", vmin=0, vmax=1, subset=grad_cols)
+    )
+    st.dataframe(styler, use_container_width=True, hide_index=True)
+
+
 # ---------- Article vs Modern verdict card ----------
 
 st.subheader("Article-models vs Modern-models on FiNER-ORD")
@@ -257,7 +318,12 @@ if not verdict.empty:
 st.subheader("Strict span-F1 by model")
 if not filt.empty:
     chart_df = filt.copy()
-    chart_df["run_label"] = chart_df["model_label"] + " · " + chart_df["template"].astype(str) + " · " + chart_df["shots"].astype(str) + "-shot"
+    chart_df["cfg"] = chart_df.apply(
+        lambda r: "" if r["backend"] == "local"
+        else f" · tmpl {r['template']} · {int(r['shots'])}-shot",
+        axis=1,
+    )
+    chart_df["run_label"] = chart_df["model_label"] + chart_df["cfg"]
     chart_df = chart_df.sort_values("strict_f1", ascending=True)
     fig, ax = plt.subplots(figsize=(8, max(3, 0.4 * len(chart_df))))
     colors = [TIER_COLOR.get(t, "#bdc3c7") for t in chart_df["tier"]]
@@ -270,7 +336,7 @@ if not filt.empty:
     ax.grid(axis="x", alpha=0.3)
     # Legend
     from matplotlib.patches import Patch
-    legend_handles = [Patch(color=c, label=t) for t, c in TIER_COLOR.items()
+    legend_handles = [Patch(color=c, label=TIER_LABEL.get(t, t)) for t, c in TIER_COLOR.items()
                       if t in chart_df["tier"].unique()]
     if legend_handles:
         ax.legend(handles=legend_handles, loc="lower right", fontsize=8)

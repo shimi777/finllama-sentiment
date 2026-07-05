@@ -1,0 +1,40 @@
+2026-06-25 17:16:30,455 | src.data_loader | INFO | Loading FPB (sentences_allagree) via HuggingFace Hub download…
+2026-06-25 17:16:31,125 | src.data_loader | INFO | FPB: 1812 train, 452 test
+2026-06-25 17:16:31,125 | run_allagree | INFO | AllAgree: 1812 train, 452 test
+2026-06-25 17:16:31,140 | src.models.vader_runner | INFO | VADERRunner ready
+2026-06-25 17:16:32,484 | run_allagree | INFO | VADER         -/0shot  acc=0.551 f1m=0.483 cov=1.00
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|##########| 201/201 [00:00<00:00, 18868.31it/s]
+2026-06-25 17:16:37,893 | src.models.finbert_runner | INFO | FinBERTRunner ready (device=-1)
+2026-06-25 17:16:57,749 | run_allagree | INFO | FinBERT       -/0shot  acc=0.980 f1m=0.977 cov=1.00
+2026-06-25 17:16:57,960 | run_allagree | WARNING | [skip] baseline FinBERT-tone failed to load: Unrecognized model in yiyanghkust/finbert-tone. Should have a `model_type` key in its config.json.
+2026-06-25 17:16:58,371 | run_allagree | INFO | LLM eval subsample: 300 (budget Modal spend: $0.7879 (4804s) over 34 runs, remaining $6.2121)
+2026-06-25 17:20:32,560 | run_allagree | INFO | qwen25_7b     A/0shot  acc=0.853 f1m=0.834 cov=1.00
+2026-06-25 17:23:12,479 | run_allagree | INFO | qwen25_7b     A/3shot  acc=0.930 f1m=0.928 cov=1.00
+2026-06-25 17:25:42,715 | run_allagree | INFO | qwen25_7b     B/0shot  acc=0.913 f1m=0.908 cov=1.00
+2026-06-25 17:28:33,938 | run_allagree | INFO | qwen25_7b     B/3shot  acc=0.833 f1m=0.852 cov=1.00
+2026-06-25 17:31:33,397 | run_allagree | INFO | mistral7b     A/0shot  acc=0.890 f1m=0.883 cov=1.00
+2026-06-25 17:34:29,028 | run_allagree | INFO | mistral7b     A/3shot  acc=0.940 f1m=0.937 cov=1.00
+2026-06-25 17:35:36,959 | run_allagree | INFO | mistral7b     B/0shot  acc=0.803 f1m=0.760 cov=1.00
+2026-06-25 17:36:59,096 | run_allagree | INFO | mistral7b     B/3shot  acc=0.870 f1m=0.862 cov=1.00
+2026-06-25 17:38:35,613 | run_allagree | INFO | plutus8b      A/0shot  acc=0.783 f1m=0.760 cov=1.00
+2026-06-25 17:39:40,428 | run_allagree | INFO | plutus8b      A/3shot  acc=0.864 f1m=0.851 cov=0.98
+2026-06-25 17:40:26,358 | run_allagree | INFO | plutus8b      B/0shot  acc=0.783 f1m=0.715 cov=1.00
+2026-06-25 17:41:30,436 | run_allagree | INFO | plutus8b      B/3shot  acc=0.787 f1m=0.748 cov=1.00
+
+    model dataset template  shots  seed  n_samples  accuracy  f1_macro  f1_weighted  coverage  runtime_s
+    VADER  FPBall        -      0    42        452    0.5509    0.4832       0.5530    1.0000       0.02
+  FinBERT  FPBall        -      0    42        452    0.9801    0.9770       0.9802    1.0000      19.82
+qwen25_7b  FPBall        A      0    42        300    0.8533    0.8342       0.8419    1.0000     210.32
+qwen25_7b  FPBall        A      3    42        300    0.9300    0.9281       0.9278    1.0000     159.90
+qwen25_7b  FPBall        B      0    42        300    0.9130    0.9078       0.9101    0.9967     150.22
+qwen25_7b  FPBall        B      3    42        300    0.8333    0.8518       0.8369    1.0000     171.19
+mistral7b  FPBall        A      0    42        300    0.8896    0.8830       0.8851    0.9967     179.43
+mistral7b  FPBall        A      3    42        300    0.9400    0.9371       0.9388    1.0000     175.61
+mistral7b  FPBall        B      0    42        300    0.8033    0.7599       0.7927    1.0000      67.92
+mistral7b  FPBall        B      3    42        300    0.8700    0.8615       0.8677    1.0000      82.11
+ plutus8b  FPBall        A      0    42        300    0.7833    0.7597       0.7849    1.0000      96.50
+ plutus8b  FPBall        A      3    42        300    0.8639    0.8508       0.8640    0.9800      64.79
+ plutus8b  FPBall        B      0    42        300    0.7833    0.7149       0.7373    1.0000      45.90
+ plutus8b  FPBall        B      3    42        300    0.7867    0.7479       0.7849    1.0000      64.07
+
+Wrote C:\python_projects\finllama-sentiment\results\summary\allagree_table.csv
