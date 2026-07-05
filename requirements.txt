@@ -6,6 +6,7 @@ datasets>=2.20.0
 requests>=2.31.0
 huggingface_hub>=0.24.0
 scikit-learn>=1.4.0
+scipy>=1.11,<1.17  # scipy 1.17 array-api probe breaks sklearn import when torch>=2.11 is installed
 pandas>=2.2.0
 numpy>=1.26.0
 matplotlib>=3.8.0
