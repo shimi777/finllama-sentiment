@@ -1,0 +1,34 @@
+diff --git a/results/summary/final_table.csv b/results/summary/final_table.csv
+index 8fb568e..996c32e 100644
+--- a/results/summary/final_table.csv
++++ b/results/summary/final_table.csv
+@@ -1,5 +1,6 @@
+ model,model_hf_id,dataset,template,shots,seed,n_samples,accuracy,f1_macro,f1_weighted,coverage,runtime_s
+ finbert,ProsusAI/finbert,FPB,-,0,42,690,0.9348,0.9254,0.9357,1.0,24.23
++finbert_tone,yiyanghkust/finbert-tone,FPB,-,0,42,690,0.8812,0.8552,0.8777,1.0,19.41
+ mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FPB,A,0,42,300,0.8433,0.803,0.8294,1.0,315.13
+ mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FPB,A,3,42,300,0.9033,0.8897,0.903,1.0,211.38
+ mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FPB,B,0,42,300,0.77,0.6889,0.7513,1.0,71.55
+@@ -13,7 +14,22 @@ qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPB,A,3,42,300,0.86,0.8324,0.8517,1.0,194.82
+ qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPB,B,0,42,300,0.84,0.8061,0.8331,1.0,180.98
+ qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPB,B,3,42,300,0.8367,0.7923,0.8284,1.0,206.85
+ vader,vaderSentiment,FPB,-,0,42,690,0.5536,0.4694,0.558,1.0,0.05
++finbert,ProsusAI/finbert,FPBall,-,0,42,105,0.5333,0.386,0.5609,1.0,19.82
++mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FPBall,A,0,42,73,0.5417,0.3674,0.5345,0.9863,179.43
++mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FPBall,A,3,42,73,0.5753,0.4108,0.5911,1.0,175.61
++mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FPBall,B,0,42,73,0.589,0.3866,0.5654,1.0,67.92
++mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FPBall,B,3,42,73,0.589,0.4131,0.5939,1.0,82.11
++plutus8b,TheFinAI/plutus-8B-instruct,FPBall,A,0,42,73,0.4384,0.3298,0.4776,1.0,96.5
++plutus8b,TheFinAI/plutus-8B-instruct,FPBall,A,3,42,73,0.493,0.3784,0.5391,0.9726,64.79
++plutus8b,TheFinAI/plutus-8B-instruct,FPBall,B,0,42,73,0.5068,0.3318,0.4938,1.0,45.9
++plutus8b,TheFinAI/plutus-8B-instruct,FPBall,B,3,42,73,0.4384,0.3347,0.4824,1.0,64.07
++qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPBall,A,0,42,73,0.5342,0.3543,0.5206,1.0,210.32
++qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPBall,A,3,42,73,0.5479,0.3964,0.5694,1.0,159.9
++qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPBall,B,0,42,73,0.5342,0.3543,0.5206,1.0,150.22
++qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FPBall,B,3,42,73,0.4521,0.3404,0.4779,1.0,171.19
++vader,vaderSentiment,FPBall,-,0,42,105,0.5048,0.3656,0.5227,1.0,0.02
+ finbert,ProsusAI/finbert,FiQA,-,0,42,1173,0.4979,0.482,0.5729,1.0,25.59
++finbert_tone,yiyanghkust/finbert-tone,FiQA,-,0,42,1173,0.3887,0.3955,0.4802,1.0,3.59
+ mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FiQA,A,0,42,300,0.62,0.5989,0.6718,1.0,172.87
+ mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FiQA,A,3,42,300,0.5833,0.5755,0.646,1.0,208.28
+ mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FiQA,B,0,42,300,0.63,0.5641,0.6659,1.0,131.85

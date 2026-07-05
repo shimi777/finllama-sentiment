@@ -1,0 +1,7 @@
+run_id,dataset,n_full,acc_full,f1_macro_full,n_subset,acc_subset,f1_macro_subset,d_acc_subset_minus_full,d_f1_subset_minus_full
+finbert__FPB__seed42,FPB,690,0.9348,0.9254,300,0.9267,0.9169,-0.0081,-0.0085
+finbert_tone__FPB__seed42,FPB,690,0.8812,0.8552,300,0.86,0.8212,-0.0212,-0.034
+vader__FPB__seed42,FPB,690,0.5536,0.4694,300,0.5633,0.4781,0.0097,0.0087
+finbert__FiQA__seed42,FiQA,1173,0.4979,0.482,300,0.4733,0.4692,-0.0245,-0.0129
+finbert_tone__FiQA__seed42,FiQA,1173,0.3887,0.3955,300,0.3933,0.3991,0.0046,0.0036
+vader__FiQA__seed42,FiQA,1173,0.4228,0.3863,300,0.3567,0.3322,-0.0662,-0.0541

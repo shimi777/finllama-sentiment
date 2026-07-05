@@ -1,0 +1,80 @@
+{
+  "FPB": {
+    "n_runs_checked": 12,
+    "run_ids_checked": [
+      "mistral7b__FPB__A__0shot__seed42",
+      "mistral7b__FPB__A__3shot__seed42",
+      "mistral7b__FPB__B__0shot__seed42",
+      "mistral7b__FPB__B__3shot__seed42",
+      "plutus8b__FPB__A__0shot__seed42",
+      "plutus8b__FPB__A__3shot__seed42",
+      "plutus8b__FPB__B__0shot__seed42",
+      "plutus8b__FPB__B__3shot__seed42",
+      "qwen25_7b__FPB__A__0shot__seed42",
+      "qwen25_7b__FPB__A__3shot__seed42",
+      "qwen25_7b__FPB__B__0shot__seed42",
+      "qwen25_7b__FPB__B__3shot__seed42"
+    ],
+    "all_identical": true,
+    "canonical_id_set_size": 300,
+    "canonical_id_set_sha1": "e5646bb831f9ab13d230ada6c4c6c6c6ca868239",
+    "deviating_runs": [],
+    "baseline_superset_check": {
+      "finbert": {
+        "found": true,
+        "run_id": "finbert__FPB__seed42",
+        "n_baseline_ids": 690,
+        "is_superset_of_canonical_300": true,
+        "n_missing_from_baseline": 0,
+        "example_missing_ids": []
+      },
+      "vader": {
+        "found": true,
+        "run_id": "vader__FPB__seed42",
+        "n_baseline_ids": 690,
+        "is_superset_of_canonical_300": true,
+        "n_missing_from_baseline": 0,
+        "example_missing_ids": []
+      }
+    }
+  },
+  "FiQA": {
+    "n_runs_checked": 12,
+    "run_ids_checked": [
+      "mistral7b__FiQA__A__0shot__seed42",
+      "mistral7b__FiQA__A__3shot__seed42",
+      "mistral7b__FiQA__B__0shot__seed42",
+      "mistral7b__FiQA__B__3shot__seed42",
+      "plutus8b__FiQA__A__0shot__seed42",
+      "plutus8b__FiQA__A__3shot__seed42",
+      "plutus8b__FiQA__B__0shot__seed42",
+      "plutus8b__FiQA__B__3shot__seed42",
+      "qwen25_7b__FiQA__A__0shot__seed42",
+      "qwen25_7b__FiQA__A__3shot__seed42",
+      "qwen25_7b__FiQA__B__0shot__seed42",
+      "qwen25_7b__FiQA__B__3shot__seed42"
+    ],
+    "all_identical": true,
+    "canonical_id_set_size": 300,
+    "canonical_id_set_sha1": "978644fc9aa22772d1e21e07564f40ca2bea21df",
+    "deviating_runs": [],
+    "baseline_superset_check": {
+      "finbert": {
+        "found": true,
+        "run_id": "finbert__FiQA__seed42",
+        "n_baseline_ids": 1173,
+        "is_superset_of_canonical_300": true,
+        "n_missing_from_baseline": 0,
+        "example_missing_ids": []
+      },
+      "vader": {
+        "found": true,
+        "run_id": "vader__FiQA__seed42",
+        "n_baseline_ids": 1173,
+        "is_superset_of_canonical_300": true,
+        "n_missing_from_baseline": 0,
+        "example_missing_ids": []
+      }
+    }
+  }
+}
