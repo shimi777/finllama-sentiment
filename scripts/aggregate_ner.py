@@ -7,6 +7,12 @@ and writes:
     results/summary_ner/final_table_ner.csv
     results/summary_ner/confusions/{run_id}.json
 
+Scope note: this script is authoritative for the FiNER-ORD benchmark track
+(GLiNER vs LLMs, glob "*FiNER-ORD*") and reproduces the committed
+final_table_ner.csv byte-identically. It does NOT touch the separate,
+exploratory "FIN/paper" NER track (run dirs named "ner__*__FIN__paper__*"),
+which is re-scored by scripts/reeval_ner.py instead.
+
 Usage: py scripts/aggregate_ner.py
 """
 

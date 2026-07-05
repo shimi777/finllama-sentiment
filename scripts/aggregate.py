@@ -26,6 +26,14 @@ from src.utils import set_seed, get_logger  # noqa: E402
 
 logger = get_logger("aggregate")
 
+# Only these datasets have gold labels loaded/aligned below (FPB, FiQA). Other
+# datasets seen under results/predictions/ (e.g. "FPBall", NER datasets) are
+# produced by separate pipelines with their own gold-alignment and must NOT be
+# aggregated here — doing so silently mis-joins ids and injects bogus metrics
+# (e.g. gold-id misalignment inflating/deflating F1). Use scripts/eval_allagree.py
+# / scripts/run_allagree.py for FPBall, and scripts/aggregate_ner.py for NER.
+DATASET_ALLOWLIST = {"FPB", "FiQA"}
+
 
 def main() -> None:
     set_seed(42)
@@ -49,6 +57,15 @@ def main() -> None:
 
         with open(meta_path) as f:
             meta = json.load(f)
+
+        if meta.get("dataset") not in DATASET_ALLOWLIST:
+            logger.info(
+                "Skipping run %s (dataset=%r not in %s). "
+                "See scripts/eval_allagree.py / run_allagree.py for FPBall, "
+                "scripts/aggregate_ner.py for NER datasets.",
+                meta.get("run_id"), meta.get("dataset"), sorted(DATASET_ALLOWLIST),
+            )
+            continue
 
         preds: list[dict] = []
         with open(pred_path) as f:
