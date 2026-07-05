@@ -1,0 +1,10 @@
+================================================================
+NER Modal plan — dataset: FiNER-ORD test (200 samples)
+GPU: T4 @ $0.000164/sec  | cap: $3.00
+Estimated wall: 400s per run ~ $0.066
+Currently spent: Modal spend: $0.6672 (4068s) over 32 runs
+This batch est total: $0.131
+
+  qwen3_8b     (modern ) Qwen/Qwen3-8B                              tpl=A shots=0
+  qwen3_4b     (modern ) Qwen/Qwen3-4B-Instruct-2507                tpl=A shots=0
+================================================================

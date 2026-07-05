@@ -1,0 +1,47 @@
+{
+  "run_id": "finbert_tone__FiQA__seed42",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      140,
+      210,
+      13
+    ],
+    [
+      14,
+      68,
+      11
+    ],
+    [
+      23,
+      446,
+      248
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.7909604519774012,
+      "recall": 0.3856749311294766,
+      "f1": 0.5185185185185185,
+      "support": 363
+    },
+    "neutral": {
+      "precision": 0.09392265193370165,
+      "recall": 0.7311827956989247,
+      "f1": 0.1664626682986536,
+      "support": 93
+    },
+    "positive": {
+      "precision": 0.9117647058823529,
+      "recall": 0.3458856345885635,
+      "f1": 0.5015166835187057,
+      "support": 717
+    }
+  },
+  "n_samples": 1173,
+  "coverage": 1.0
+}

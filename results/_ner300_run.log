@@ -1,0 +1,22 @@
+2026-06-25 22:56:29,759 | src.ner.data_loader | INFO | Loading FiNER-ORD split=test …
+Repo card metadata block was not found. Setting CardData to empty.
+2026-06-25 22:56:32,684 | src.ner.data_loader | INFO | FiNER-ORD test: 300 samples (after cap)
+2026-06-25 22:56:36,798 | run_ner_modal | INFO | [run ] plutus8b__FiNER-ORD__A__0shot__seed42  (100 new prompts, 200 kept, ~$0.066 budgeted)
+2026-06-25 23:00:42,097 | run_ner_modal | INFO | [done] plutus8b__FiNER-ORD__A__0shot__seed42  strict_f1=0.365  partial_f1=0.411  cov=0.85  (245.2s, $1.0687 cum spend)
+2026-06-25 23:00:42,133 | run_ner_modal | INFO | [run ] qwen3_8b__FiNER-ORD__A__0shot__seed42  (100 new prompts, 200 kept, ~$0.066 budgeted)
+2026-06-25 23:03:51,232 | run_ner_modal | INFO | [done] qwen3_8b__FiNER-ORD__A__0shot__seed42  strict_f1=0.603  partial_f1=0.688  cov=1.00  (189.0s, $1.0997 cum spend)
+2026-06-25 23:03:51,247 | run_ner_modal | INFO | [run ] qwen3_4b__FiNER-ORD__A__0shot__seed42  (100 new prompts, 200 kept, ~$0.066 budgeted)
+2026-06-25 23:06:32,231 | run_ner_modal | INFO | [done] qwen3_4b__FiNER-ORD__A__0shot__seed42  strict_f1=0.494  partial_f1=0.606  cov=1.00  (160.9s, $1.1261 cum spend)
+2026-06-25 23:06:32,571 | run_ner_modal | INFO | NER Modal matrix done. ran=3 skipped=0 aborted=0
+2026-06-25 23:06:32,573 | run_ner_modal | INFO | Final Modal spend: $1.1261 (6867s) over 49 runs
+================================================================
+NER Modal plan — dataset: FiNER-ORD test (300 samples)
+GPU: T4 @ $0.000164/sec  | cap: $7.00
+Estimated wall: 400s per run ~ $0.066
+Currently spent: Modal spend: $1.0285 (6272s) over 46 runs
+This batch est total: $0.197
+
+  plutus8b     (article) TheFinAI/plutus-8B-instruct                tpl=A shots=0
+  qwen3_8b     (modern ) Qwen/Qwen3-8B                              tpl=A shots=0
+  qwen3_4b     (modern ) Qwen/Qwen3-4B-Instruct-2507                tpl=A shots=0
+================================================================
