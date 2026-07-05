@@ -1,0 +1,5 @@
+ M .claude/settings.local.json
+?? .gstack/
+?? presentation/node_modules/
+?? report/
+?? review/
