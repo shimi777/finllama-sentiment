@@ -3,103 +3,135 @@
 - Main deck slides: 26
 - Dated deck slides: 30
 
+## Unresolved `[NUM]` placeholders left in each deck
+
+A `[NUM]` token means the slide author never substituted the real number. Table-cell placeholders that got filled in the dated deck are covered in the table-cell diff below; this section flags placeholders that are STILL unresolved in one or both decks.
+
+**Main deck — 24 unresolved:**
+
+- Slide 14: `Best F1-macro per model × dataset. [NUM] placeholders are filled from the live results table.`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 14: `[NUM]`
+- Slide 23: `ΔF1 between Template A and B was [NUM] points — comparable to gaps between models. Single-prompt LLM benchmarks should not be trusted.`
+- Slide 23: `Force-mapping parse failures to 'neutral' would overstate accuracy by [NUM] points. Most papers don't report it.`
+- Slide 25: `[Insert a one-sentence answer to the research question once the matrix completes — e.g. 'Financial instruction tuning gave plutus-8B a [NUM]-point F1 edge over the strongest general 7B LLM on FPB, but the small specialised FinBERT still outperformed every 8B model on this in-domain task.']`
+
+**Dated deck — 2 unresolved:**
+
+- Slide 27: `ΔF1 between Template A and B was [NUM] points — comparable to gaps between models. Single-prompt LLM benchmarks should not be trusted.`
+- Slide 27: `Force-mapping parse failures to 'neutral' would overstate accuracy by [NUM] points. Most papers don't report it.`
+
 ## Table-cell number differences (position-aligned by slide/table/row/col)
-
-### Slide 14, Table 1, row='plutus-8B-instruct (focal)', col='Model'
-- MAIN:  `plutus-8B-instruct (focal)`
-- DATED: `FinBERT (specialised, 110M)`
-
-### Slide 14, Table 1, row='plutus-8B-instruct (focal)', col='FPB · F1-macro'
-- MAIN:  `[NUM]`
-- DATED: `0.925`
-
-### Slide 14, Table 1, row='plutus-8B-instruct (focal)', col='FPB · Accuracy'
-- MAIN:  `[NUM]`
-- DATED: `0.935`
-
-### Slide 14, Table 1, row='plutus-8B-instruct (focal)', col='FiQA · F1-macro'
-- MAIN:  `[NUM]`
-- DATED: `0.482`
-
-### Slide 14, Table 1, row='plutus-8B-instruct (focal)', col='FiQA · Accuracy'
-- MAIN:  `[NUM]`
-- DATED: `0.498`
-
-### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='FPB · F1-macro'
-- MAIN:  `[NUM]`
-- DATED: `0.832`
-
-### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='FPB · Accuracy'
-- MAIN:  `[NUM]`
-- DATED: `0.860`
-
-### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='FiQA · F1-macro'
-- MAIN:  `[NUM]`
-- DATED: `0.673`
-
-### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='FiQA · Accuracy'
-- MAIN:  `[NUM]`
-- DATED: `0.717`
-
-### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='Best config'
-- MAIN:  `(missing)`
-- DATED: `Best LLM on FiQA: tpl B 0-shot`
-
-### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='FPB · F1-macro'
-- MAIN:  `[NUM]`
-- DATED: `0.890`
-
-### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='FPB · Accuracy'
-- MAIN:  `[NUM]`
-- DATED: `0.903`
-
-### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='FiQA · F1-macro'
-- MAIN:  `[NUM]`
-- DATED: `0.599`
-
-### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='FiQA · Accuracy'
-- MAIN:  `[NUM]`
-- DATED: `0.620`
-
-### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='Best config'
-- MAIN:  `(missing)`
-- DATED: `Best LLM on FPB: tpl A 3-shot`
-
-### Slide 14, Table 1, row='FinBERT (specialised classifier)', col='Model'
-- MAIN:  `FinBERT (specialised classifier)`
-- DATED: `plutus-8B-instruct (focal)`
-
-### Slide 14, Table 1, row='FinBERT (specialised classifier)', col='FPB · F1-macro'
-- MAIN:  `[NUM]`
-- DATED: `0.829`
-
-### Slide 14, Table 1, row='FinBERT (specialised classifier)', col='FPB · Accuracy'
-- MAIN:  `[NUM]`
-- DATED: `0.851`
-
-### Slide 14, Table 1, row='FinBERT (specialised classifier)', col='FiQA · F1-macro'
-- MAIN:  `[NUM]`
-- DATED: `0.597`
 
 ### Slide 14, Table 1, row='FinBERT (specialised classifier)', col='FiQA · Accuracy'
 - MAIN:  `[NUM]`
+- DATED: `0.498`
+
+### Slide 14, Table 1, row='FinBERT (specialised classifier)', col='FiQA · F1-macro'
+- MAIN:  `[NUM]`
+- DATED: `0.482`
+
+### Slide 14, Table 1, row='FinBERT (specialised classifier)', col='FPB · Accuracy'
+- MAIN:  `[NUM]`
+- DATED: `0.935`
+
+### Slide 14, Table 1, row='FinBERT (specialised classifier)', col='FPB · F1-macro'
+- MAIN:  `[NUM]`
+- DATED: `0.925`
+
+### Slide 14, Table 1, row='FinBERT (specialised classifier)', col='Model'
+- MAIN:  `FinBERT (specialised classifier)`
+- DATED: `FinBERT (specialised, 110M)`
+
+### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='Best config'
+- MAIN:  `(column absent)`
+- DATED: `Best LLM on FPB: tpl A 3-shot`
+
+### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='FiQA · Accuracy'
+- MAIN:  `[NUM]`
+- DATED: `0.620`
+
+### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='FiQA · F1-macro'
+- MAIN:  `[NUM]`
+- DATED: `0.599`
+
+### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='FPB · Accuracy'
+- MAIN:  `[NUM]`
+- DATED: `0.903`
+
+### Slide 14, Table 1, row='Mistral-7B-Instruct-v0.3', col='FPB · F1-macro'
+- MAIN:  `[NUM]`
+- DATED: `0.890`
+
+### Slide 14, Table 1, row='plutus-8B-instruct (focal)', col='FiQA · Accuracy'
+- MAIN:  `[NUM]`
 - DATED: `0.657`
 
-### Slide 14, Table 1, row='VADER (lexicon)', col='FPB · F1-macro'
+### Slide 14, Table 1, row='plutus-8B-instruct (focal)', col='FiQA · F1-macro'
 - MAIN:  `[NUM]`
-- DATED: `0.469`
+- DATED: `0.597`
 
-### Slide 14, Table 1, row='VADER (lexicon)', col='FPB · Accuracy'
+### Slide 14, Table 1, row='plutus-8B-instruct (focal)', col='FPB · Accuracy'
 - MAIN:  `[NUM]`
-- DATED: `0.554`
+- DATED: `0.851`
+
+### Slide 14, Table 1, row='plutus-8B-instruct (focal)', col='FPB · F1-macro'
+- MAIN:  `[NUM]`
+- DATED: `0.829`
+
+### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='Best config'
+- MAIN:  `(column absent)`
+- DATED: `Best LLM on FiQA: tpl B 0-shot`
+
+### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='FiQA · Accuracy'
+- MAIN:  `[NUM]`
+- DATED: `0.717`
+
+### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='FiQA · F1-macro'
+- MAIN:  `[NUM]`
+- DATED: `0.673`
+
+### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='FPB · Accuracy'
+- MAIN:  `[NUM]`
+- DATED: `0.860`
+
+### Slide 14, Table 1, row='Qwen2.5-7B-Instruct', col='FPB · F1-macro'
+- MAIN:  `[NUM]`
+- DATED: `0.832`
+
+### Slide 14, Table 1, row='VADER (lexicon)', col='FiQA · Accuracy'
+- MAIN:  `[NUM]`
+- DATED: `0.423`
 
 ### Slide 14, Table 1, row='VADER (lexicon)', col='FiQA · F1-macro'
 - MAIN:  `[NUM]`
 - DATED: `0.386`
 
-### Slide 14, Table 1, row='VADER (lexicon)', col='FiQA · Accuracy'
+### Slide 14, Table 1, row='VADER (lexicon)', col='FPB · Accuracy'
 - MAIN:  `[NUM]`
-- DATED: `0.423`
+- DATED: `0.554`
+
+### Slide 14, Table 1, row='VADER (lexicon)', col='FPB · F1-macro'
+- MAIN:  `[NUM]`
+- DATED: `0.469`
 
 ## Numbers that differ between decks (slide-aligned best-effort line match, non-table text)
 

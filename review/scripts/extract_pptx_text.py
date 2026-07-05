@@ -322,11 +322,34 @@ def get_slide_tables(pptx_path: Path):
     return out
 
 
+def _normalize_row_key(text):
+    """Strip parenthetical annotations/whitespace differences so the same model row
+    matches across decks even if its qualifier text changed, e.g.
+    'FinBERT (specialised classifier)' vs 'FinBERT (specialised, 110M)' -> 'finbert'.
+    """
+    base = re.sub(r"\(.*?\)", "", text).strip().lower()
+    return base or text.strip().lower()
+
+
+def _normalize_col_key(text):
+    """Normalize column headers so common metric abbreviations match across decks,
+    e.g. 'FPB · F1-macro' vs 'FPB · F1m' both -> 'fpb f1m'.
+    """
+    t = text.strip().lower()
+    t = t.replace("·", " ").replace("-", " ")
+    t = re.sub(r"\bf1[\s-]*macro\b", "f1m", t)
+    t = re.sub(r"\baccuracy\b", "acc", t)
+    t = re.sub(r"\s+", " ", t).strip()
+    return t
+
+
 def build_table_cell_diff(main_tables, dated_tables):
-    """Compare same-position table cells slide-by-slide (best-effort by slide index
-    and table/row/col position) and report every cell whose NUMBER content differs,
-    including 'filled in' cases where one side is a placeholder like [NUM] and the
-    other has a concrete value.
+    """Compare table cells slide-by-slide, matching rows by ROW HEADER (first cell,
+    normalized) rather than raw position -- the two decks reorder table rows, so a
+    positional comparison would misreport a same-model row as a mismatch. Matches
+    columns by column HEADER text (also normalized) so renamed/reordered/appended
+    columns (e.g. a new 'Best config' column) are handled correctly. Reports every
+    cell whose content differs, including 'filled in' placeholder -> value cases.
     """
     diffs = []
     all_slides = sorted(set(main_tables) | set(dated_tables))
@@ -336,34 +359,58 @@ def build_table_cell_diff(main_tables, dated_tables):
         for t_idx in range(max(len(m_tables), len(d_tables))):
             m_grid = m_tables[t_idx] if t_idx < len(m_tables) else []
             d_grid = d_tables[t_idx] if t_idx < len(d_tables) else []
-            max_rows = max(len(m_grid), len(d_grid))
-            for r in range(max_rows):
-                m_row = m_grid[r] if r < len(m_grid) else []
-                d_row = d_grid[r] if r < len(d_grid) else []
-                max_cols = max(len(m_row), len(d_row))
-                for c in range(max_cols):
-                    m_cell = m_row[c] if c < len(m_row) else "(missing)"
-                    d_cell = d_row[c] if c < len(d_row) else "(missing)"
+            if not m_grid and not d_grid:
+                continue
+
+            m_header = m_grid[0] if m_grid else []
+            d_header = d_grid[0] if d_grid else []
+            m_col_by_key = {_normalize_col_key(h): i for i, h in enumerate(m_header)}
+            d_col_by_key = {_normalize_col_key(h): i for i, h in enumerate(d_header)}
+            all_col_keys = sorted(set(m_col_by_key) | set(d_col_by_key))
+
+            m_rows_by_key = {_normalize_row_key(row[0]): row for row in m_grid[1:] if row}
+            d_rows_by_key = {_normalize_row_key(row[0]): row for row in d_grid[1:] if row}
+            all_row_keys = sorted(set(m_rows_by_key) | set(d_rows_by_key))
+
+            for row_key in all_row_keys:
+                m_row = m_rows_by_key.get(row_key)
+                d_row = d_rows_by_key.get(row_key)
+                row_header = (m_row[0] if m_row else None) or (d_row[0] if d_row else row_key)
+
+                for col_key in all_col_keys:
+                    m_idx = m_col_by_key.get(col_key)
+                    d_idx = d_col_by_key.get(col_key)
+                    m_cell = (m_row[m_idx] if m_row and m_idx is not None and m_idx < len(m_row) else "(column absent)")
+                    d_cell = (d_row[d_idx] if d_row and d_idx is not None and d_idx < len(d_row) else "(column absent)")
                     if m_cell == d_cell:
                         continue
                     m_nums = RE_ANY_NUMBER.findall(m_cell)
                     d_nums = RE_ANY_NUMBER.findall(d_cell)
                     has_placeholder = "[NUM]" in m_cell or "[NUM]" in d_cell
                     if m_nums != d_nums or has_placeholder:
-                        row_header = m_row[0] if m_row else (d_row[0] if d_row else "")
-                        col_header = (m_grid[0][c] if m_grid and c < len(m_grid[0]) else
-                                      (d_grid[0][c] if d_grid and c < len(d_grid[0]) else f"col{c}"))
+                        col_header = (m_header[m_idx] if m_idx is not None and m_idx < len(m_header) else
+                                      (d_header[d_idx] if d_idx is not None and d_idx < len(d_header) else col_key))
                         diffs.append({
                             "slide": slide_idx,
                             "table": t_idx + 1,
-                            "row": r,
-                            "col": c,
                             "row_header": row_header,
                             "col_header": col_header,
                             "main_cell": m_cell,
                             "dated_cell": d_cell,
                         })
     return diffs
+
+
+def find_unresolved_placeholders(slide_lines):
+    """Return [(slide_idx, text)] for every line still containing a literal '[NUM]'
+    (or similar bracketed placeholder) token -- i.e. a claim the deck author never
+    filled in with a real number.
+    """
+    out = []
+    for idx, _src, text in slide_lines:
+        if "[NUM]" in text or re.search(r"\[num\]", text, re.IGNORECASE):
+            out.append((idx, text))
+    return out
 
 
 def build_number_diff(main_lines, dated_lines):
@@ -451,9 +498,27 @@ def main():
     dated_tables = get_slide_tables(DATED_PPTX)
     table_cell_diffs = build_table_cell_diff(main_tables, dated_tables)
 
+    main_placeholders = find_unresolved_placeholders(main_lines)
+    dated_placeholders = find_unresolved_placeholders(dated_lines)
+
     diff_md = ["# Deck diff: main vs dated\n"]
     diff_md.append(f"- Main deck slides: {max((i for i,_,_ in main_lines), default=0)}")
     diff_md.append(f"- Dated deck slides: {max((i for i,_,_ in dated_lines), default=0)}\n")
+
+    diff_md.append("## Unresolved `[NUM]` placeholders left in each deck\n")
+    diff_md.append(
+        "A `[NUM]` token means the slide author never substituted the real number. "
+        "Table-cell placeholders that got filled in the dated deck are covered in the "
+        "table-cell diff below; this section flags placeholders that are STILL unresolved "
+        "in one or both decks.\n"
+    )
+    diff_md.append(f"**Main deck — {len(main_placeholders)} unresolved:**\n")
+    for idx, text in main_placeholders:
+        diff_md.append(f"- Slide {idx}: `{text}`")
+    diff_md.append(f"\n**Dated deck — {len(dated_placeholders)} unresolved:**\n")
+    for idx, text in dated_placeholders:
+        diff_md.append(f"- Slide {idx}: `{text}`")
+    diff_md.append("")
 
     diff_md.append("## Table-cell number differences (position-aligned by slide/table/row/col)\n")
     if table_cell_diffs:
