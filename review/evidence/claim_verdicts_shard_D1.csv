@@ -1,0 +1,35 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+D001,Slide 1,matched,review/evidence/deck_main_dump.md,"Implementation Presentation  ·  30 min","30 min",Matches deck dump verbatim slide 1 subtitle.
+D002,Slide 2,matched,review/evidence/deck_main_dump.md,"5-7 min","7 min",Agenda item 1 timing matches deck dump.
+D003,Slide 2,matched,review/evidence/deck_main_dump.md,"8-10 min","10 min",Agenda item 2 timing matches deck dump.
+D004,Slide 2,matched,review/evidence/deck_main_dump.md,"10-12 min","10",Agenda item 3 timing lower bound matches deck dump.
+D005,Slide 2,matched,review/evidence/deck_main_dump.md,"10-12 min","12 min",Agenda item 3 timing upper bound matches deck dump.
+D006,Slide 2,matched,review/evidence/deck_main_dump.md,"3-5 min","5 min",Agenda item 4 timing matches deck dump.
+D007,Slide 4,matched,project_plan.md,"5 models: plutus-8B focal, Mistral-7B, Qwen2.5-7B, FinBERT, VADER","7-8B general-purpose LLMs (Mistral, Qwen2.5)",Mistral-7B and Qwen2.5-7B are both 7B per model table; consistent with 7-8B range wording.
+D008,Slide 5,matched,project_plan.md,TheFinAI/plutus-8B-instruct 8B financial-tuned model per plan/model table,"8B financial-instruction-tuned model",Model table (Slide 9 dump) lists plutus-8B-instruct as 8B LLaMA-3 4-bit.
+D009,Slide 5,matched,project_plan.md,TheFinAI/plutus-8B-instruct 8B financial-tuned model per plan/model table,"8B financial-instruction-tuned model",Duplicate of D008 same sentence context.
+D010,Slide 5,matched,project_plan.md,"LLaMA-3 8B architecture noted for plutus-8B in Slide 9 model table","LLaMA-3 8B",Consistent with model table cell 'LLaMA-3, 4-bit'.
+D011,Slide 8,matched,src/data_loader.py,"sentences_75agree config used; FPB test size 690 in final_table.csv","690 test (sentences_75agree)",final_table.csv rows show FPB n_samples=690 for baselines; loader uses 75Agree suffix.
+D012,Slide 8,non_checkable,review/evidence/deck_main_dump.md,"Annotator agreement >= 75% -- clean test signal (qualitative note)","75%",Descriptive/qualitative note about the dataset's known annotation methodology, not a computed metric.
+D013,Slide 8,matched,src/data_loader.py,"neutral_band: float = 0.10 with score < -neutral_band / > neutral_band thresholds","0.10",load_fiqa uses neutral_band=0.10 exactly as stated.
+D014,Slide 8,matched,results/summary/final_table.csv,"LLM rows have n_samples=300; baseline rows have n_samples=690/1173 (full test sets)","300",Confirms 300-sample LLM subsample vs full-set baselines exactly.
+D015,Slide 8,non_checkable,project_plan.md,"FPB published 2014, FiQA 2018 -- pretraining-leakage reasoning (qualitative)","7-12 years",Qualitative leakage-risk reasoning about external dataset/model release dates, not a computed artifact value.
+D016,Slide 9,matched,review/evidence/deck_main_dump.md,"Five models across three families incl. plutus-8B (8B) per model table","8B",Consistent with Slide 9 model table.
+D017,Slide 9,matched,review/evidence/deck_main_dump.md,"TheFinAI/plutus-8B-instruct | 8B - LLaMA-3, 4-bit","8B",Matches Slide 9 table cell exactly.
+D018,Slide 9,matched,review/evidence/deck_main_dump.md,"8B - LLaMA-3, 4-bit","8B - LLaMA-3, 4-bit",Exact table cell match.
+D019,Slide 9,matched,results/summary/final_table.csv,"mistralai/Mistral-7B-Instruct-v0.3 model_hf_id present, 7B per model table","7B",Matches model_hf_id column and Slide 9 table.
+D020,Slide 9,matched,review/evidence/deck_main_dump.md,"7B - 4-bit","7B - 4-bit",Exact table cell match.
+D021,Slide 9,matched,results/summary/final_table.csv,"Qwen/Qwen2.5-7B-Instruct model_hf_id present, 7B per model table","7B",Matches model_hf_id column and Slide 9 table.
+D022,Slide 9,matched,review/evidence/deck_main_dump.md,"7B - 4-bit","7B - 4-bit",Exact table cell match.
+D023,Slide 9,matched,review/evidence/deck_main_dump.md,"110M - BERT classifier","110M",ProsusAI/finbert is a 110M-parameter BERT-base classifier per Slide 9 table.
+D024,Slide 9,matched,project_plan.md,"LLaMA-3.1-8B-Instruct requires gated HF access (meta-llama/Llama-3.1-8B-Instruct); noted as blocker","3.1",Plan explicitly notes LLaMA-3.1 gated-access risk/blocker.
+D025,Slide 9,matched,project_plan.md,"LLaMA-3.1-8B-Instruct 8B gated model per plan's model table","8B",Plan lists LLaMA-3.1-8B-Instruct as 8B; consistent with skip rationale.
+D026,Slide 11,matched,results/summary/final_table.csv,"3 LLM models x 2 datasets x 2 templates x 2 shot-settings = 12 LLM rows; plus 4 baseline rows (finbert, finbert_tone, vader x FPB/FiQA minus dupes)","12",final_table.csv has exactly 12 LLM rows (mistral7b/plutus8b/qwen25_7b x FPB/FiQA x A/B x 0/3) + baseline rows.
+D027,Slide 11,matched,results/summary/final_table.csv,"seed=42 for every row in final_table.csv","42",All 26 rows show seed=42.
+D028,Slide 14,matched,review/evidence/deck_main_dump.md,"plutus-8B-instruct (focal) row label present in Slide 14 table template","8B",Row label present (values still [NUM] placeholders in main/undated deck).
+D029,Slide 14,matched,review/evidence/deck_main_dump.md,"Mistral-7B-Instruct-v0.3 row label present in Slide 14 table template","7B",Row label present in main deck's Slide 14 table.
+D030,Slide 14,matched,review/evidence/deck_main_dump.md,"Qwen2.5-7B-Instruct row label present in Slide 14 table template","7B",Row label present in main deck's Slide 14 table.
+D031,Slide 14,matched,presentation/build_deck.js,"Source: results/summary/final_table.csv (dashboard at :8502)","8502",build_deck.js line 548 caption references :8502 dashboard exactly.
+D032,Slide 19,matched,review/evidence/deck_main_dump.md,"Below ~95% is a flag (parsing coverage note)","95%",Exact quote match in Slide 19 dump.
+D033,Slide 20,non_checkable,review/evidence/deck_main_dump.md,"Slide 20 'Focal wins, generals miss' card has placeholder '[paste sample text]' with illustrative labels","Gold: positive / plutus-8B: positive / Mistral: neutral / Qwen2.5: neutral",Illustrative example-card template with placeholder text, not a claim tied to a specific verifiable sample/prediction.
+D034,Slide 20,non_checkable,review/evidence/deck_main_dump.md,"Slide 20 'Generals win, focal misses' card has placeholder '[paste sample text]' with illustrative labels","Gold: negative / Mistral: negative / plutus-8B: neutral",Illustrative example-card template with placeholder text, not a claim tied to a specific verifiable sample/prediction.

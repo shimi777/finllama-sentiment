@@ -1,0 +1,35 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+R171,Results NER,matched,results/summary_ner/final_table_ner.csv,"model=qwen25_7b","Qwen2.5-7B-Instruct",Row exists in FiNER-ORD table; model name matches report Table 6
+R172,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,Qwen2.5-7B-Instruct n=300 on FiNER-ORD matches
+R173,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.6279,0.628,Rounds to printed 0.628; matches report Table 6
+R174,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,Qwen2.5-7B-Instruct coverage 1.00 matches
+R175,Results NER,matched,results/summary_ner/final_table_ner.csv,model=qwen3_8b,Qwen3-8B,Row exists in FiNER-ORD table matching report Table 6
+R176,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,Qwen3-8B n=300 on FiNER-ORD matches
+R177,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.6027,0.603,Rounds to printed 0.603; matches report Table 6
+R178,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,Qwen3-8B coverage 1.00 matches
+R179,Results NER,matched,results/summary_ner/final_table_ner.csv,"model=gliner-small, n_samples=300",300,GLiNER-small n=300 on FiNER-ORD matches
+R180,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.5942,0.594,Rounds to printed 0.594; matches report Table 6
+R181,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,GLiNER-small coverage 1.00 matches
+R182,Results NER,matched,results/summary_ner/final_table_ner.csv,"model=gliner-large, n_samples=300",300,GLiNER-large n=300 on FiNER-ORD matches
+R183,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.5605,0.561,"0.5605 rounds to 0.561 (half-up); matches report Table 6"
+R184,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,GLiNER-large coverage 1.00 matches
+R185,Results NER,matched,results/summary_ner/final_table_ner.csv,model=mistral7b,Mistral-7B-Instruct-v0.3,Row exists in FiNER-ORD table matching report Table 6
+R186,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,Mistral-7B-Instruct-v0.3 n=300 on FiNER-ORD matches
+R187,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.5352,0.535,Rounds to printed 0.535; matches report Table 6
+R188,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,Mistral-7B-Instruct-v0.3 coverage 1.00 matches
+R189,Results NER,matched,results/summary_ner/final_table_ner.csv,model=qwen3_4b,Qwen3-4B,Row exists in FiNER-ORD table matching report Table 6
+R190,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,Qwen3-4B n=300 on FiNER-ORD matches
+R191,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.4936,0.494,Rounds to printed 0.494; matches report Table 6
+R192,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,Qwen3-4B coverage 1.00 matches
+R193,Results NER,matched,results/summary_ner/final_table_ner.csv,model=plutus8b,plutus-8B-instruct (financial),Row exists in FiNER-ORD table matching report Table 6
+R194,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,plutus-8B-instruct n=300 on FiNER-ORD matches
+R195,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.3649,0.365,Rounds to printed 0.365; matches report Table 6 (worst LLM)
+R196,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=0.8533,0.853,Rounds to printed 0.853; only model with dropped coverage
+R197,Results NER,matched,results/summary/ner_table.csv,n_total=98,98,FIN/Alvarado-2015 dataset size 98 matches ner_table.csv and report Table 7 header
+R198,Results NER,matched,results/summary/ner_table.csv,model=qwen25_7b,Qwen2.5-7B-Instruct,Row exists in FIN table matching report Table 7
+R199,Results NER,matched,results/summary/ner_table.csv,micro_f1=0.1598,0.160,Rounds to printed 0.160; matches report Table 7
+R200,Results NER,matched,results/summary/ner_table.csv,coverage=0.8367,0.84,Rounds to printed 0.84; matches report Table 7
+R201,Results NER,matched,results/summary/ner_table.csv,model=mistral7b,Mistral-7B-Instruct-v0.3,Row exists in FIN table matching report Table 7
+R202,Results NER,matched,results/summary/ner_table.csv,micro_f1=0.1529,0.153,Rounds to printed 0.153; matches report Table 7
+R203,Results NER,matched,results/summary/ner_table.csv,coverage=0.9388,0.94,Rounds to printed 0.94; matches report Table 7
+R204,Results NER,non_checkable,report/report.md,"Mistral-v0.1: 0.00 (paper analog column)",Mistral-v0.1: 0.00,External paper-reported analog value; not from project's own runs/artifacts

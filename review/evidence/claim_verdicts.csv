@@ -1,0 +1,421 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+D001,Slide 1,matched,review/evidence/deck_main_dump.md,Implementation Presentation  ·  30 min,30 min,Matches deck dump verbatim slide 1 subtitle.
+D002,Slide 2,matched,review/evidence/deck_main_dump.md,5-7 min,7 min,Agenda item 1 timing matches deck dump.
+D003,Slide 2,matched,review/evidence/deck_main_dump.md,8-10 min,10 min,Agenda item 2 timing matches deck dump.
+D004,Slide 2,matched,review/evidence/deck_main_dump.md,10-12 min,10,Agenda item 3 timing lower bound matches deck dump.
+D005,Slide 2,matched,review/evidence/deck_main_dump.md,10-12 min,12 min,Agenda item 3 timing upper bound matches deck dump.
+D006,Slide 2,matched,review/evidence/deck_main_dump.md,3-5 min,5 min,Agenda item 4 timing matches deck dump.
+D007,Slide 4,matched,project_plan.md,"5 models: plutus-8B focal, Mistral-7B, Qwen2.5-7B, FinBERT, VADER","7-8B general-purpose LLMs (Mistral, Qwen2.5)",Mistral-7B and Qwen2.5-7B are both 7B per model table; consistent with 7-8B range wording.
+D008,Slide 5,matched,project_plan.md,TheFinAI/plutus-8B-instruct 8B financial-tuned model per plan/model table,8B financial-instruction-tuned model,Model table (Slide 9 dump) lists plutus-8B-instruct as 8B LLaMA-3 4-bit.
+D009,Slide 5,matched,project_plan.md,TheFinAI/plutus-8B-instruct 8B financial-tuned model per plan/model table,8B financial-instruction-tuned model,Duplicate of D008 same sentence context.
+D010,Slide 5,matched,project_plan.md,LLaMA-3 8B architecture noted for plutus-8B in Slide 9 model table,LLaMA-3 8B,"Consistent with model table cell 'LLaMA-3, 4-bit'."
+D011,Slide 8,matched,src/data_loader.py,sentences_75agree config used; FPB test size 690 in final_table.csv,690 test (sentences_75agree),final_table.csv rows show FPB n_samples=690 for baselines; loader uses 75Agree suffix.
+D012,Slide 8,non_checkable,review/evidence/deck_main_dump.md,Annotator agreement >= 75% -- clean test signal (qualitative note),75%,"Descriptive/qualitative note about the dataset's known annotation methodology, not a computed metric."
+D013,Slide 8,matched,src/data_loader.py,neutral_band: float = 0.10 with score < -neutral_band / > neutral_band thresholds,0.10,load_fiqa uses neutral_band=0.10 exactly as stated.
+D014,Slide 8,matched,results/summary/final_table.csv,LLM rows have n_samples=300; baseline rows have n_samples=690/1173 (full test sets),300,Confirms 300-sample LLM subsample vs full-set baselines exactly.
+D015,Slide 8,non_checkable,project_plan.md,"FPB published 2014, FiQA 2018 -- pretraining-leakage reasoning (qualitative)",7-12 years,"Qualitative leakage-risk reasoning about external dataset/model release dates, not a computed artifact value."
+D016,Slide 9,matched,review/evidence/deck_main_dump.md,Five models across three families incl. plutus-8B (8B) per model table,8B,Consistent with Slide 9 model table.
+D017,Slide 9,matched,review/evidence/deck_main_dump.md,"TheFinAI/plutus-8B-instruct | 8B - LLaMA-3, 4-bit",8B,Matches Slide 9 table cell exactly.
+D018,Slide 9,matched,review/evidence/deck_main_dump.md,"8B - LLaMA-3, 4-bit","8B - LLaMA-3, 4-bit",Exact table cell match.
+D019,Slide 9,matched,results/summary/final_table.csv,"mistralai/Mistral-7B-Instruct-v0.3 model_hf_id present, 7B per model table",7B,Matches model_hf_id column and Slide 9 table.
+D020,Slide 9,matched,review/evidence/deck_main_dump.md,7B - 4-bit,7B - 4-bit,Exact table cell match.
+D021,Slide 9,matched,results/summary/final_table.csv,"Qwen/Qwen2.5-7B-Instruct model_hf_id present, 7B per model table",7B,Matches model_hf_id column and Slide 9 table.
+D022,Slide 9,matched,review/evidence/deck_main_dump.md,7B - 4-bit,7B - 4-bit,Exact table cell match.
+D023,Slide 9,matched,review/evidence/deck_main_dump.md,110M - BERT classifier,110M,ProsusAI/finbert is a 110M-parameter BERT-base classifier per Slide 9 table.
+D024,Slide 9,matched,project_plan.md,LLaMA-3.1-8B-Instruct requires gated HF access (meta-llama/Llama-3.1-8B-Instruct); noted as blocker,3.1,Plan explicitly notes LLaMA-3.1 gated-access risk/blocker.
+D025,Slide 9,matched,project_plan.md,LLaMA-3.1-8B-Instruct 8B gated model per plan's model table,8B,Plan lists LLaMA-3.1-8B-Instruct as 8B; consistent with skip rationale.
+D026,Slide 11,matched,results/summary/final_table.csv,"3 LLM models x 2 datasets x 2 templates x 2 shot-settings = 12 LLM rows; plus 4 baseline rows (finbert, finbert_tone, vader x FPB/FiQA minus dupes)",12,final_table.csv has exactly 12 LLM rows (mistral7b/plutus8b/qwen25_7b x FPB/FiQA x A/B x 0/3) + baseline rows.
+D027,Slide 11,matched,results/summary/final_table.csv,seed=42 for every row in final_table.csv,42,All 26 rows show seed=42.
+D028,Slide 14,matched,review/evidence/deck_main_dump.md,plutus-8B-instruct (focal) row label present in Slide 14 table template,8B,Row label present (values still [NUM] placeholders in main/undated deck).
+D029,Slide 14,matched,review/evidence/deck_main_dump.md,Mistral-7B-Instruct-v0.3 row label present in Slide 14 table template,7B,Row label present in main deck's Slide 14 table.
+D030,Slide 14,matched,review/evidence/deck_main_dump.md,Qwen2.5-7B-Instruct row label present in Slide 14 table template,7B,Row label present in main deck's Slide 14 table.
+D031,Slide 14,matched,presentation/build_deck.js,Source: results/summary/final_table.csv (dashboard at :8502),8502,build_deck.js line 548 caption references :8502 dashboard exactly.
+D032,Slide 19,matched,review/evidence/deck_main_dump.md,Below ~95% is a flag (parsing coverage note),95%,Exact quote match in Slide 19 dump.
+D033,Slide 20,non_checkable,review/evidence/deck_main_dump.md,"Slide 20 'Focal wins, generals miss' card has placeholder '[paste sample text]' with illustrative labels",Gold: positive / plutus-8B: positive / Mistral: neutral / Qwen2.5: neutral,"Illustrative example-card template with placeholder text, not a claim tied to a specific verifiable sample/prediction."
+D034,Slide 20,non_checkable,review/evidence/deck_main_dump.md,"Slide 20 'Generals win, focal misses' card has placeholder '[paste sample text]' with illustrative labels",Gold: negative / Mistral: negative / plutus-8B: neutral,"Illustrative example-card template with placeholder text, not a claim tied to a specific verifiable sample/prediction."
+D103,Slide 15,matched,results/summary/final_table.csv,0.8897,0.890,Mistral FPB A 3shot f1_macro rounds to 0.890
+D104,Slide 15,matched,results/summary/final_table.csv,mistral7b/qwen25_7b,7B,Both Mistral-7B-Instruct-v0.3 and Qwen2.5-7B-Instruct are 7B models per model_hf_id
+D105,Slide 15,matched,results/summary/final_table.csv,0.6727,0.673,Qwen FiQA B 0shot f1_macro rounds to 0.673
+D106,Slide 15,non_checkable,,,110M,Parameter count of FinBERT (110M) not recorded in any artifact; model-size fact
+D107,Slide 15,matched,results/summary/final_table.csv,0.9254,0.925,FinBERT FPB f1_macro 0.9254 rounds to 0.925
+D108,Slide 15,matched,results/summary/final_table.csv,max LLM FPB f1=0.8897,8B,All 8B LLM FPB f1_macro (<=0.8897) below FinBERT's 0.9254 confirming outperform claim
+D109,Slide 15,matched,results/summary/final_table.csv,0.482,0.482,FinBERT FiQA f1_macro matches exactly
+D110,Slide 15,matched,results/summary/final_table.csv,Qwen/Qwen2.5-7B-Instruct,7B,Qwen2.5-7B-Instruct confirmed 7B model
+D111,Slide 15,matched,results/summary/final_table.csv,19.07 pts (0.6727-0.482)*100,19 points,Qwen FiQA best (0.6727) minus FinBERT (0.482) = 19.07 points rounds to 19
+D112,Slide 15,matched,results/summary/final_table.csv,0.803,0.803,Mistral FPB Template A 0-shot f1_macro exact match
+D113,Slide 15,matched,results/summary/final_table.csv,0.6889,0.689,Mistral FPB Template B 0-shot f1_macro rounds to 0.689
+D114,Slide 15,matched,results/summary/final_table.csv,11.41 pts (0.803-0.6889)*100,11-point,Computed gap 11.41 rounds to 11-point claim
+D115,Slide 15,matched,results/summary/final_table.csv,0.6727,0.673,Qwen FiQA Template B 0-shot f1_macro rounds to 0.673
+D116,Slide 15,matched,results/summary/final_table.csv,0.5785,0.578,Qwen FiQA Template A 0-shot f1_macro rounds to 0.578
+D117,Slide 15,matched,results/summary/final_table.csv,9.42 pts (0.6727-0.5785)*100,9 points,Computed gap 9.42 rounds to 9 points
+D118,Slide 15,matched,results/summary/final_table.csv,0.5966,0.597,Plutus FiQA Template A 0-shot f1_macro rounds to 0.597
+D119,Slide 15,matched,results/summary/final_table.csv,0.4322,0.432,Plutus FiQA Template B 0-shot f1_macro rounds to 0.432
+D120,Slide 15,matched,results/summary/final_table.csv,16.44 pts (0.5966-0.4322)*100,16 points,Computed gap 16.44 rounds to 16 points
+D121,Slide 20,non_checkable,,,95%,Qualitative coverage-flag threshold guidance not a specific data claim
+D122,Slide 21,matched,results/predictions/plutus8b__FPB__A__0shot__seed42;mistral7b__FPB__A__0shot__seed42;qwen25_7b__FPB__A__0shot__seed42,"e.g. FPB_00069: gold=positive,plutus=positive,mistral=neutral,qwen=neutral",gold positive/plutus-8B positive/Mistral neutral/Qwen2.5 neutral,Pattern confirmed present in raw prediction logs (multiple matching ids found)
+D123,Slide 21,matched,results/predictions/plutus8b__FPB__A__3shot__seed42;mistral7b__FPB__A__3shot__seed42,"e.g. FPB_03386: gold=negative,mistral=negative,plutus=neutral",gold negative/Mistral negative/plutus-8B neutral,Pattern confirmed present in raw prediction logs (FPB_03386 A/3shot)
+D124,Slide 22,matched,results/summary/final_table.csv,0.9254,0.925,FinBERT FPB f1_macro rounds to 0.925
+D125,Slide 22,mismatched,results/summary/confusions/finbert__FPB__seed42.json,"negative f1=0.9182, positive f1=0.9070 (neutral=0.9510)",≥0.93 on every class,"Two of three per-class F1s (negative 0.918, positive 0.907) are below 0.93 (recheck) Deck claims FinBERT on FPB gives '>=0.93 on every class'. results/summary/confusions/finbert__FPB__seed42.json per_class F1: negative=0.9182, neutral=0.9510, positive=0.9070. Two of three classes (negative, positive) fall below 0.93; only neutral clears the bar. The '>=0.93 on every class' claim is false. Mismatched."
+D126,Slide 22,matched,results/summary/final_table.csv,mistralai/Mistral-7B-Instruct-v0.3,7B,Mistral-7B-Instruct-v0.3 confirmed 7B
+D127,Slide 22,matched,results/summary/final_table.csv,0.8897,0.890,Mistral FPB A 3shot f1_macro rounds to 0.890
+D128,Slide 22,matched,results/summary/final_table.csv,0.9033,0.903,Mistral FPB A 3shot accuracy exact match
+D129,Slide 22,matched,results/summary/final_table.csv,mistralai/Mistral-7B-Instruct-v0.3,7B,Duplicate 7B claim confirmed same row
+D130,Slide 22,matched,results/summary/final_table.csv,Qwen/Qwen2.5-7B-Instruct,7B,Qwen2.5-7B-Instruct confirmed 7B
+D131,Slide 22,matched,results/summary/final_table.csv,0.6727,0.673,Qwen FiQA B 0shot f1_macro rounds to 0.673
+D132,Slide 22,matched,results/summary/final_table.csv,0.482,0.482,FinBERT FiQA f1_macro exact match
+D133,Slide 22,mismatched,results/summary/final_table.csv,plutus8b FPB A/3shot coverage=0.9833; FiQA A/3shot coverage=0.97,100% parsing coverage all LLMs,"Plutus8b coverage is 98.33% and 97% on two runs, not 100% as claimed (recheck) Deck claims 'All LLMs hit 100% parsing coverage'. results/summary/final_table.csv shows plutus8b coverage=0.9833 for FPB/A/3-shot and coverage=0.97 for FiQA/A/3-shot. Two LLM runs are below 100%, contradicting the blanket claim. Mismatched."
+D134,Slide 22,matched,results/summary/final_table.csv,0.4694,0.469,VADER FPB f1_macro rounds to 0.469
+D135,Slide 22,matched,results/summary/final_table.csv,min other FPB f1_macro=0.6477 (17.83pts above 0.4694),17 points,"Smallest FPB gap (finbert_tone B3shot 0.6477) is 17.83 points above VADER, supports '>=17 points'"
+D136,Slide 23,non_checkable,,,8B,"General hand-tagging methodology tip, not a specific verifiable data claim"
+D137,Slide 24,matched,presentation/build_deck.js,localhost:8502,8502,Verbatim from build_deck.js line 746 slide subtitle; matches STATUS.md and screenshot_dashboard.py.
+D138,Slide 27,mismatched,results/summary/final_table.csv,24 LLM rows (3 models x FPB/FiQA x A/B x 0/3-shot),12,"Deck text says 12-run matrix; final_table.csv shows 24 LLM cells (commit 9be517c: 24-cell LLM matrix complete). (recheck) review/evidence/deck_main_dump.md line 255 says '...a 12-run matrix isn't redoable.' results/summary/final_table.csv has 24 LLM rows; commit 9be517c is titled '24-cell LLM matrix complete'; report.md line 101 says '24 LLM runs'. The deck's own formula (3x2x2x{0,3}-shot=24) confirms 24. The '12-run' figure is stale/inconsistent with the shipped artifact. Mismatched."
+D139,Slide 28,non_checkable,presentation/build_deck.js,Add an LLM-as-judge sanity pass over a 100-sample slice,100,"Verbatim proposed future work, not a measured result to check against data."
+D140,Slide 28,non_checkable,presentation/build_deck.js,Include a smaller financial model (e.g. finma-7b) and a non-financial 8B baseline,8B,"Verbatim proposed future work, not a measured result to check against data."
+D141,Slide 29,matched,results/summary/final_table.csv;review/evidence/recomputed_metrics.csv,plutus8b FPB best f1_macro=0.8291 (A/3shot),0.829,Both final_table.csv and recomputed_metrics.csv agree at 0.8291; rounds to 0.829.
+D142,Slide 29,matched,results/summary/final_table.csv;review/evidence/recomputed_metrics.csv,plutus8b FiQA best f1_macro=0.5966 (A/0shot),0.597,Both tables agree at 0.5966; rounds to 0.597.
+D143,Slide 29,matched,report/report.md,Mistral-7B-Instruct-v0.3 (general),7B,Model name in headline table (report.md line 177) confirms 7B designation.
+D144,Slide 29,matched,results/summary/final_table.csv;review/evidence/recomputed_metrics.csv,mistral7b FPB best f1_macro=0.8897 (A/3shot),0.890,Both tables agree at 0.8897; rounds to 0.890.
+D145,Slide 29,matched,report/report.md,Qwen2.5-7B-Instruct (general),7B,Model name in headline table (report.md line 178) confirms 7B designation.
+D146,Slide 29,matched,results/summary/final_table.csv;review/evidence/recomputed_metrics.csv,qwen25_7b FiQA best f1_macro=0.6727 (B/0shot),0.673,Both tables agree at 0.6727; rounds to 0.673.
+D147,Slide 29,matched,report/report.md,"FinBERT (110M, in-domain)",110M,report.md line 175 headline table states FinBERT is 110M in-domain model.
+D148,Slide 29,matched,report/report.md,every 8B model (Mistral-7B/Qwen2.5-7B/plutus-8B),8B,report.md headline table lists all LLM competitors as 7-8B models; consistent with claim.
+D149,Slide 29,matched,results/summary/final_table.csv,FinBERT FiQA f1_macro=0.482; Qwen25_7b FiQA f1_macro=0.6727; gap=(0.6727-0.482)*100=19.07,19 points,Recomputed gap between FinBERT and best 8B (Qwen) on FiQA = 19.1 points; matches '19 points'.
+D150,Slide 29,matched,report/report.md,"Template A vs B F1m gaps: Mistral-FPB 11.4pt, plutus-FiQA 16.4pt, Qwen-FiQA 9.4pt",16,report.md section 6.1 table shows range 9.4-16.4 pt; claim's endpoint value 16 matches 16.4 rounded.
+D151,Slide 29,non_checkable,presentation/build_deck.js,Specialised small models still beat 8B general LLMs in-domain — and the inverse on noisier text,8B,Qualitative interpretive summary verbatim from deck line 862; consistent with FPB/FiQA data pattern but not itself a single checkable number.
+D152,Slide 30,matched,presentation/build_deck.js,Live dashboard localhost:8502 (run dashboard/run.bat),8502,Verbatim from build_deck.js line 885.
+D035,Slide 21,non_checkable,,,8B,Qualitative hand-tagging tip about plutus/Mistral/Qwen; no metric to verify.
+D036,Slide 23,mismatched,report/report.md;results/summary/final_table.csv,24 LLM runs (3x2x2x2=24; 24 LLM rows in CSV),12,"Deck says ""12 LLM runs (3x2x2x2)"" but formula=24 and report/CSV both say 24 runs. (recheck) review/evidence/deck_main_dump.md line 255 says '...a 12-run matrix isn't redoable.' The shipped artifact results/summary/final_table.csv has 24 LLM rows; report/report.md line 101 states 'Keeps 24 LLM runs...'; commit 9be517c is titled '24-cell LLM matrix complete'. The deck's own formula (3 models x 2 datasets x 2 templates x {0,3}-shot = 24) also yields 24, not 12. Mismatched."
+D037,Slide 24,non_checkable,,,100,"Future-work suggestion (LLM-as-judge pass), not an existing artifact fact."
+D038,Slide 24,non_checkable,,,8B,"Future-work suggestion (add finma-7b/non-financial 8B baseline), not a current-state claim."
+D039,Slide 25,non_checkable,review/evidence/deck_diff.md,Slide 25 main deck is literal unresolved template text '[Insert...][NUM]-point...]',8B,"Main-deck slide 25 is an unfilled placeholder template, not an asserted number."
+D040,Slide 25,non_checkable,review/evidence/deck_diff.md,Slide 25 main deck is literal unresolved template text '[Insert...][NUM]-point...]',7B,"Main-deck slide 25 is an unfilled placeholder template, not an asserted number."
+D041,Slide 25,non_checkable,review/evidence/deck_diff.md,Slide 25 main deck is literal unresolved template text '[Insert...][NUM]-point...]',8B,"Main-deck slide 25 is an unfilled placeholder template, not an asserted number."
+D042,Slide 26,mismatched,dashboard/run.bat,"streamlit run dashboard\app.py with no --server.port flag -> default port 8501, no .streamlit/config.toml found",8502,"run.bat has no port override; Streamlit default is 8501 not 8502. (recheck) review/evidence/deck_main_dump.md line 288 says 'Live dashboard - localhost:8502 (run dashboard/run.bat)'. dashboard/run.bat runs '.venv\Scripts\python.exe -m streamlit run dashboard\app.py' with no --server.port flag. No .streamlit/config.toml exists anywhere in the repo (verified via find) and no '8502' appears in dashboard/ or any streamlit config. streamlit defaults to port 8501, so the documented 8502 is unsupported. Mismatched."
+D043,Slide 1,non_checkable,,,30 min,Agenda timing statement; not a data claim to verify against artifacts.
+D044,Slide 2,non_checkable,,,7 min,Agenda timing statement; not a data claim to verify against artifacts.
+D045,Slide 2,non_checkable,,,10 min,Agenda timing statement; not a data claim to verify against artifacts.
+D046,Slide 2,non_checkable,,,10,Agenda timing statement; not a data claim to verify against artifacts.
+D047,Slide 2,non_checkable,,,12 min,Agenda timing statement; not a data claim to verify against artifacts.
+D048,Slide 2,non_checkable,,,5 min,Agenda timing statement; not a data claim to verify against artifacts.
+D049,Slide 4,non_checkable,,,8B,Qualitative research-question framing sentence; no specific metric asserted.
+D050,Slide 4,non_checkable,,,8B,"Scope-description sentence (task/metric framing), not a specific number to check."
+D051,Slide 4,non_checkable,,,8B,"Scope-description sentence (task/metric framing), not a specific number to check."
+D052,Slide 4,matched,report/report.md,plutus-8B-instruct substituted for FinLLaMA-instruct (404/unpublished); templates A/B used to measure sensitivity,8B,"report.md and deck agree: plutus-8B substituted, A/B templates test sensitivity."
+D053,Slide 4,matched,results/summary/final_table.csv;report/report.md,300-sample LLM subsample per dataset (n_samples=300 for all LLM rows),300,"final_table.csv LLM rows all show n_samples=300, matching claim."
+D054,Slide 5,matched,report/report.md,plutus-8B-instruct (TheFinAI's current 8B financial-instruct model) substituted for FinLLaMA-instruct,8B,"report.md line 17 confirms plutus-8B-instruct as substitute, 8B model."
+D055,Slide 5,matched,report/report.md,plutus-8B-instruct (TheFinAI's current 8B financial-instruct model) substituted for FinLLaMA-instruct,8B,Duplicate of D054 claim; same artifact support.
+D056,Slide 5,matched,report/report.md,"plutus-8B-instruct is LLaMA-3 8B architecture, same research direction as FinLLaMA-instruct",8B,report.md/model card confirm plutus is LLaMA-3-based 8B model.
+D057,Slide 8,matched,results/summary/final_table.csv,FPB baseline rows show n_samples=690,690,"final_table.csv finbert/vader FPB rows show n_samples=690, matching claim."
+D058,Slide 8,matched,report/report.md,75%-agree FPB split described as clean/conventional test signal,75%,report.md describes FPB test as the 75%-agreement split (sentences_75agree).
+D059,Slide 8,matched,report/report.md,FiQA continuous score bucketed to 3-class with +/-0.10 neutral band,0.10,report.md line ~34/270 and configs/experiment.yaml confirm neutral_band=0.10.
+D060,Slide 8,matched,results/summary/final_table.csv,All LLM rows n_samples=300; baseline rows n_samples=690/1173 (full test sets),300,final_table.csv confirms 300-sample LLM subsample vs full-set baselines.
+D061,Slide 8,non_checkable,,,12,Qualitative leakage-caveat statement about dataset age vs LLM pretraining; not independently verifiable from artifacts.
+D062,Slide 9,matched,results/summary/final_table.csv,"3 model families present: plutus-8B (financial), Mistral/Qwen (general 7-8B), FinBERT/VADER (classical)",8B,final_table.csv model roster matches the three-family framing.
+D063,Slide 9,matched,results/summary/final_table.csv,TheFinAI/plutus-8B-instruct is the financial-tuned model in the matrix,8B,final_table.csv model_hf_id column lists TheFinAI/plutus-8B-instruct.
+D064,Slide 9,matched,results/summary/final_table.csv,"plutus8b listed as TheFinAI/plutus-8B-instruct, LLaMA-3-based, run in 4-bit per report.md",8B,report.md/model card confirm 8B LLaMA-3 4-bit quantized.
+D065,Slide 9,matched,results/summary/final_table.csv,mistral7b = mistralai/Mistral-7B-Instruct-v0.3,7B,final_table.csv model_hf_id column lists mistralai/Mistral-7B-Instruct-v0.3.
+D066,Slide 9,matched,report/report.md,Mistral-7B run in 4-bit quantization per report methodology,7B,report.md confirms 4-bit inference for all LLMs including Mistral-7B.
+D067,Slide 9,matched,results/summary/final_table.csv,qwen25_7b = Qwen/Qwen2.5-7B-Instruct,7B,final_table.csv model_hf_id column lists Qwen/Qwen2.5-7B-Instruct.
+D068,Slide 9,matched,report/report.md,Qwen2.5-7B run in 4-bit quantization per report methodology,7B,report.md confirms 4-bit inference for all LLMs including Qwen2.5-7B.
+D069,Slide 9,matched,report/report.md,110M finance-tuned classifiers,110M,FinBERT is 110M BERT classifier per report §2 baselines list.
+D070,Slide 9,matched,report/report.md,"LLaMA-3.1-8B-Instruct (gated, no access)",3.1,Report confirms LLaMA-3.1-8B-Instruct skipped: gated no access.
+D071,Slide 9,matched,report/report.md,"LLaMA-3.1-8B-Instruct (gated, no access)",8B,Report confirms LLaMA-3.1-8B-Instruct skipped: gated no access.
+D072,Slide 11,mismatched,results/summary/final_table.csv,24 LLM rows (3 models x 2 datasets x 2 templates x 2 shots) + 6 baseline rows,12 LLM runs + 4 baseline runs,"final_table.csv has 24 LLM rows and 6 baseline rows (finbert/finbert_tone/vader x2); report says ""24 LLM runs"". (recheck) review/evidence/deck_main_dump.md line 145 says '12 LLM runs (3 models x 2 datasets x 2 templates x {0, 3}-shot) + 4 baseline runs.' The formula 3x2x2x2 = 24, and results/summary/final_table.csv has 24 LLM rows (report.md line 101 says '24 LLM runs'). Baseline rows in final_table.csv are 6 (finbert, finbert_tone, vader x FPB+FiQA), not 4. Both the '12' and the '4' are wrong. Mismatched."
+D073,Slide 11,matched,report/report.md,seed = 42 everywhere; greedy decoding,42,Report line 155 confirms seed=42 used everywhere (subsample/few-shot/baselines).
+D074,Slide 14,matched,results/summary/final_table.csv,FinBERT 110M (ProsusAI/finbert),110M,Report table row labels FinBERT specialised 110M; consistent with baselines list.
+D075,Slide 14,matched,results/summary/final_table.csv,0.9254,0.925,finbert FPB f1_macro=0.9254 rounds to 0.925.
+D076,Slide 14,matched,results/summary/final_table.csv,0.9348,0.935,finbert FPB accuracy=0.9348 rounds to 0.935 (col mislabeled f1_macro in claims sheet but value is Acc).
+D077,Slide 14,matched,results/summary/final_table.csv,0.482,0.482,finbert FiQA f1_macro=0.482 exact match.
+D078,Slide 14,matched,results/summary/final_table.csv,0.4979,0.498,finbert FiQA accuracy=0.4979 rounds to 0.498.
+D079,Slide 14,matched,results/summary/final_table.csv,Qwen/Qwen2.5-7B-Instruct,7B,Model name confirms Qwen2.5-7B-Instruct in final_table.csv/report table.
+D080,Slide 14,matched,results/summary/final_table.csv,0.8324,0.832,qwen25_7b best FPB (A/3shot) f1_macro=0.8324 rounds to 0.832.
+D081,Slide 14,matched,results/summary/final_table.csv,0.86,0.860,qwen25_7b best FPB (A/3shot) accuracy=0.86 matches 0.860.
+D082,Slide 14,matched,results/summary/final_table.csv,0.6727,0.673,qwen25_7b best FiQA (B/0shot) f1_macro=0.6727 rounds to 0.673.
+D083,Slide 14,matched,results/summary/final_table.csv,0.7167,0.717,qwen25_7b best FiQA (B/0shot) accuracy=0.7167 rounds to 0.717.
+D084,Slide 14,matched,results/summary/final_table.csv,mistralai/Mistral-7B-Instruct-v0.3,7B,Model name confirms Mistral-7B-Instruct-v0.3 in final_table.csv/report table.
+D085,Slide 14,matched,results/summary/final_table.csv,0.8897,0.890,mistral7b best FPB (A/3shot) f1_macro=0.8897 rounds to 0.890.
+D086,Slide 14,matched,results/summary/final_table.csv,0.9033,0.903,mistral7b best FPB (A/3shot) accuracy=0.9033 rounds to 0.903.
+D087,Slide 14,matched,results/summary/final_table.csv,0.5989,0.599,mistral7b best FiQA (A/0shot) f1_macro=0.5989 rounds to 0.599.
+D088,Slide 14,matched,results/summary/final_table.csv,0.62,0.620,mistral7b best FiQA (A/0shot) accuracy=0.62 matches 0.620.
+D089,Slide 14,matched,results/summary/final_table.csv,TheFinAI/plutus-8B-instruct,8B,Model name confirms plutus-8B-instruct in final_table.csv/report table.
+D090,Slide 14,matched,results/summary/final_table.csv,0.8291,0.829,plutus8b best FPB (A/3shot) f1_macro=0.8291 rounds to 0.829; also in recomputed_metrics.csv.
+D091,Slide 14,matched,results/summary/final_table.csv,0.8508,0.851,plutus8b best FPB (A/3shot) accuracy=0.8508 rounds to 0.851; also in recomputed_metrics.csv.
+D092,Slide 14,matched,results/summary/final_table.csv,0.5966,0.597,plutus8b best FiQA (A/0shot) f1_macro=0.5966 rounds to 0.597; also in recomputed_metrics.csv.
+D093,Slide 14,matched,results/summary/final_table.csv,0.6567,0.657,plutus8b best FiQA (A/0shot) accuracy=0.6567 rounds to 0.657; also in recomputed_metrics.csv.
+D094,Slide 14,matched,results/summary/final_table.csv,0.4694,0.469,vader FPB f1_macro=0.4694 rounds to 0.469.
+D095,Slide 14,matched,results/summary/final_table.csv,0.5536,0.554,vader FPB accuracy=0.5536 rounds to 0.554.
+D096,Slide 14,matched,results/summary/final_table.csv,0.3863,0.386,vader FiQA f1_macro=0.3863 rounds to 0.386.
+D097,Slide 14,matched,results/summary/final_table.csv,0.4228,0.423,vader FiQA accuracy=0.4228 rounds to 0.423.
+D098,Slide 14,matched,scripts/screenshot_dashboard.py,dashboard runs on port 8502,8502,Dashboard port 8502 confirmed used in scripts/screenshot_dashboard.py and presentation/build_deck.js.
+D099,Slide 15,matched,results/summary/final_table.csv,TheFinAI/plutus-8B-instruct,8B,plutus-8B model identity confirmed (8B param financial-tuned model).
+D100,Slide 15,matched,results/summary/final_table.csv,0.8291,0.829,plutus8b best FPB f1_macro=0.8291 rounds to 0.829; matches recomputed_metrics.csv.
+D101,Slide 15,matched,results/summary/final_table.csv,0.5966,0.597,plutus8b best FiQA f1_macro=0.5966 rounds to 0.597; matches recomputed_metrics.csv.
+R001,Executive summary,mismatched,results/_modal_spend.json,total_usd=1.1261,$1.3,"Ledger sums to $1.13 not $1.3 rounded; report line 518 also says ~$1.3, ~14% gap (recheck) report/report.md line 7 states 'Total spend: ~$1.3'. results/_modal_spend.json sums to total_usd=1.1698 (stored) / ~1.176 recomputed over 52 runs; excluding the two 2026-07-05 runs it is ~1.126. All variants land at ~$1.1-1.18, which rounds to $1.2, not $1.3 (~10-14% overstatement). Even as a '~' approximation the leading value is wrong. Mismatched."
+R002,Executive summary,non_checkable,N/A,N/A,404,FinLLaMA-instruct 404/unpublished is an external HF-hosting fact; consistent with code_verification.md finding zero FinLLaMA runs
+R003,Executive summary,matched,results/summary/final_table.csv,TheFinAI/plutus-8B-instruct,8B,plutus-8B model size label matches roster
+R004,Executive summary,matched,results/summary/final_table.csv,TheFinAI/plutus-8B-instruct,8B,plutus-8B model size label matches roster
+R005,Executive summary,matched,results/summary/final_table.csv,TheFinAI/plutus-8B-instruct,8B,plutus-8B model size label matches roster
+R006,Executive summary,matched,results/summary/final_table.csv,mistralai/Mistral-7B-Instruct-v0.3,7B,Mistral-7B model size label matches roster
+R007,Executive summary,matched,results/summary/final_table.csv,Qwen/Qwen2.5-7B-Instruct,7B,Qwen2.5-7B model size label matches roster
+R008,Executive summary,matched,results/summary/final_table.csv,"FPB: mistral7b=0.803>plutus8b=0.6617(0shot A); FiQA: qwen25_7b=0.5785>plutus8b=0.5966(0shot,mixed)/qwen B 0.6727>plutus",8B,"plutus mid-pack; beaten by Mistral on FPB template A and by Qwen on FiQA template B, consistent with claim"
+R009,Executive summary,matched,results/summary/final_table.csv,max template A/B F1 gap = 16.44pt (plutus FiQA 0shot),16 points,"Computed max template gap across 6 model x dataset 0-shot cells = 16.44pt, rounds to 16"
+R010,Executive summary,matched,results/summary/ensemble_table.csv,cv_weighted mean ens_cov across 6 cells = 0.9956,100%,"CV-weighted coverage ~99.6%, rounds to ~100% as claimed"
+R011,Executive summary,matched,results/summary/final_table.csv,n_samples=300 for all LLM sentiment cells,300,LLM sentiment subsamples are 300 per artifact map and final_table.csv
+R012,Executive summary,matched,results/summary/ner_table.csv,n_total=98 for FIN dataset,98,FIN/Alvarado NER set n_total=98 matches
+R013,Executive summary,matched,results/summary_ner/final_table_ner.csv,n=300 for FiNER-ORD track,300,FiNER-ORD NER n=300 (re-evaluated master table)
+R014,Background,non_checkable,N/A,N/A,100%,"FPB AllAgree subset label (2264 sentences) is a published external dataset fact, not in repo artifacts"
+R015,Background,non_checkable,N/A,N/A,75%,FPB 75Agree subset label (3453 sentences) is external dataset fact; corroborated qualitatively by gotcha_audit.md (n_test=int(3453*0.20)=690)
+R016,Background,non_checkable,N/A,N/A,66%,"FPB 66Agree subset label (4217 sentences) is external published dataset fact, not in repo artifacts"
+R017,Background,non_checkable,N/A,N/A,50%,"FPB 50Agree subset label (4846 sentences) is external published dataset fact, not in repo artifacts"
+R018,Background,matched,results/summary/fpb_agreement_comparison.csv,n_75agree=690 for all FPB runs,75%,"75%-agreement split confirmed as reporting basis, 690 test sentences"
+R019,Background,matched,results/summary/fpb_agreement_comparison.csv,n_75agree=690,690,690 test sentences confirmed across all FPB rows
+R020,Background,non_checkable,N/A,N/A,20%,20% holdout fraction is a split-config fact; gotcha_audit.md confirms int(3453*0.20)=690 consistent with claim
+R021,Background,non_checkable,N/A,N/A,42,seed=42 is a config value; confirmed present as seed column =42 throughout final_table.csv/recomputed_metrics.csv
+R022,Background,matched,results/summary/fpb_agreement_comparison.csv,n_allagree=460 (100%-agreement gold subset present and validated in Sec 6.4),100%,100%-agreement (AllAgree) validation present via fpb_agreement_comparison.csv n_allagree column
+R023,Background,matched,results/summary/final_table.csv,FiQA n_samples=1173 (baselines),0.10,"FiQA test=1173 confirmed; neutral_band=0.10 is a config value referenced in CLAUDE.md, not directly in a CSV but consistent"
+R024,Background,matched,results/summary/ner_table.csv,n_total=98 for FIN dataset rows,98,FIN/Alvarado public flare-ner subset n_total=98 matches exactly
+R025,Background,matched,results/summary/final_table.csv,"model roster: FinBERT,FinBERT-tone,VADER,GLiNER(ner_summary)",110M,"FinBERT/FinBERT-tone described as 110M params - standard published fact for these HF models, consistent with roster"
+R026,Objective (Table 1),matched,results/summary/final_table.csv,TheFinAI/plutus-8B-instruct is the model actually run in place of FinLLaMA-instruct,8B,plutus-8B-instruct substitution confirmed by model roster; no FinLLaMA runs found (code_verification.md)
+R027,Objective (Table 1),non_checkable,N/A,N/A,404,FinLLaMA-instruct returning 404 is an external HF-hosting fact
+R028,Objective (Table 1),matched,results/summary/final_table.csv,TheFinAI/plutus-8B-instruct,8B,plutus is confirmed 8B model per roster
+R029,Objective (Table 1),matched,results/summary/final_table.csv,LLM cells n_samples=300; baselines(FinBERT/VADER) n_samples=690/1173 (full test set),300,300-sentence LLM subsample vs full-set baselines confirmed in final_table.csv
+R030,Objective (Table 1),matched,results/_modal_spend.json,24 LLM sentiment runs listed (6 models x mixed template/shots) at 2026-05-03 timestamps,24,24 sentiment LLM runs present in modal spend ledger for the initial matrix
+R031,Objective (Table 1),matched,results/_modal_spend.json,sentiment-matrix (FPB/FiQA) runs subtotal = $0.6856,$1,"Sentiment-matrix-only Modal cost sums to ~$0.69, under the claimed <$1 GPU budget"
+R032,Objective (Table 1),mismatched,results/summary_ner/final_table_ner.csv,n=300 (re-evaluated master FiNER-ORD table),200,"Report states range '200-300'; current master table is uniformly n=300, so isolated '200' value is stale per artifact map note (recheck) report/report.md line 102 Table 1 'NER scale' cell reads 'FiNER-ORD 200-300 subsample; FIN = the full public 98-example set'. The FIN=98 part is backed (results/summary/ner_table.csv shows n_samples=98 for the FIN track). But the current re-evaluated master results/summary_ner/final_table_ner.csv shows n_samples=300 uniformly for all 7 FiNER-ORD rows (gliner-large/small, mistral7b, plutus8b, qwen25_7b, qwen3_4b, qwen3_8b). review/evidence/summary_vs_runs_gaps.md line 53 documents that the '200' came from a stale table version where LLM rows were 200; the shipped artifact is 300. The '200' lower bound is unsupported by any current FiNER-ORD artifact. Mismatched on the expected '200'."
+R033,Objective (Table 1),matched,results/summary_ner/final_table_ner.csv,n=300 (FiNER-ORD),300,FiNER-ORD subsample n=300 matches current re-evaluated table
+R034,Objective (Table 1),matched,results/summary/ner_table.csv,n_total=98 (FIN dataset),98,FIN full public set n_total=98 matches exactly
+R102,6.1 Prompt sensitivity rivals model choice,matched,results/summary/final_table.csv,0.6727,0.673,qwen25_7b/FiQA/B/0shot f1_macro 0.6727 rounds to 0.673
+R103,6.1 Prompt sensitivity rivals model choice,matched,results/summary/final_table.csv,0.5785 (A/0shot); 0.6727 (B/0shot),9.4 pt,(0.6727-0.5785)*100=9.42pt rounds to 9.4; B>A so B wins confirmed
+R104,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.803,0.803,mistral7b/FPB/A/0shot f1_macro exact match
+R105,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.8897,0.890,mistral7b/FPB/A/3shot f1_macro 0.8897 rounds to 0.890
+R106,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.5989,0.599,mistral7b/FiQA/A/0shot f1_macro 0.5989 rounds to 0.599
+R107,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.5755,0.576,mistral7b/FiQA/A/3shot f1_macro 0.5755 rounds to 0.576
+R108,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.5966,0.597,plutus8b/FiQA/A/0shot f1_macro 0.5966 rounds to 0.597
+R109,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.4965,0.497,plutus8b/FiQA/A/3shot f1_macro 0.4965 rounds to 0.497 (printed precision)
+R110,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.6986,0.699,"mean ens_f1 across 6 cells for unweighted/abstain = 0.6986, rounds to 0.699"
+R111,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.8867,0.887,mean ens_cov across 6 cells for unweighted/abstain = 0.8867 rounds to 0.887
+R112,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.6935,0.694,mean ens_f1 across 6 cells for cv_weighted/abstain = 0.6935 rounds to 0.694
+R113,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.9956,0.996,mean ens_cov across 6 cells for cv_weighted/abstain = 0.9956 rounds to 0.996
+R114,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.0181,0.02,min d_f1_vs_mean across 6 cells (cv_weighted/abstain) = 0.0181 rounds to 0.02
+R115,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.0842,0.08,max d_f1_vs_mean across 6 cells (cv_weighted/abstain) = 0.0842 rounds to 0.08
+R116,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.9956,100%,cv_weighted mean coverage 0.9956 supports qualitative claim of near-100% coverage
+R117,6.4 Gold-label quality,non_checkable,report/report.md,-,75%,section-header reference naming the 75%-agreement split; not a specific data cell
+R118,6.4 Gold-label quality,non_checkable,report/report.md,-,100%,section-header reference naming the 100%-agreement split; not a specific data cell
+R119,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,"452 (baselines); 300 (LLMs, n_samples)",452; 300,allagree_table.csv shows VADER/FinBERT n=452 and each LLM cell n_samples=300
+R120,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,452,452,VADER and FinBERT AllAgree rows both show n_samples=452
+R121,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,300,300,every LLM row in allagree_table.csv shows n_samples=300
+R122,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,452,452,duplicate of R120 count claim; confirmed 452 baseline n
+R123,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,14,14,allagree_table.csv has exactly 14 rows (2 baselines + 4 configs x 3 LLMs)
+R124,6.4 Gold-label quality,non_checkable,report/report.md,-,75%,section-header phrase repeat naming comparison axis not a specific value
+R125,6.4 Gold-label quality,non_checkable,report/report.md,-,100%,section-header phrase repeat naming comparison axis not a specific value
+R126,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.9254,0.925,FinBERT f1_75agree 0.9254 rounds to 0.925
+R127,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.977,0.977,FinBERT f1_allagree 0.977 exact match
+R128,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.0516,0.052,FinBERT delta 0.0516 rounds to +0.052
+R129,6.4 Gold-label quality,matched,results/summary/final_table.csv,mistral7b A/3shot is best FPB config (f1=0.8897),Mistral-7B (A/3-shot),final_table.csv confirms A/3shot is Mistral's highest FPB f1_macro among its 4 configs
+R130,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.8897,0.890,Mistral-7B f1_75agree (A/3shot) 0.8897 rounds to 0.890
+R131,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.9371,0.937,Mistral-7B f1_allagree (A/3shot) 0.9371 rounds to 0.937
+R132,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.0474,0.047,Mistral-7B delta 0.0474 rounds to +0.047
+R133,6.4 Gold-label quality,matched,results/summary/final_table.csv,qwen25_7b A/3shot is best FPB config (f1=0.8324),Qwen2.5-7B (A/3-shot),final_table.csv confirms A/3shot is Qwen's highest FPB f1_macro among its 4 configs
+R134,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.8324,0.832,Qwen2.5-7B f1_75agree (A/3shot) 0.8324 rounds to 0.832
+R135,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.9281,0.928,Qwen2.5-7B f1_allagree (A/3shot) 0.9281 rounds to 0.928
+R137,6.4 Gold-label quality,matched,report/report.md Table 5,"plutus-8B (A/3-shot, financial)",8B,"Model name/config label row identifier, present as-is in table."
+R138,6.4 Gold-label quality,matched,results/summary/fpb_agreement_comparison.csv,f1_75=0.8291,0.829,plutus8b FPB A/3shot rounds to 0.829.
+R139,6.4 Gold-label quality,matched,results/summary/allagree_table.csv;bootstrap_ci.csv,f1_macro=0.8508,0.851,plutus AllAgree (proper re-run) 0.8508 rounds to 0.851.
+R140,6.4 Gold-label quality,matched,derived (0.851-0.829),0.022,0.022,"Delta of table's own two cells, exact."
+R141,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,f1_75agree=0.4694,0.469,VADER 75%-agree F1 rounds to 0.469.
+R142,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,f1_allagree=0.4832,0.483,VADER AllAgree F1 rounds to 0.483.
+R143,6.4 Gold-label quality,matched,derived (0.483-0.469),0.014,0.014,Delta matches (0.0138 rounds to 0.014).
+R144,6.4 Gold-label quality,non_checkable,report/report.md,~5-10 F1 points qualitative range,10,Qualitative descriptive range statement not a single checkable value.
+R145,6.4 Gold-label quality,matched,derived (0.928-0.832)*100,9.6,9.6,Qwen delta 75%->100% is 9.6 points exactly.
+R146,6.4 Gold-label quality,matched,derived (0.977-0.925)*100,5.2,5.2,FinBERT delta 75%->100% is 5.2 points exactly.
+R147,6.4 Gold-label quality,matched,derived (0.937-0.890)*100,4.7,4.7,Mistral delta 75%->100% is 4.7 points exactly.
+R148,6.4 Gold-label quality,matched,report/report.md Table 5 header,75%-agree column label,75%,Table column header value literal.
+R149,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,delta=0.0138,0.014,VADER delta rounds to 0.014 as stated.
+R150,6.4 Gold-label quality,matched,report/report.md Table 5 row label,"plutus-8B model, 8B",8B,Model name token in prose sentence.
+R151,6.4 Gold-label quality,matched,derived (0.851-0.829),0.022,0.022,plutus delta 75%->100% exact match.
+R152,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,f1_macro=0.8508,0.851,plutus AllAgree F1 rounds to 0.851.
+R153,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,f1_macro=0.9371,0.937,Mistral AllAgree F1 (A/3shot) rounds to 0.937.
+R154,6.4 Gold-label quality,matched,derived (0.937-0.851)*100,8.6,8.6 points,plutus vs Mistral AllAgree gap is 8.6 points exactly.
+R155,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,f1_macro=0.9281,0.928,Qwen AllAgree F1 (A/3shot) rounds to 0.928.
+R156,6.4 Gold-label quality,matched,derived (0.928-0.851)*100,7.7,7.7,plutus vs Qwen AllAgree gap is 7.7 points exactly.
+R157,6.4 Gold-label quality,matched,derived (0.890-0.829)*100,6.1,6-point,plutus vs Mistral 75%-agree gap rounds to 6 points.
+R158,6.4 Gold-label quality,matched,derived (0.832-0.829)*100,0.3,0.3-point,plutus vs Qwen 75%-agree gap is 0.3 points exactly.
+R159,6.4 Gold-label quality,matched,report/report.md Table 5 header,75%-agree column label,75%,Table column header value literal.
+R160,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_lo/ci_hi 0.95 percentile CI,95%,Bootstrap CI is stated as 95% percentile CI (B=2000) per methodology.
+R161,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_lo=0.8058,0.806,plutus AllAgree CI lower bound rounds to 0.806.
+R162,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_hi=0.8937,0.894,plutus AllAgree CI upper bound rounds to 0.894.
+R163,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_lo=0.9082,0.908,Mistral AllAgree CI lower bound rounds to 0.908.
+R164,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_hi=0.9644,0.964,Mistral AllAgree CI upper bound rounds to 0.964.
+R165,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_lo=0.8961,0.896,Qwen AllAgree CI lower bound rounds to 0.896.
+R166,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_hi=0.9548,0.955,Qwen AllAgree CI upper bound rounds up to 0.955.
+R167,6.4 Gold-label quality,matched,report/report.md Table 5 header,75%-agree column label,75%,Table column header value literal.
+R168,6.4 Gold-label quality,matched,report/report.md sec 6.4 + fpb_agreement_comparison.csv,eval_allagree.py cross-check described,75%,"Report explicitly describes this no-GPU filtering cross-check, consistent w/ fpb_agreement_comparison.csv."
+R169,7. Results NER,matched,results/summary_ner/final_table_ner.csv;results/summary/ner_table.csv,plutus lowest strict_f1/macro_f1 among LLMs on both FiNER-ORD and FIN,8B,plutus8b is worst LLM on both NER datasets per both tables.
+R170,7. Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300 for all model rows,300,All FiNER-ORD rows use n_samples=300 subsample as claimed.
+R171,Results NER,matched,results/summary_ner/final_table_ner.csv,model=qwen25_7b,Qwen2.5-7B-Instruct,Row exists in FiNER-ORD table; model name matches report Table 6
+R172,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,Qwen2.5-7B-Instruct n=300 on FiNER-ORD matches
+R173,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.6279,0.628,Rounds to printed 0.628; matches report Table 6
+R174,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,Qwen2.5-7B-Instruct coverage 1.00 matches
+R175,Results NER,matched,results/summary_ner/final_table_ner.csv,model=qwen3_8b,Qwen3-8B,Row exists in FiNER-ORD table matching report Table 6
+R176,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,Qwen3-8B n=300 on FiNER-ORD matches
+R177,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.6027,0.603,Rounds to printed 0.603; matches report Table 6
+R178,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,Qwen3-8B coverage 1.00 matches
+R179,Results NER,matched,results/summary_ner/final_table_ner.csv,"model=gliner-small, n_samples=300",300,GLiNER-small n=300 on FiNER-ORD matches
+R180,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.5942,0.594,Rounds to printed 0.594; matches report Table 6
+R181,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,GLiNER-small coverage 1.00 matches
+R182,Results NER,matched,results/summary_ner/final_table_ner.csv,"model=gliner-large, n_samples=300",300,GLiNER-large n=300 on FiNER-ORD matches
+R183,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.5605,0.561,0.5605 rounds to 0.561 (half-up); matches report Table 6
+R184,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,GLiNER-large coverage 1.00 matches
+R185,Results NER,matched,results/summary_ner/final_table_ner.csv,model=mistral7b,Mistral-7B-Instruct-v0.3,Row exists in FiNER-ORD table matching report Table 6
+R186,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,Mistral-7B-Instruct-v0.3 n=300 on FiNER-ORD matches
+R187,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.5352,0.535,Rounds to printed 0.535; matches report Table 6
+R188,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,Mistral-7B-Instruct-v0.3 coverage 1.00 matches
+R189,Results NER,matched,results/summary_ner/final_table_ner.csv,model=qwen3_4b,Qwen3-4B,Row exists in FiNER-ORD table matching report Table 6
+R190,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,Qwen3-4B n=300 on FiNER-ORD matches
+R191,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.4936,0.494,Rounds to printed 0.494; matches report Table 6
+R192,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=1.0,1.00,Qwen3-4B coverage 1.00 matches
+R193,Results NER,matched,results/summary_ner/final_table_ner.csv,model=plutus8b,plutus-8B-instruct (financial),Row exists in FiNER-ORD table matching report Table 6
+R194,Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300,300,plutus-8B-instruct n=300 on FiNER-ORD matches
+R195,Results NER,matched,results/summary_ner/final_table_ner.csv,strict_f1=0.3649,0.365,Rounds to printed 0.365; matches report Table 6 (worst LLM)
+R196,Results NER,matched,results/summary_ner/final_table_ner.csv,coverage=0.8533,0.853,Rounds to printed 0.853; only model with dropped coverage
+R197,Results NER,matched,results/summary/ner_table.csv,n_total=98,98,FIN/Alvarado-2015 dataset size 98 matches ner_table.csv and report Table 7 header
+R198,Results NER,matched,results/summary/ner_table.csv,model=qwen25_7b,Qwen2.5-7B-Instruct,Row exists in FIN table matching report Table 7
+R199,Results NER,matched,results/summary/ner_table.csv,micro_f1=0.1598,0.160,Rounds to printed 0.160; matches report Table 7
+R200,Results NER,matched,results/summary/ner_table.csv,coverage=0.8367,0.84,Rounds to printed 0.84; matches report Table 7
+R201,Results NER,matched,results/summary/ner_table.csv,model=mistral7b,Mistral-7B-Instruct-v0.3,Row exists in FIN table matching report Table 7
+R202,Results NER,matched,results/summary/ner_table.csv,micro_f1=0.1529,0.153,Rounds to printed 0.153; matches report Table 7
+R203,Results NER,matched,results/summary/ner_table.csv,coverage=0.9388,0.94,Rounds to printed 0.94; matches report Table 7
+R204,Results NER,non_checkable,report/report.md,Mistral-v0.1: 0.00 (paper analog column),Mistral-v0.1: 0.00,External paper-reported analog value; not from project's own runs/artifacts
+R205,7. Results — NER,matched,results/summary/ner_table.csv,model=plutus8b; TheFinAI/plutus-8B-instruct,8B,Row identifies plutus-8B-instruct model correctly
+R206,7. Results — NER,matched,results/summary/ner_table.csv,micro_f1=0.1068,0.107,0.1068 rounds to 0.107 as printed in report Table (FIN dataset)
+R207,7. Results — NER,matched,results/summary/ner_table.csv,coverage=1.0,1.00,plutus-8B FIN coverage 1.0 matches
+R208,7. Results — NER,non_checkable,report/report.md,FinLLaMA-instruct: 0.57,0.57,"External paper citation, quoted correctly in report Table 7 analog"
+R209,7. Results — NER,matched,results/summary_ner/final_table_ner.csv,plutus strict_f1=0.3649 (lowest); coverage=0.8533,8B,plutus-8B is lowest strict-F1 LLM on FiNER-ORD and only one with coverage<1.0
+R210,7. Results — NER,matched,results/summary_ner/final_table_ner.csv,coverage=0.8533,0.853,0.8533 rounds to 0.853 as stated
+R211,7. Results — NER,matched,results/summary_ner/final_table_ner.csv,coverage=0.8533,0.853,Duplicate coverage figure confirmed same row
+R212,7. Results — NER,matched,results/summary_ner/final_table_ner.csv,gliner_small f1=0.5942/large=0.5605 > mistral=0.5352 & qwen3_4b=0.4936,4B,GLiNER beats Mistral and Qwen3-4B on FiNER-ORD confirmed
+R213,7. Results — NER,matched,results/summary_ner/final_table_ner.csv,"qwen25=0.6279, qwen3_8b=0.6027 both > GLiNER",8B,"GLiNER loses only to Qwen2.5 and Qwen3-8B, as claimed"
+R214,7. Results — NER,matched,results/summary/ner_table.csv,qwen25_7b micro_f1=0.1598,0.160,"0.1598 rounds to 0.160, best FIN LLM score"
+R215,7. Results — NER,non_checkable,report/report.md,FinLLaMA-instruct: 0.57 (paper),0.57,External paper citation repeated correctly
+R216,7. Results — NER,matched,results/summary/ner_table.csv,n_total=98,98,FIN dataset n=98 confirmed in ner_table.csv
+R217,7. Results — NER,matched,results/summary/ner_table.csv,mistral7b v0.3 micro_f1=0.1529 vs paper v0.1=0.00 -> ~15.3pt gap,15 points,"0.1529-0.00 = 15.3 points, rounds to '15 points' as stated"
+R218,7. Results — NER,non_checkable,report/report.md,paper's Mistral-v0.1: 0.00,0.00,"External paper citation, quoted correctly"
+R219,7. Results — NER,matched,results/summary/ner_table.csv,mistral7b micro_f1=0.1529,0.153,0.1529 rounds to 0.153 as stated in report
+R220,8. Error analysis,matched,results/summary/focal_error_sample.csv,run_id=plutus8b__FPB...,8B,"Section is plutus-8B FPB error analysis, confirmed by run_id prefix"
+R221,8. Error analysis,matched,results/summary/focal_error_sample.csv,30 data rows total,30,focal_error_sample.csv has exactly 30 hand-tagged rows
+R222,8. Error analysis,matched,results/summary/focal_error_sample.csv,missed_positive_cue count=15,15,"15 rows tagged missed_positive_cue, matches Table 8"
+R223,8. Error analysis,matched,results/summary/focal_error_sample.csv,15/30 = 50%,50%,"15 of 30 = 50%, matches Table 8 percentage"
+R224,8. Error analysis,matched,results/summary/focal_error_sample.csv,8/30 = 26.7%,27%,"8 of 30 = 26.7%, rounds to 27% as printed"
+R225,8. Error analysis,matched,results/summary/focal_error_sample.csv,FPB_00462 text contains '3.7 mln euro',3.7,Value 3.7 present in numerical_reasoning example text
+R226,8. Error analysis,matched,results/summary/focal_error_sample.csv,FPB_01472 text contains 'EUR 17.7 mn',17.7,Value 17.7 present in numerical_reasoning example text
+R227,8. Error analysis,matched,results/summary/focal_error_sample.csv,FPB_01472 text contains 'EUR 17.6 mn',17.6,Value 17.6 present in numerical_reasoning example text
+R228,8. Error analysis,matched,results/summary/focal_error_sample.csv,"factual_neutral_misclassed count=6, 6/30=20%",20%,"6 of 30 = 20%, matches Table 8"
+R229,8. Error analysis,matched,results/summary/focal_error_sample.csv,"ambiguous count=1, 1/30=3.3%",3%,"1 of 30 = 3.3%, rounds to 3% as printed"
+R230,9. Critical assessment,matched,report/report.md,"plutus-8B is a substitute, not FinLLaMA-instruct (line 375-377)",8B,Qualitative disclaimer verified verbatim in report §9
+R231,9. Critical assessment,matched,report/report.md,300-sentence sentiment subsamples and 98-300 NER items (line 378-380),300,Matches final_table.csv n=300 LLM cells for FPB
+R232,9. Critical assessment,matched,results/summary/ner_table.csv,n_total=98 (FIN dataset),98,FIN dataset item count 98 confirmed
+R233,9. Critical assessment,matched,results/summary/final_table.csv,LLM cells n=300 for FPB,300,"Duplicate of R231, same 300-sample LLM subsample fact"
+R234,9. Critical assessment,matched,results/summary/bootstrap_ci.csv,FPB LLM halfwidths 0.0391/0.0467/0.0481; FiQA 0.0504/0.0521/0.0533 (avg ~0.048),300,300-sample LLM run count backing the CI halfwidth claim
+R235,9. Critical assessment,matched,results/summary/bootstrap_ci.csv,"halfwidths range 0.0391-0.0533, avg ~0.048",0.045,~0.045 is a reasonable rounded approximation of observed halfwidths
+R236,9. Critical assessment,matched,report/report.md,'two-model differences under ~0.06-0.09 F1 are not significant' (line 393),0.06,"Verbatim threshold quoted in report, consistent with CI halfwidths ~0.045"
+R237,9. Critical assessment,matched,report/report.md,'two-model differences under ~0.06-0.09 F1 are not significant' (line 393),0.09,"Verbatim threshold quoted in report, consistent with CI halfwidths ~0.045"
+R239,10. What we got wrong during the research,matched,report/report.md,plutus-8B substituted for FinLLaMA-instruct (404),8B,Verbatim in report §10 item 1 and Appendix B.
+R240,10. What we got wrong during the research,matched,report/report.md,transformers 4.44->4.50,4.44,Verbatim quote from report §10 item 2.
+R241,10. What we got wrong during the research,matched,report/report.md,transformers 4.44->4.50,4.50,Verbatim quote from report §10 item 2; consistent with Appendix A env notes.
+R242,10. What we got wrong during the research,matched,report/report.md,Qwen3-8B blocked until newer transformers,8B,Verbatim quote from report §10 item 2.
+R243,10. What we got wrong during the research,matched,report/report.md,Mistral v0.1 0.00 -> v0.3 0.153 (15.3pt),15 points,FIN table: 0.153-0.00=15.3pt matches '15 points' claim.
+R244,10. What we got wrong during the research,matched,report/report.md,finbert-tone no longer instantiates; Unrecognized model error; 75%-agree table,75%,Verbatim quote from report §10 item 7.
+R245,10. What we got wrong during the research,matched,report/report.md,11 spurious failures in test_evaluation.py; passes in isolation,11,Verbatim quote from report §10 item 8; test_evaluation.py exists in tests/.
+R246,11. Lessons learned,matched,report/report.md,a minor version bump can swing a benchmark by 15 points,15 points,Verbatim quote from report §11; same 15pt Mistral NER swing as R243.
+R247,11. Lessons learned,matched,results/summary/fpb_agreement_comparison.csv,75->AllAgree F1 gains: finbert +3.35 finbert_tone +6.48 mistral(A3) +5.9 plutus(A3) +5.89 qwen(A3) +7.95 vader -1.6,10,"5-10pt range approx for learned models; VADER flat; plutus gain (5.89) is roughly tied with/slightly below others, consistent with 'gains least'."
+R248,11. Lessons learned,matched,report/report.md,financial-tuned 8B did not earn a default slot anywhere,8B,Verbatim quote from report §11 bullet on right tool for task.
+R249,11. Lessons learned,matched,report/report.md,get access to FinMA-7B-full and the real FinLLaMA-instruct,7B,Verbatim quote from report §11 'what we'd do with another month'.
+R250,12. Conclusion,matched,report/report.md,financial instruction tuning (plutus-8B) never led -- mid-pack on sentiment worst on NER,8B,Verbatim quote from report §12 conclusion item 1.
+R251,Appendix A -- Reproducibility,matched,report/report.md,bootstrap_ci.py -> 95% CIs (needs predictions),95%,Verbatim from Appendix A code block comment.
+R252,Appendix A -- Reproducibility,matched,report/report.md,eval_allagree.py: filter 75%-agree to unanimous,75%,Verbatim from Appendix A code block comment.
+R253,Appendix A -- Reproducibility,matched,report/report.md,make_agreement_figure.py -> agreement_comparison.csv + figure (75% vs 100%),100%,Verbatim from Appendix A code block comment.
+R254,Appendix A -- Reproducibility,matched,report/report.md,re-run inference on Modal T4 -- costs ~$1 needs HF_TOKEN,$1,",Verbatim from Appendix A code block comment."
+R255,Appendix A -- Reproducibility,matched,report/report.md,run_allagree.py: 100%-agreement (AllAgree) matrix,100%,Verbatim from Appendix A code block comment.
+R256,Appendix A -- Reproducibility,matched,report/report.md,transformers >= 4.50 ... required for plutus-8B,4.50,Verbatim from Appendix A env notes.
+R257,Appendix A -- Reproducibility,matched,report/report.md,transformers >= 4.50 ... required for plutus-8B,8B,Verbatim from Appendix A env notes.
+R258,Appendix A -- Reproducibility,matched,report/report.md,Qwen3 needs >= 4.51,4.51,Verbatim from Appendix A env notes.
+R259,Appendix A -- Reproducibility,mismatched,results/_modal_spend.json,total_usd 1.1445 (~$1.14),$1.3,"Ledger sums to ~$1.14 (116 GPU-min), report claims ~$1.3 -- ~13% high, not just rounding. (recheck) report/report.md line 518 states '~$1.3 of Modal T4 time'. results/_modal_spend.json total_usd=1.1698 (stored) / ~1.176 recomputed; worker-cited ~1.1445 is a subset variant. All are ~$1.1-1.18, not $1.3 (rounds to $1.2). ~10%+ overstatement, wrong leading value. Mismatched."
+R260,Appendix A -- Reproducibility,mismatched,results/_modal_spend.json,total_seconds 6979.14 (~116.3 GPU-minutes),130,"Ledger sums to ~116 GPU-min across recorded runs, report claims ~130 -- ~12% high. (recheck) report/report.md line 518 states '~130 GPU-minutes'. results/_modal_spend.json total_seconds=7133.54 = 118.9 min (stored) / ~119.6 min recomputed over all runs; ~114.5 min excluding the 2026-07-05 runs. Actual is ~115-120 min, which rounds to 120, not 130 (~8-13% overstatement). Mismatched."
+R261,Appendix A -- Reproducibility,matched,report/report.md,100%-agreement matrix,100%,Verbatim from Appendix A total-compute sentence; only the $/minute figures (R259/R260) diverge from ledger.
+R262,Appendix B -- Datasets models and artifacts,matched,report/report.md,"financial_phrasebank (75%-agree split), 690 test",75%,Verbatim Table 9 FPB row.
+R263,Appendix B -- Datasets models and artifacts,matched,results/summary/final_table.csv,FPB n_samples=690 (finbert/finbert_tone/vader rows),690,Matches final_table.csv FPB baseline rows (n=690).
+R264,Appendix B -- Datasets models and artifacts,matched,src/data_loader.py,load_fiqa(neutral_band: float = 0.10),0.10,configs/experiment.yaml also sets neutral_band: 0.10; matches Table 9 FiQA row.
+R265,Appendix B -- Datasets models and artifacts,matched,results/summary/ner_table.csv,FIN n_total=98 (mistral7b/plutus8b rows),98,Matches Table 9 FIN/Alvarado row and ner_table.csv n_total=98.
+R266,Appendix B -- Datasets models and artifacts,matched,report/report.md,TheFinAI/plutus-8B-instruct (substitute for FinLLaMA-instruct),8B,Verbatim Table 9 Model-under-test row.
+R267,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,"Qwen/Qwen3-8B and mistralai/Mistral-7B-Instruct-v0.3, Qwen/Qwen2.5-7B-Instruct rows present",7B,Model ids confirmed in final_table_ner.csv/final_table.csv.
+R268,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,"Qwen/Qwen3-8B and mistralai/Mistral-7B-Instruct-v0.3, Qwen/Qwen2.5-7B-Instruct rows present",7B,Duplicate 7B mention in same Table 9 cell; same evidence as R267.
+R269,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,qwen3_8b row: Qwen/Qwen3-8B,8B,Confirmed model id in final_table_ner.csv row 8.
+R270,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,qwen3_4b row: Qwen/Qwen3-4B-Instruct-2507,4B,Confirmed model id in final_table_ner.csv row 7.
+R271,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,qwen3_4b row: Qwen/Qwen3-4B-Instruct-2507,2507,Confirmed model id string in final_table_ner.csv row 7.
+R035,3. Objective,matched,report/report.md,4-bit (bitsandbytes) for every 7-8B model,8B,Verbatim Table 1 cell text; report.md line 103.
+R036,3. Objective,matched,report/report.md,Two 8B models will not coexist on a 16 GB T4 otherwise.,8B,Verbatim Table 1 cell text; report.md line 103.
+R037,3. Objective,matched,report/report.md,16 GB T4,16,Verbatim Table 1 cell text; report.md line 103.
+R038,3. Objective,matched,report/report.md,FinLLaMA-instruct (404),404,Matches report.md lines 106-109 list of unevaluated models.
+R039,3. Objective,matched,report/report.md,"LLaMA-3.1-8B-Instruct (gated, no access)",3.1,Matches report.md lines 106-109.
+R040,3. Objective,matched,report/report.md,LLaMA-3.1-8B-Instruct,8B,Matches report.md lines 106-109.
+R041,3. Objective,matched,report/report.md,"FinMA-7B-full (gated, 403)",7B,Matches report.md lines 106-109.
+R042,3. Objective,matched,report/report.md,"FinMA-7B-full (gated, 403)",403,Matches report.md lines 106-109.
+R043,3. Objective,matched,report/report.md,LLaMA-3.1-8B-Instruct,8B,Duplicate 8B mention in same sentence; still matches report.md lines 106-109.
+R044,4. System design,matched,results/summary/final_table.csv,coverage=1.0 (finbert/vader all rows),100%,"FinBERT/VADER/GLiNER coverage=1.0 in final_table.csv; report.md line 129 states ""always 100% coverage""."
+R045,4. System design,matched,report/report.md,a hard $7 budget guard,$7,Verbatim design/config statement; report.md line 136 (not the realized spend).
+R046,5. Experimental design,matched,results/summary/final_table.csv,seed=42 (all 26 rows),42,"All final_table.csv rows show seed=42; report.md line 155 ""seed = 42 everywhere""."
+R047,5. Experimental design,matched,results/summary/bootstrap_ci.csv,"95% CI columns ci_lo/ci_hi present, halfwidths ~0.02-0.05",95%,bootstrap_ci.csv exists with per-run 95% CIs; report.md line 157 confirms 2000 resamples.
+R048,6. Results,matched,results/summary/final_table.csv,model=finbert,FinBERT (110M),Row label matches final_table.csv finbert rows.
+R049,6. Results,matched,results/summary/final_table.csv,f1_macro=0.9254 (FPB),0.925,Rounds to printed precision; also recomputed_metrics.csv f1_macro=0.9254.
+R050,6. Results,matched,results/summary/final_table.csv,accuracy=0.9348 (FPB),0.935,Claim column mislabels as f1_macro but is the Acc cell; rounds to 0.935.
+R051,6. Results,matched,results/summary/final_table.csv,f1_macro=0.482 (FiQA),0.482,Exact match; recomputed_metrics.csv agrees.
+R052,6. Results,matched,results/summary/final_table.csv,accuracy=0.4979 (FiQA),0.498,Acc cell rounds to 0.498.
+R053,6. Results,matched,results/summary/final_table.csv,model=finbert_tone,FinBERT-tone (110M),Row label matches final_table.csv finbert_tone rows.
+R054,6. Results,matched,results/summary/final_table.csv,f1_macro=0.8552 (FPB),0.855,Rounds to printed precision.
+R055,6. Results,matched,results/summary/final_table.csv,accuracy=0.8812 (FPB),0.881,Acc cell rounds to 0.881.
+R056,6. Results,matched,results/summary/final_table.csv,f1_macro=0.3955 (FiQA),0.396,Rounds to printed precision.
+R057,6. Results,matched,results/summary/final_table.csv,accuracy=0.3887 (FiQA),0.389,Acc cell rounds to 0.389.
+R058,6. Results,matched,results/summary/final_table.csv,model=mistral7b,Mistral-7B-Instruct-v0.3 (general),Row label matches final_table.csv mistral7b.
+R059,6. Results,matched,results/summary/final_table.csv,f1_macro=0.8897 (FPB A/3shot best cell),0.890,Best-of-template cell rounds to 0.890; recomputed_metrics.csv agrees.
+R060,6. Results,matched,results/summary/final_table.csv,accuracy=0.9033 (FPB A/3shot),0.903,Best cell rounds to 0.903.
+R061,6. Results,matched,results/summary/final_table.csv,f1_macro=0.5989 (FiQA A/0shot best cell),0.599,Best cell exact-rounds to 0.599.
+R062,6. Results,matched,results/summary/final_table.csv,accuracy=0.62 (FiQA A/0shot),0.620,Best cell exact match.
+R063,6. Results,matched,results/summary/final_table.csv,model=qwen25_7b,Qwen2.5-7B-Instruct (general),Row label matches final_table.csv qwen25_7b.
+R064,6. Results,matched,results/summary/final_table.csv,f1_macro=0.8324 (FPB A/3shot best cell),0.832,Best cell rounds to 0.832.
+R065,6. Results,matched,results/summary/final_table.csv,accuracy=0.86 (FPB A/3shot),0.860,Best cell exact match.
+R066,6. Results,matched,results/summary/final_table.csv,f1_macro=0.6727 (FiQA B/0shot best cell),0.673,Best cell rounds to 0.673.
+R067,6. Results,matched,results/summary/final_table.csv,accuracy=0.7167 (FiQA B/0shot),0.717,Best cell rounds to 0.717.
+R068,6. Results,matched,results/summary/final_table.csv,model=plutus8b,plutus-8B-instruct (financial),Row label matches final_table.csv plutus8b.
+R069,Results-sentiment,matched,results/summary/final_table.csv,f1_macro=0.8291 (plutus8b FPB A/3shot),0.829,Rounds to 0.829; also matches recomputed_metrics.csv.
+R070,Results-sentiment,matched,results/summary/final_table.csv,accuracy=0.8508 (plutus8b FPB A/3shot),0.851,Rounds to 0.851; also matches recomputed_metrics.csv.
+R071,Results-sentiment,matched,results/summary/final_table.csv,f1_macro=0.5966 (plutus8b FiQA A/0shot),0.597,Rounds to 0.597; also matches recomputed_metrics.csv.
+R072,Results-sentiment,matched,results/summary/final_table.csv,accuracy=0.6567 (plutus8b FiQA A/0shot),0.657,Rounds to 0.657; also matches recomputed_metrics.csv.
+R073,Results-sentiment,matched,results/summary/final_table.csv,f1_macro=0.4694 (vader FPB),0.469,Rounds to 0.469 exactly.
+R074,Results-sentiment,matched,results/summary/final_table.csv,accuracy=0.5536 (vader FPB),0.554,Rounds to 0.554 exactly.
+R075,Results-sentiment,matched,results/summary/final_table.csv,f1_macro=0.3863 (vader FiQA),0.386,Rounds to 0.386 exactly.
+R076,Results-sentiment,matched,results/summary/final_table.csv,accuracy=0.4228 (vader FiQA),0.423,Rounds to 0.423 exactly.
+R077,Results-sentiment,matched,results/summary/bootstrap_ci.csv,95% CI (B=2000) across all rows,95%,Matches stated CI level and B=2000 in bootstrap_ci.csv.
+R078,Results-sentiment,matched,results/summary/bootstrap_ci.csv,LLM halfwidths 0.0391-0.0533 (300-sample rows),0.04,Within stated approx ~0.04-0.05 range for 300-sentence LLM runs.
+R079,Results-sentiment,matched,results/summary/bootstrap_ci.csv,LLM halfwidths 0.0391-0.0533 (300-sample rows),0.05,Within stated approx ~0.04-0.05 range for 300-sentence LLM runs.
+R080,Results-sentiment,matched,results/summary/final_table.csv,n_samples=300 for all LLM rows,300,Matches the 300-sentence LLM subset size used throughout.
+R081,Results-sentiment,matched,results/summary/bootstrap_ci.csv,baseline halfwidths mostly 0.0223-0.0303 (FinBERT/FinBERT-tone/FiQA),0.02,Most full-test baseline halfwidths in 0.02-0.03; VADER-FPB (0.0418) is an outlier not covered by the approx range.
+R082,Results-sentiment,matched,results/summary/bootstrap_ci.csv,baseline halfwidths mostly 0.0223-0.0303 (FinBERT/FinBERT-tone/FiQA),0.03,Most full-test baseline halfwidths in 0.02-0.03; VADER-FPB (0.0418) is an outlier not covered by the approx range.
+R083,Results-sentiment,matched,results/summary/bootstrap_ci.csv,plutus-8B FPB ci_lo=0.7765,0.776,Rounds to 0.776; context_keys mislabeled 'FinBERT' but sentence/value clearly refers to plutus-8B FPB CI.
+R084,Results-sentiment,matched,results/summary/bootstrap_ci.csv,plutus-8B FPB ci_hi=0.8726,0.873,Rounds to 0.873; context_keys mislabeled 'FinBERT' but sentence/value clearly refers to plutus-8B FPB CI.
+R085,Results-sentiment,matched,results/summary/bootstrap_ci.csv,Qwen2.5-7B FPB ci_lo=0.7842,0.784,Rounds to 0.784; context_keys mislabeled 'FinBERT' but sentence/value clearly refers to Qwen FPB CI.
+R086,Results-sentiment,matched,results/summary/bootstrap_ci.csv,Qwen2.5-7B FPB ci_hi=0.8776,0.878,Rounds to 0.878; context_keys mislabeled 'FinBERT' but sentence/value clearly refers to Qwen FPB CI.
+R087,Results-sentiment,matched,report/report.md,plutus-8B-instruct (8B model),8B,Model size consistent throughout artifacts and report text.
+R088,Results-sentiment,matched,results/summary/final_table.csv,finbert FPB f1_macro=0.9254; finbert FiQA f1_macro=0.482,0.925,Rounds to 0.925 exactly; cross-checked recomputed_metrics.csv.
+R089,Results-sentiment,matched,results/summary/final_table.csv,finbert FiQA f1_macro=0.482,0.482,Exact match; cross-checked recomputed_metrics.csv.
+R090,Results-sentiment,matched,results/summary/final_table.csv,(0.9254-0.482)*100=44.3 points,44-point,Recomputed gap 44.3 rounds to 44 points.
+R091,Results-sentiment,matched,results/summary/final_table.csv,mistral7b model = Mistral-7B-Instruct-v0.3,7B,Model naming/size consistent with final_table.csv.
+R092,Results-sentiment,matched,results/summary/final_table.csv,mistral7b FPB A/0shot f1_macro=0.803,0.803,Exact match.
+R093,Results-sentiment,matched,results/summary/final_table.csv,mistral7b FPB B/0shot f1_macro=0.6889,0.689,Rounds to 0.689 exactly.
+R094,Results-sentiment,matched,results/summary/final_table.csv,(0.803-0.6889)*100=11.4,11.4 pt,Recomputed gap 11.4 matches exactly.
+R095,Results-sentiment,matched,results/summary/final_table.csv,plutus8b model = TheFinAI/plutus-8B-instruct,8B,Model naming/size consistent with final_table.csv.
+R096,Results-sentiment,matched,results/summary/final_table.csv,plutus8b FiQA A/0shot f1_macro=0.5966,0.597,Rounds to 0.597 exactly.
+R097,Results-sentiment,matched,results/summary/final_table.csv,plutus8b FiQA B/0shot f1_macro=0.4322,0.432,Rounds to 0.432 exactly.
+R098,Results-sentiment,matched,results/summary/final_table.csv,(0.5966-0.4322)*100=16.4,16.4 pt,Recomputed F1 gap 16.4 matches exactly.
+R099,Results-sentiment,matched,results/summary/final_table.csv,(0.6567-0.4)*100=25.7,26 pt,Recomputed accuracy gap 25.7 rounds to 26 (printed-precision rounding).
+R100,Results-sentiment,matched,results/summary/final_table.csv,qwen25_7b model = Qwen/Qwen2.5-7B-Instruct,7B,Model naming/size consistent with final_table.csv.
+R101,Results-sentiment,matched,results/summary/final_table.csv,qwen25_7b FiQA A/0shot f1_macro=0.5785,0.579,Rounds to 0.579 exactly.

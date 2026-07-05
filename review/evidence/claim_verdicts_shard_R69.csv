@@ -1,0 +1,35 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+R069,Results-sentiment,matched,results/summary/final_table.csv,"f1_macro=0.8291 (plutus8b FPB A/3shot)",0.829,Rounds to 0.829; also matches recomputed_metrics.csv.
+R070,Results-sentiment,matched,results/summary/final_table.csv,"accuracy=0.8508 (plutus8b FPB A/3shot)",0.851,Rounds to 0.851; also matches recomputed_metrics.csv.
+R071,Results-sentiment,matched,results/summary/final_table.csv,"f1_macro=0.5966 (plutus8b FiQA A/0shot)",0.597,Rounds to 0.597; also matches recomputed_metrics.csv.
+R072,Results-sentiment,matched,results/summary/final_table.csv,"accuracy=0.6567 (plutus8b FiQA A/0shot)",0.657,Rounds to 0.657; also matches recomputed_metrics.csv.
+R073,Results-sentiment,matched,results/summary/final_table.csv,"f1_macro=0.4694 (vader FPB)",0.469,Rounds to 0.469 exactly.
+R074,Results-sentiment,matched,results/summary/final_table.csv,"accuracy=0.5536 (vader FPB)",0.554,Rounds to 0.554 exactly.
+R075,Results-sentiment,matched,results/summary/final_table.csv,"f1_macro=0.3863 (vader FiQA)",0.386,Rounds to 0.386 exactly.
+R076,Results-sentiment,matched,results/summary/final_table.csv,"accuracy=0.4228 (vader FiQA)",0.423,Rounds to 0.423 exactly.
+R077,Results-sentiment,matched,results/summary/bootstrap_ci.csv,"95% CI (B=2000) across all rows",95%,Matches stated CI level and B=2000 in bootstrap_ci.csv.
+R078,Results-sentiment,matched,results/summary/bootstrap_ci.csv,"LLM halfwidths 0.0391-0.0533 (300-sample rows)",0.04,Within stated approx ~0.04-0.05 range for 300-sentence LLM runs.
+R079,Results-sentiment,matched,results/summary/bootstrap_ci.csv,"LLM halfwidths 0.0391-0.0533 (300-sample rows)",0.05,Within stated approx ~0.04-0.05 range for 300-sentence LLM runs.
+R080,Results-sentiment,matched,results/summary/final_table.csv,n_samples=300 for all LLM rows,300,Matches the 300-sentence LLM subset size used throughout.
+R081,Results-sentiment,matched,results/summary/bootstrap_ci.csv,"baseline halfwidths mostly 0.0223-0.0303 (FinBERT/FinBERT-tone/FiQA)",0.02,Most full-test baseline halfwidths in 0.02-0.03; VADER-FPB (0.0418) is an outlier not covered by the approx range.
+R082,Results-sentiment,matched,results/summary/bootstrap_ci.csv,"baseline halfwidths mostly 0.0223-0.0303 (FinBERT/FinBERT-tone/FiQA)",0.03,Most full-test baseline halfwidths in 0.02-0.03; VADER-FPB (0.0418) is an outlier not covered by the approx range.
+R083,Results-sentiment,matched,results/summary/bootstrap_ci.csv,"plutus-8B FPB ci_lo=0.7765",0.776,"Rounds to 0.776; context_keys mislabeled 'FinBERT' but sentence/value clearly refers to plutus-8B FPB CI."
+R084,Results-sentiment,matched,results/summary/bootstrap_ci.csv,"plutus-8B FPB ci_hi=0.8726",0.873,"Rounds to 0.873; context_keys mislabeled 'FinBERT' but sentence/value clearly refers to plutus-8B FPB CI."
+R085,Results-sentiment,matched,results/summary/bootstrap_ci.csv,"Qwen2.5-7B FPB ci_lo=0.7842",0.784,"Rounds to 0.784; context_keys mislabeled 'FinBERT' but sentence/value clearly refers to Qwen FPB CI."
+R086,Results-sentiment,matched,results/summary/bootstrap_ci.csv,"Qwen2.5-7B FPB ci_hi=0.8776",0.878,"Rounds to 0.878; context_keys mislabeled 'FinBERT' but sentence/value clearly refers to Qwen FPB CI."
+R087,Results-sentiment,matched,report/report.md,"plutus-8B-instruct (8B model)",8B,Model size consistent throughout artifacts and report text.
+R088,Results-sentiment,matched,results/summary/final_table.csv,"finbert FPB f1_macro=0.9254; finbert FiQA f1_macro=0.482",0.925,Rounds to 0.925 exactly; cross-checked recomputed_metrics.csv.
+R089,Results-sentiment,matched,results/summary/final_table.csv,"finbert FiQA f1_macro=0.482",0.482,Exact match; cross-checked recomputed_metrics.csv.
+R090,Results-sentiment,matched,results/summary/final_table.csv,"(0.9254-0.482)*100=44.3 points",44-point,Recomputed gap 44.3 rounds to 44 points.
+R091,Results-sentiment,matched,results/summary/final_table.csv,mistral7b model = Mistral-7B-Instruct-v0.3,7B,Model naming/size consistent with final_table.csv.
+R092,Results-sentiment,matched,results/summary/final_table.csv,"mistral7b FPB A/0shot f1_macro=0.803",0.803,Exact match.
+R093,Results-sentiment,matched,results/summary/final_table.csv,"mistral7b FPB B/0shot f1_macro=0.6889",0.689,Rounds to 0.689 exactly.
+R094,Results-sentiment,matched,results/summary/final_table.csv,"(0.803-0.6889)*100=11.4",11.4 pt,Recomputed gap 11.4 matches exactly.
+R095,Results-sentiment,matched,results/summary/final_table.csv,plutus8b model = TheFinAI/plutus-8B-instruct,8B,Model naming/size consistent with final_table.csv.
+R096,Results-sentiment,matched,results/summary/final_table.csv,"plutus8b FiQA A/0shot f1_macro=0.5966",0.597,Rounds to 0.597 exactly.
+R097,Results-sentiment,matched,results/summary/final_table.csv,"plutus8b FiQA B/0shot f1_macro=0.4322",0.432,Rounds to 0.432 exactly.
+R098,Results-sentiment,matched,results/summary/final_table.csv,"(0.5966-0.4322)*100=16.4",16.4 pt,Recomputed F1 gap 16.4 matches exactly.
+R099,Results-sentiment,matched,results/summary/final_table.csv,"(0.6567-0.4)*100=25.7",26 pt,Recomputed accuracy gap 25.7 rounds to 26 (printed-precision rounding).
+R100,Results-sentiment,matched,results/summary/final_table.csv,qwen25_7b model = Qwen/Qwen2.5-7B-Instruct,7B,Model naming/size consistent with final_table.csv.
+R101,Results-sentiment,matched,results/summary/final_table.csv,"qwen25_7b FiQA A/0shot f1_macro=0.5785",0.579,Rounds to 0.579 exactly.
+R102,Results-sentiment,matched,results/summary/final_table.csv,"qwen25_7b FiQA B/0shot f1_macro=0.6727",0.673,Rounds to 0.673 exactly.

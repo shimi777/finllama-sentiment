@@ -1,0 +1,34 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+D069,Slide 9,matched,report/report.md,"110M finance-tuned classifiers",110M,FinBERT is 110M BERT classifier per report §2 baselines list.
+D070,Slide 9,matched,report/report.md,"LLaMA-3.1-8B-Instruct (gated, no access)",3.1,Report confirms LLaMA-3.1-8B-Instruct skipped: gated no access.
+D071,Slide 9,matched,report/report.md,"LLaMA-3.1-8B-Instruct (gated, no access)",8B,Report confirms LLaMA-3.1-8B-Instruct skipped: gated no access.
+D072,Slide 11,mismatched,results/summary/final_table.csv,24 LLM rows (3 models x 2 datasets x 2 templates x 2 shots) + 6 baseline rows,12 LLM runs + 4 baseline runs,final_table.csv has 24 LLM rows and 6 baseline rows (finbert/finbert_tone/vader x2); report says "24 LLM runs".
+D073,Slide 11,matched,report/report.md,"seed = 42 everywhere; greedy decoding",42,Report line 155 confirms seed=42 used everywhere (subsample/few-shot/baselines).
+D074,Slide 14,matched,results/summary/final_table.csv,"FinBERT 110M (ProsusAI/finbert)",110M,Report table row labels FinBERT specialised 110M; consistent with baselines list.
+D075,Slide 14,matched,results/summary/final_table.csv,0.9254,0.925,finbert FPB f1_macro=0.9254 rounds to 0.925.
+D076,Slide 14,matched,results/summary/final_table.csv,0.9348,0.935,finbert FPB accuracy=0.9348 rounds to 0.935 (col mislabeled f1_macro in claims sheet but value is Acc).
+D077,Slide 14,matched,results/summary/final_table.csv,0.482,0.482,finbert FiQA f1_macro=0.482 exact match.
+D078,Slide 14,matched,results/summary/final_table.csv,0.4979,0.498,finbert FiQA accuracy=0.4979 rounds to 0.498.
+D079,Slide 14,matched,results/summary/final_table.csv,"Qwen/Qwen2.5-7B-Instruct",7B,Model name confirms Qwen2.5-7B-Instruct in final_table.csv/report table.
+D080,Slide 14,matched,results/summary/final_table.csv,0.8324,0.832,qwen25_7b best FPB (A/3shot) f1_macro=0.8324 rounds to 0.832.
+D081,Slide 14,matched,results/summary/final_table.csv,0.86,0.860,qwen25_7b best FPB (A/3shot) accuracy=0.86 matches 0.860.
+D082,Slide 14,matched,results/summary/final_table.csv,0.6727,0.673,qwen25_7b best FiQA (B/0shot) f1_macro=0.6727 rounds to 0.673.
+D083,Slide 14,matched,results/summary/final_table.csv,0.7167,0.717,qwen25_7b best FiQA (B/0shot) accuracy=0.7167 rounds to 0.717.
+D084,Slide 14,matched,results/summary/final_table.csv,"mistralai/Mistral-7B-Instruct-v0.3",7B,Model name confirms Mistral-7B-Instruct-v0.3 in final_table.csv/report table.
+D085,Slide 14,matched,results/summary/final_table.csv,0.8897,0.890,mistral7b best FPB (A/3shot) f1_macro=0.8897 rounds to 0.890.
+D086,Slide 14,matched,results/summary/final_table.csv,0.9033,0.903,mistral7b best FPB (A/3shot) accuracy=0.9033 rounds to 0.903.
+D087,Slide 14,matched,results/summary/final_table.csv,0.5989,0.599,mistral7b best FiQA (A/0shot) f1_macro=0.5989 rounds to 0.599.
+D088,Slide 14,matched,results/summary/final_table.csv,0.62,0.620,mistral7b best FiQA (A/0shot) accuracy=0.62 matches 0.620.
+D089,Slide 14,matched,results/summary/final_table.csv,"TheFinAI/plutus-8B-instruct",8B,Model name confirms plutus-8B-instruct in final_table.csv/report table.
+D090,Slide 14,matched,results/summary/final_table.csv,0.8291,0.829,plutus8b best FPB (A/3shot) f1_macro=0.8291 rounds to 0.829; also in recomputed_metrics.csv.
+D091,Slide 14,matched,results/summary/final_table.csv,0.8508,0.851,plutus8b best FPB (A/3shot) accuracy=0.8508 rounds to 0.851; also in recomputed_metrics.csv.
+D092,Slide 14,matched,results/summary/final_table.csv,0.5966,0.597,plutus8b best FiQA (A/0shot) f1_macro=0.5966 rounds to 0.597; also in recomputed_metrics.csv.
+D093,Slide 14,matched,results/summary/final_table.csv,0.6567,0.657,plutus8b best FiQA (A/0shot) accuracy=0.6567 rounds to 0.657; also in recomputed_metrics.csv.
+D094,Slide 14,matched,results/summary/final_table.csv,0.4694,0.469,vader FPB f1_macro=0.4694 rounds to 0.469.
+D095,Slide 14,matched,results/summary/final_table.csv,0.5536,0.554,vader FPB accuracy=0.5536 rounds to 0.554.
+D096,Slide 14,matched,results/summary/final_table.csv,0.3863,0.386,vader FiQA f1_macro=0.3863 rounds to 0.386.
+D097,Slide 14,matched,results/summary/final_table.csv,0.4228,0.423,vader FiQA accuracy=0.4228 rounds to 0.423.
+D098,Slide 14,matched,scripts/screenshot_dashboard.py,"dashboard runs on port 8502",8502,Dashboard port 8502 confirmed used in scripts/screenshot_dashboard.py and presentation/build_deck.js.
+D099,Slide 15,matched,results/summary/final_table.csv,"TheFinAI/plutus-8B-instruct",8B,plutus-8B model identity confirmed (8B param financial-tuned model).
+D100,Slide 15,matched,results/summary/final_table.csv,0.8291,0.829,plutus8b best FPB f1_macro=0.8291 rounds to 0.829; matches recomputed_metrics.csv.
+D101,Slide 15,matched,results/summary/final_table.csv,0.5966,0.597,plutus8b best FiQA f1_macro=0.5966 rounds to 0.597; matches recomputed_metrics.csv.
