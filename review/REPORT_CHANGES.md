@@ -2,9 +2,15 @@
 
 Two artifacts were rewritten with the review findings:
 - **`report/report.md`** — the markdown source (edited in place; see git commit).
-- **`report/3_implementation_report_REVISED.docx`** — the submission docx, rewritten
-  from a copy (the original was open in Word / write-locked). Byte-verified: all 8
-  figures preserved, zip intact, paragraph count unchanged (326 → 326).
+- **`report/3_implementation_report_FINAL.docx`** — the submission docx, rewritten
+  from a copy (the original was open in Word / write-locked). Byte-verified: figures
+  preserved, zip intact. **This FINAL supersedes the earlier `_REVISED.docx`** (which
+  was still locked in Word when the diagram fix landed) — use FINAL, discard REVISED.
+
+> **§4 diagram fix:** the ASCII-art pipeline (which loses its monospace alignment in
+> Word) was replaced with a proper embedded figure, `report/figures/pipeline.png` —
+> a clean 5-stage flow (data_loader → prompts → runners → parser → evaluation)
+> matching the report's other figures. 9 embedded media now (was 8).
 
 To adopt: close Word, replace `3_implementation_report.docx` with the `_REVISED`
 copy (or run **Review ▸ Compare** in Word against your original to see every change

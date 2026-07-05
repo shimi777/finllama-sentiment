@@ -113,12 +113,7 @@ later run on the NER track).
 The pipeline is a small, testable library (`src/`) driven by scripts; the same
 shape is reused for both tasks.
 
-```
-                         data_loader            prompts            runner               parser            evaluation
- HF datasets  ──▶  unified Sample dicts  ──▶  build_prompt  ──▶  LLMRunner (Modal T4) ──▶  parse(raw)  ──▶  compute_metrics
-   FPB / FiQA      {id,text,label,...}        (LLMs only)        FinBERTRunner/VADER       (LLMs only)      acc / F1 / coverage
-   FiNER / FIN                                                   GLiNER (local)                             confusion matrix
-```
+![System-design pipeline: one library reused for sentiment and NER; parsing applies to LLMs only](figures/pipeline.png)
 
 **Key design invariants:**
 - **One unified `Sample` schema** for every dataset: `{id, text, label, dataset,
