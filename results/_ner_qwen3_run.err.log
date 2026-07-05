@@ -1,0 +1,9 @@
+2026-06-01 01:19:08,955 | src.ner.data_loader | INFO | Loading FiNER-ORD split=test …
+Repo card metadata block was not found. Setting CardData to empty.
+2026-06-01 01:19:12,412 | src.ner.data_loader | INFO | FiNER-ORD test: 200 samples (after cap)
+2026-06-01 01:19:16,622 | run_ner_modal | INFO | [run ] qwen3_8b__FiNER-ORD__A__0shot__seed42  (200 new prompts, 0 kept, ~$0.066 budgeted)
+2026-06-01 01:25:24,458 | run_ner_modal | INFO | [done] qwen3_8b__FiNER-ORD__A__0shot__seed42  strict_f1=0.602  partial_f1=0.669  cov=0.99  (367.7s, $0.7275 cum spend)
+2026-06-01 01:25:24,464 | run_ner_modal | INFO | [run ] qwen3_4b__FiNER-ORD__A__0shot__seed42  (200 new prompts, 0 kept, ~$0.066 budgeted)
+2026-06-01 01:31:33,178 | run_ner_modal | INFO | [done] qwen3_4b__FiNER-ORD__A__0shot__seed42  strict_f1=0.492  partial_f1=0.579  cov=1.00  (368.6s, $0.7879 cum spend)
+2026-06-01 01:31:33,510 | run_ner_modal | INFO | NER Modal matrix done. ran=2 skipped=0 aborted=0
+2026-06-01 01:31:33,510 | run_ner_modal | INFO | Final Modal spend: $0.7879 (4804s) over 34 runs

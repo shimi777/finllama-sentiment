@@ -1,0 +1,56 @@
+{
+  "run_id": "mistral7b__FiQA__E4",
+  "ensemble": "E4",
+  "method": "unweighted",
+  "members": [
+    "mistral7b__FiQA__A__0shot__seed42",
+    "mistral7b__FiQA__A__3shot__seed42",
+    "mistral7b__FiQA__B__0shot__seed42",
+    "mistral7b__FiQA__B__3shot__seed42"
+  ],
+  "tie_break": "abstain",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "matrix": [
+    [
+      37,
+      30,
+      4
+    ],
+    [
+      2,
+      29,
+      5
+    ],
+    [
+      1,
+      57,
+      93
+    ]
+  ],
+  "per_class": {
+    "negative": {
+      "precision": 0.925,
+      "recall": 0.5211267605633803,
+      "f1": 0.6666666666666666,
+      "support": 71
+    },
+    "neutral": {
+      "precision": 0.25,
+      "recall": 0.8055555555555556,
+      "f1": 0.3815789473684211,
+      "support": 36
+    },
+    "positive": {
+      "precision": 0.9117647058823529,
+      "recall": 0.6158940397350994,
+      "f1": 0.7351778656126482,
+      "support": 151
+    }
+  },
+  "n_samples": 300,
+  "coverage": 0.86
+}

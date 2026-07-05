@@ -39,3 +39,7 @@ Thumbs.db
 ~$*.pptx
 ~$*.docx
 ~$*.xlsx
+.gstack/
+
+# Node deps (presentation tooling)
+node_modules/

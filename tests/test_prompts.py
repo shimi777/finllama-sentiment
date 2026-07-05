@@ -29,6 +29,19 @@ def test_template_b_has_answer_line():
     p = build_prompt("B", "some text")
     assert "Answer with one word only" in p
 
+def test_template_c_contains_text():
+    p = build_prompt("C", "earnings beat estimates")
+    assert "earnings beat estimates" in p
+
+def test_template_c_one_word_instruction():
+    p = build_prompt("C", "some text")
+    assert "exactly one word" in p
+
+def test_template_c_fewshot_block():
+    p = build_prompt("C", "query", few_shot=_POOL[:3])
+    # 3 examples + 1 query
+    assert p.count("Text:") == 4
+
 def test_unknown_template_raises():
     with pytest.raises(ValueError):
         build_prompt("Z", "text")

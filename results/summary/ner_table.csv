@@ -1,0 +1,4 @@
+run_id,model,model_hf,dataset,template,shots,n_total,n_eval,coverage,micro_f1,micro_p,micro_r,macro_f1,parse_fail,runtime_s
+ner__mistral7b__FIN__paper__0shot__seed42,mistral7b,mistralai/Mistral-7B-Instruct-v0.3,FIN,paper,0,98,92,0.9388,0.1529,0.1223,0.2042,0.1711,6,326.72
+ner__plutus8b__FIN__paper__0shot__seed42,plutus8b,TheFinAI/plutus-8B-instruct,FIN,paper,0,98,98,1.0,0.1068,0.0845,0.145,0.1097,0,318.55
+ner__qwen25_7b__FIN__paper__0shot__seed42,qwen25_7b,Qwen/Qwen2.5-7B-Instruct,FIN,paper,0,98,82,0.8367,0.1598,0.1357,0.1944,0.2233,16,318.17
