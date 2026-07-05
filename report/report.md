@@ -4,7 +4,7 @@
 
 **LLMs in Finance Seminar — Implementation Track**
 Paper reproduced: *Open-FinLLMs: Open Multimodal Large Language Models for Financial Applications*
-Task: inference-only reproduction · Compute: Modal T4 (4-bit) · Total spend: **~$1.3**
+Task: inference-only reproduction · Compute: Modal T4 (4-bit) · Total spend: **~$1.2**
 
 ---
 
@@ -99,7 +99,7 @@ tests the tuning claim:
 | **Model under test** | `plutus-8B-instruct` substituted for `FinLLaMA-instruct` | FinLLaMA-instruct returns **404** (un-published). plutus is the same group's current 8B financial-instruct model. Comparison is *indicative*, not identical. |
 | **Mode** | Inference only — **no fine-tuning** | Tests the *released* tuning, on a T4 budget. |
 | **Sentiment scale** | 300-sentence balanced subsample per LLM run; full test set for the cheap baselines | Keeps 24 LLM runs inside a < $1 GPU budget; baselines are free so they run on everything. |
-| **NER scale** | FiNER-ORD 200–300 subsample; FIN = the full public 98-example set | Same budget logic; FIN is small because only the PIXIU subset is public. |
+| **NER scale** | FiNER-ORD 300-sentence subsample; FIN = the full public 98-example set | Same budget logic; FIN is small because only the PIXIU subset is public. |
 | **Precision** | 4-bit (bitsandbytes) for every 7–8B model | Two 8B models will not coexist on a 16 GB T4 otherwise. |
 | **Prompts** | Templates A (minimal), B (analyst definition list), C (market-reaction) × {0, 3}-shot | To *measure* prompt sensitivity rather than assume a single prompt is representative. |
 
@@ -158,13 +158,20 @@ zero-/few-shot only (no fine-tuning); a single prompt template × 0-shot for NER
   (2,000 resamples of the per-example predictions; `bootstrap_ci.py`), so the reader
   can see which gaps are real and which are subsample noise.
 - **Baselines.** Every sentiment claim is measured against FinBERT, FinBERT-tone,
-  and VADER on the *same* items; every NER claim against GLiNER-small/large.
+  and VADER (on the full test set; we also re-scored them on the *identical*
+  300-sentence subsets the LLMs saw, as a parity check — same ranking, gaps ≤ 0.02
+  F1); every NER claim against GLiNER-small/large.
 - **Leakage and contamination — the honest caveats.** (i) These benchmarks are
   old and public; any of these models may have seen FPB/FiQA/FIN during
   pre-training, which would *inflate* all of them — we cannot rule it out. (ii) For
   NER we use **strict** span matching, which is harsh (see §8). (iii) plutus is a
   *substitute* for the paper's model, so the gap to the paper's numbers mixes a real
-  effect with a model-identity difference.
+  effect with a model-identity difference. (iv) **FinBERT was fine-tuned *on*
+  Financial PhraseBank**, so its FPB scores here — and its 100%-agreement scores in
+  §6.4 — are effectively *in-sample*, not held-out. We treat FinBERT's FPB number as
+  an upper bound rather than a peer comparison; if anything this *strengthens* the
+  thesis, since a general LLM (Mistral) nearly matches a model trained on the test
+  set while the financial-tuned plutus does not.
 
 ## 6. Results — sentiment
 
@@ -196,7 +203,8 @@ Mistral ≈ plutus > FinBERT. Two things follow:
   tuning added a robust downstream advantage, plutus should top at least one
   dataset. It tops neither.
 - **Small in-domain models don't generalise.** FinBERT tops FPB (0.925; though
-  within noise of Mistral) but **collapses on FiQA (0.482)** — a 44-point drop,
+  within noise of Mistral, and on data it was *trained* on — see §5-iv) but
+  **collapses on FiQA (0.482)** — a 44-point drop,
   far outside any CI, on a different financial register (microblog/news). The cheap
   specialist is the best tool *only* on the distribution it was trained for. This is
   a genuinely useful production lesson.
@@ -216,6 +224,23 @@ The same model, same dataset, same 0-shot setting, only the **prompt** changed:
 These swings are **as large as, or larger than, the differences between models.**
 A benchmark that reports one prompt per model is measuring the prompt as much as the
 model. This is the methodological hole that motivated the ensemble (§6.3).
+
+**Follow-up: the swings are a fixable design flaw, not a capability ceiling.** The
+A-vs-B comparison is confounded — the two prompts differ in persona, definition
+list, output format, *and* their neutral definition all at once. Template B's
+"a factual statement is neutral" clause is the culprit: it turns the model into a
+*neutral-magnet* (on FPB it drives plutus-8B's positive-recall down to **0.16**,
+dumping genuine positives into neutral). To test this we designed three replacement
+templates that keep an analyst framing but drop the neutral-magnet clause and add an
+explicit "use neutral only as a last resort" rule, and re-ran the two most
+prompt-sensitive models (plutus-8B, Mistral-7B) 0-shot on the **same 300-sentence
+subsets**. Every model×dataset cell improved by **+0.04 to +0.09 macro-F1**:
+plutus-8B on FPB rose 0.66 → **0.75** (positive-recall recovering 0.16 → 0.74), and
+its FiQA neutral-collapse (0.43) rose to **0.67**. The lesson sharpens rather than
+softens the thesis: plutus's headline weakness is *partly* a prompt artifact, but
+even with prompts matched it still does not lead — the general models improve too.
+(Details and the full 2×2 wording-vs-format deconfounding design are in the
+review appendix; the templates ship as `src/prompts.py` D/F/H.)
 
 ### 6.2 Few-shot help is not free
 
@@ -387,6 +412,10 @@ reading a single strict-F1 number as "the model can't do NER".
 - **Coverage is not free F1.** plutus's FiQA template-B run answers only when
   confident; we report its F1 on what it answered and its coverage separately,
   rather than papering over the abstentions.
+- **The FiQA neutral band (±0.10) is a fixed convention, not tuned.** We did not
+  sweep it; because FiQA is where the model rankings are closest, the band width
+  sets neutral prevalence and could shift them. A ±0.05 / ±0.15 sensitivity check is
+  left to future work.
 
 **What I would distrust most about these numbers:** the absolute NER F1 (strict
 matching + tiny FIN set) and any sentiment gap inside the bootstrap CIs — for the
@@ -432,11 +461,14 @@ the next person:
    it, and report the AllAgree comparison without it. *Lesson:* a working baseline can
    silently rot across a dependency bump; pin per-model environments or re-verify
    every baseline each run.
-8. **A test-suite environment wrinkle.** The full `pytest` run shows 11 spurious
-   failures in `test_evaluation.py` from a `scipy`/`array_api_compat` caching quirk
-   triggered by test ordering — every test **passes in isolation**, and the
-   evaluation code is the same code that produced the (verified) tables. *Lesson:*
-   distinguish environment artifacts from logic regressions before "fixing" them.
+8. **An unpinned-dependency test failure.** A fresh `pip install` resolved into
+   `scipy 1.17` + `torch 2.11`, a combination where scipy's array-API probe throws a
+   `TypeError` while importing scikit-learn — failing 11 `test_evaluation.py` tests.
+   The evaluation *logic* was never wrong (it is the same code that produced the
+   verified tables); pinning `scipy < 1.17` restores a fully green suite. *Lesson:*
+   pin transitive scientific-stack versions — an unbounded requirement can turn a
+   clean repo red on someone else's machine, and "it passes for me" is not
+   reproducibility.
 
 ## 11. Lessons learned
 
@@ -514,8 +546,9 @@ python scripts/run_ner_matrix.py       # FIN/Alvarado NER
 ```
 
 **Environment notes:** `transformers >= 4.50` and the chat template are required for
-plutus-8B; Qwen3 needs `>= 4.51`. Set `HF_TOKEN` for gated weights. Seed = 42.
-Total compute for the whole study: **~$1.3** of Modal T4 time (≈ 130 GPU-minutes,
+plutus-8B; Qwen3 needs `>= 4.51`; pin `scipy < 1.17` (a later scipy breaks the
+scikit-learn import under `torch >= 2.11`). Set `HF_TOKEN` for gated weights. Seed = 42.
+Total compute for the whole study: **~$1.2** of Modal T4 time (≈ 120 GPU-minutes,
 across the sentiment matrix, the 100%-agreement matrix, and both NER tracks).
 
 ## Appendix B — Datasets, models, and artifacts
