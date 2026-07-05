@@ -234,8 +234,22 @@ plutus-8B on FPB rose 0.66 → **0.75** (positive-recall recovering 0.16 → 0.7
 its FiQA neutral-collapse (0.43) rose to **0.67**. The lesson sharpens rather than
 softens the thesis: plutus's headline weakness is *partly* a prompt artifact, but
 even with prompts matched it still does not lead — the general models improve too.
-(Details and the full 2×2 wording-vs-format deconfounding design are in the
-review appendix; the templates ship as `src/prompts.py` D/F/H.)
+(The full 2×2 wording-vs-format deconfounding design is in the review appendix; the
+templates ship as `src/prompts.py` D/F/H.)
+
+| Model · dataset | A | B | D | F | H | Best new − best A/B |
+|---|---|---|---|---|---|---|
+| plutus-8B · FPB | 0.662 | 0.648 | 0.614 | 0.635 | **0.753** | **+0.091 (H)** |
+| plutus-8B · FiQA | 0.597 | 0.432 | **0.671** | 0.613 | 0.650 | **+0.074 (D)** |
+| Mistral-7B · FPB | 0.803 | 0.689 | 0.803 | **0.841** | 0.840 | **+0.038 (F)** |
+| Mistral-7B · FiQA | 0.599 | 0.564 | 0.648 | **0.674** | 0.621 | **+0.075 (F)** |
+
+*Macro-F1, 0-shot, same 300-id subsets; new-cell coverage stayed ≥0.997 (no
+parse regression). No single new template wins everywhere — H rescues plutus·FPB,
+D rescues plutus·FiQA, F is best for both Mistral cells — which is itself the §6.3
+argument for voting over prompts rather than betting on one.*
+
+![Follow-up prompt templates recover macro-F1 across all four model×dataset cells](figures/prompt_followup.png)
 
 ### 6.2 Few-shot help is not free
 

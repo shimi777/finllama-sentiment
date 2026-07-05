@@ -26,7 +26,7 @@ Also refresh the copies in `report/_bundle/` and `report/finllama-seminar-final/
 | 3 | §5 caveats | **New (iv): FinBERT was fine-tuned *on* FPB** — its FPB/AllAgree scores are in-sample; treated as an upper bound; strengthens the thesis | Gotcha audit **[major]** — the one real disclosure gap |
 | 4 | §5 baselines | Added **parity note** — baselines also re-scored on the identical 300-id LLM subsets (same ranking, gaps ≤0.02 F1) | Subsample-parity finding |
 | 5 | §6 interpretation | FinBERT FPB win annotated **"on data it was trained on — see §5-iv"** | Same as #3 |
-| 6 | §6.1 | **New paragraph**: templates D/F/H recover **+0.04 to +0.09 F1** (plutus FPB 0.66→0.75, FiQA 0.43→0.67); neutral-magnet mechanism; sharpens the thesis | Prompt-design experiment (your requested focus) |
+| 6 | §6.1 | **New paragraph + results table + figure**: templates D/F/H recover **+0.04 to +0.09 F1** (plutus FPB 0.66→0.75, FiQA 0.43→0.67); neutral-magnet mechanism; sharpens the thesis. Full 5-template (A/B/D/F/H) per-cell macro-F1 table added, plus grouped-bar figure `figures/prompt_followup.png` (originals muted, best-new solid navy with Δ labels) | Prompt-design experiment (your requested focus) |
 | 7 | §9 limitations | **New caveat**: FiQA ±0.10 neutral band is untuned/unswept; sensitivity check is future work | Gotcha audit [minor] |
 | 8 | §10 item 8 | Rewrote the test-suite item: accurate root cause (**unpinned scipy 1.17 + torch 2.11**, not "test ordering"), now **fixed via `scipy < 1.17`** | Code-verify + claim-verify |
 | 9 | Appendix A env notes | Added the **`scipy < 1.17`** pin to reproduction instructions | Code-verify |
