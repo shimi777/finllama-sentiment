@@ -135,6 +135,64 @@ shape is reused for both tasks.
 **Major simplifications:** 4-bit (not fp16); subsampled test sets for LLMs;
 zero-/few-shot only (no fine-tuning); a single prompt template × 0-shot for NER.
 
+### 4.1 Prompt templates (verbatim)
+
+All six sentiment templates ship in `src/prompts.py` and are reproduced verbatim
+below. `{text}` receives the sentence to classify; `{fewshot_block}` is empty at
+0-shot and otherwise holds the balanced examples (§5). **A / B / C** are the three
+ensemble members (§6.3); **D / F / H** are the neutral-magnet-free follow-up designs
+introduced in §6.1.
+
+```text
+Template A — minimal
+  Classify the sentiment of the following financial text as positive, negative, or neutral.
+  {fewshot_block}
+  Text: {text}
+  Sentiment:
+
+Template B — analyst definition list
+  You are a financial analyst. Classify the sentiment of the text below from the perspective of an investor.
+  - Positive: the text suggests favorable conditions, growth, or gains
+  - Negative: the text suggests unfavorable conditions, losses, or risks
+  - Neutral: the text is factual without clear positive or negative implication
+
+  {fewshot_block}
+  Text: {text}
+  Answer with one word only (positive / negative / neutral):
+
+Template C — market-reaction framing (ensemble member)
+  Read the financial statement and judge how it would move an investor's outlook.
+  If it points to a better outlook it is bullish; to a worse outlook, bearish; if there is no clear directional signal, neutral.
+  {fewshot_block}
+  Text: {text}
+  Reply with exactly one word — positive, negative, or neutral:
+
+Template D — strict structured single-token (follow-up)
+  Classify the sentiment of the financial text toward the company or asset it describes.
+  Choose exactly one label from this set: [negative, neutral, positive].
+  Respond with only the label as a single lowercase word. No explanation, no punctuation.
+  {fewshot_block}
+  Text: {text}
+  Label:
+
+Template F — minimal + explicit neutral tie-break (follow-up)
+  Classify the sentiment of the financial text as positive, negative, or neutral.
+  Rule: only choose neutral if the text has no positive or negative implication at all. If the text leans even slightly toward gains or losses, choose positive or negative accordingly.
+  {fewshot_block}
+  Text: {text}
+  Sentiment:
+
+Template H — contrastive anchor, neutral demoted (follow-up)
+  Task: label the financial text's sentiment toward the company or asset.
+  positive = clearly better prospects (growth, gains, gains for investors)
+  negative = clearly worse prospects (losses, risk, decline)
+  neutral = genuinely no directional signal (choose this only as a last resort)
+  Pick the single best-fitting label. Output only that one word.
+  {fewshot_block}
+  Text: {text}
+  Answer:
+```
+
 ## 5. Experimental design
 
 - **Metrics.** Accuracy, **macro-F1** (the headline — it does not let a dominant

@@ -11,6 +11,11 @@ Two artifacts were rewritten with the review findings:
 > Word) was replaced with a proper embedded figure, `report/figures/pipeline.png` —
 > a clean 5-stage flow (data_loader → prompts → runners → parser → evaluation)
 > matching the report's other figures. 9 embedded media now (was 8).
+>
+> **§4.1 all prompts added:** new subsection "4.1 Prompt templates (verbatim)"
+> reproduces all six sentiment templates (A/B/C ensemble members + D/F/H follow-up
+> designs) in full from `src/prompts.py`, as monospace SourceCode blocks. Added to
+> both report.md and the FINAL docx.
 
 To adopt: close Word, replace `3_implementation_report.docx` with the `_REVISED`
 copy (or run **Review ▸ Compare** in Word against your original to see every change
