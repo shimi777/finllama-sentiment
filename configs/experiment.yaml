@@ -1,14 +1,19 @@
 seed: 42
 
 models:
-  finllama:
-    hf_id: TheFinAI/FinLLaMA-instruct
+  plutus8b:
+    hf_id: TheFinAI/plutus-8B-instruct
     load_in_4bit: true
-  llama31:
-    hf_id: meta-llama/Llama-3.1-8B-Instruct
+  mistral7b:
+    hf_id: mistralai/Mistral-7B-Instruct-v0.3
+    load_in_4bit: true
+  qwen25_7b:
+    hf_id: Qwen/Qwen2.5-7B-Instruct
     load_in_4bit: true
   finbert:
     hf_id: ProsusAI/finbert
+  finbert_tone:
+    hf_id: yiyanghkust/finbert-tone
   vader: {}
 
 inference:
@@ -23,12 +28,12 @@ datasets:
     config: sentences_75agree   # kept for compat, ignored by loader
     test_fraction: 0.20
   fiqa:
-    hf_id: ChanceFocus/fiqa-sentiment-classification
+    hf_id: TheFinAI/fiqa-sentiment-classification
     neutral_band: 0.10
 
 prompts:
-  templates: [A, B]
-  shots: [0, 3, 5]
+  templates: [A, B, C]
+  shots: [0, 3]  # 5-shot was descoped for time/budget reasons (disclosed in report §3)
   fewshot_source: fpb_train
 
 paths:

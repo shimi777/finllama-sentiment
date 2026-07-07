@@ -1,0 +1,35 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+R102,6.1 Prompt sensitivity rivals model choice,matched,results/summary/final_table.csv,0.6727,0.673,qwen25_7b/FiQA/B/0shot f1_macro 0.6727 rounds to 0.673
+R103,6.1 Prompt sensitivity rivals model choice,matched,results/summary/final_table.csv,"0.5785 (A/0shot); 0.6727 (B/0shot)",9.4 pt,"(0.6727-0.5785)*100=9.42pt rounds to 9.4; B>A so B wins confirmed"
+R104,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.803,0.803,mistral7b/FPB/A/0shot f1_macro exact match
+R105,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.8897,0.890,mistral7b/FPB/A/3shot f1_macro 0.8897 rounds to 0.890
+R106,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.5989,0.599,mistral7b/FiQA/A/0shot f1_macro 0.5989 rounds to 0.599
+R107,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.5755,0.576,mistral7b/FiQA/A/3shot f1_macro 0.5755 rounds to 0.576
+R108,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.5966,0.597,plutus8b/FiQA/A/0shot f1_macro 0.5966 rounds to 0.597
+R109,6.2 Few-shot help is not free,matched,results/summary/final_table.csv,0.4965,0.497,plutus8b/FiQA/A/3shot f1_macro 0.4965 rounds to 0.497 (printed precision)
+R110,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.6986,0.699,"mean ens_f1 across 6 cells for unweighted/abstain = 0.6986, rounds to 0.699"
+R111,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.8867,0.887,mean ens_cov across 6 cells for unweighted/abstain = 0.8867 rounds to 0.887
+R112,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.6935,0.694,mean ens_f1 across 6 cells for cv_weighted/abstain = 0.6935 rounds to 0.694
+R113,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.9956,0.996,mean ens_cov across 6 cells for cv_weighted/abstain = 0.9956 rounds to 0.996
+R114,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.0181,0.02,min d_f1_vs_mean across 6 cells (cv_weighted/abstain) = 0.0181 rounds to 0.02
+R115,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.0842,0.08,max d_f1_vs_mean across 6 cells (cv_weighted/abstain) = 0.0842 rounds to 0.08
+R116,6.3 A prompt-ensemble buys back robustness,matched,results/summary/ensemble_table.csv,0.9956,100%,cv_weighted mean coverage 0.9956 supports qualitative claim of near-100% coverage
+R117,6.4 Gold-label quality,non_checkable,report/report.md,-,75%,section-header reference naming the 75%-agreement split; not a specific data cell
+R118,6.4 Gold-label quality,non_checkable,report/report.md,-,100%,section-header reference naming the 100%-agreement split; not a specific data cell
+R119,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,"452 (baselines); 300 (LLMs, n_samples)","452; 300",allagree_table.csv shows VADER/FinBERT n=452 and each LLM cell n_samples=300
+R120,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,452,452,VADER and FinBERT AllAgree rows both show n_samples=452
+R121,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,300,300,every LLM row in allagree_table.csv shows n_samples=300
+R122,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,452,452,duplicate of R120 count claim; confirmed 452 baseline n
+R123,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,14,14,allagree_table.csv has exactly 14 rows (2 baselines + 4 configs x 3 LLMs)
+R124,6.4 Gold-label quality,non_checkable,report/report.md,-,75%,section-header phrase repeat naming comparison axis not a specific value
+R125,6.4 Gold-label quality,non_checkable,report/report.md,-,100%,section-header phrase repeat naming comparison axis not a specific value
+R126,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.9254,0.925,FinBERT f1_75agree 0.9254 rounds to 0.925
+R127,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.977,0.977,FinBERT f1_allagree 0.977 exact match
+R128,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.0516,0.052,FinBERT delta 0.0516 rounds to +0.052
+R129,6.4 Gold-label quality,matched,results/summary/final_table.csv,mistral7b A/3shot is best FPB config (f1=0.8897),Mistral-7B (A/3-shot),final_table.csv confirms A/3shot is Mistral's highest FPB f1_macro among its 4 configs
+R130,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.8897,0.890,Mistral-7B f1_75agree (A/3shot) 0.8897 rounds to 0.890
+R131,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.9371,0.937,Mistral-7B f1_allagree (A/3shot) 0.9371 rounds to 0.937
+R132,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.0474,0.047,Mistral-7B delta 0.0474 rounds to +0.047
+R133,6.4 Gold-label quality,matched,results/summary/final_table.csv,qwen25_7b A/3shot is best FPB config (f1=0.8324),Qwen2.5-7B (A/3-shot),final_table.csv confirms A/3shot is Qwen's highest FPB f1_macro among its 4 configs
+R134,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.8324,0.832,Qwen2.5-7B f1_75agree (A/3shot) 0.8324 rounds to 0.832
+R135,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,0.9281,0.928,Qwen2.5-7B f1_allagree (A/3shot) 0.9281 rounds to 0.928

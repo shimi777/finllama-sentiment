@@ -1,0 +1,34 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+R239,10. What we got wrong during the research,matched,report/report.md,"plutus-8B substituted for FinLLaMA-instruct (404)",8B,Verbatim in report §10 item 1 and Appendix B.
+R240,10. What we got wrong during the research,matched,report/report.md,"transformers 4.44->4.50",4.44,Verbatim quote from report §10 item 2.
+R241,10. What we got wrong during the research,matched,report/report.md,"transformers 4.44->4.50",4.50,Verbatim quote from report §10 item 2; consistent with Appendix A env notes.
+R242,10. What we got wrong during the research,matched,report/report.md,"Qwen3-8B blocked until newer transformers",8B,Verbatim quote from report §10 item 2.
+R243,10. What we got wrong during the research,matched,report/report.md,"Mistral v0.1 0.00 -> v0.3 0.153 (15.3pt)",15 points,FIN table: 0.153-0.00=15.3pt matches '15 points' claim.
+R244,10. What we got wrong during the research,matched,report/report.md,"finbert-tone no longer instantiates; Unrecognized model error; 75%-agree table",75%,Verbatim quote from report §10 item 7.
+R245,10. What we got wrong during the research,matched,report/report.md,"11 spurious failures in test_evaluation.py; passes in isolation",11,Verbatim quote from report §10 item 8; test_evaluation.py exists in tests/.
+R246,11. Lessons learned,matched,report/report.md,"a minor version bump can swing a benchmark by 15 points",15 points,Verbatim quote from report §11; same 15pt Mistral NER swing as R243.
+R247,11. Lessons learned,matched,results/summary/fpb_agreement_comparison.csv,"75->AllAgree F1 gains: finbert +3.35 finbert_tone +6.48 mistral(A3) +5.9 plutus(A3) +5.89 qwen(A3) +7.95 vader -1.6",10,"5-10pt range approx for learned models; VADER flat; plutus gain (5.89) is roughly tied with/slightly below others, consistent with 'gains least'."
+R248,11. Lessons learned,matched,report/report.md,"financial-tuned 8B did not earn a default slot anywhere",8B,Verbatim quote from report §11 bullet on right tool for task.
+R249,11. Lessons learned,matched,report/report.md,"get access to FinMA-7B-full and the real FinLLaMA-instruct",7B,Verbatim quote from report §11 'what we'd do with another month'.
+R250,12. Conclusion,matched,report/report.md,"financial instruction tuning (plutus-8B) never led -- mid-pack on sentiment worst on NER",8B,Verbatim quote from report §12 conclusion item 1.
+R251,Appendix A -- Reproducibility,matched,report/report.md,"bootstrap_ci.py -> 95% CIs (needs predictions)",95%,Verbatim from Appendix A code block comment.
+R252,Appendix A -- Reproducibility,matched,report/report.md,"eval_allagree.py: filter 75%-agree to unanimous",75%,Verbatim from Appendix A code block comment.
+R253,Appendix A -- Reproducibility,matched,report/report.md,"make_agreement_figure.py -> agreement_comparison.csv + figure (75% vs 100%)",100%,Verbatim from Appendix A code block comment.
+R254,Appendix A -- Reproducibility,matched,report/report.md,"re-run inference on Modal T4 -- costs ~$1 needs HF_TOKEN",$1,,Verbatim from Appendix A code block comment.
+R255,Appendix A -- Reproducibility,matched,report/report.md,"run_allagree.py: 100%-agreement (AllAgree) matrix",100%,Verbatim from Appendix A code block comment.
+R256,Appendix A -- Reproducibility,matched,report/report.md,"transformers >= 4.50 ... required for plutus-8B",4.50,Verbatim from Appendix A env notes.
+R257,Appendix A -- Reproducibility,matched,report/report.md,"transformers >= 4.50 ... required for plutus-8B",8B,Verbatim from Appendix A env notes.
+R258,Appendix A -- Reproducibility,matched,report/report.md,"Qwen3 needs >= 4.51",4.51,Verbatim from Appendix A env notes.
+R259,Appendix A -- Reproducibility,mismatched,results/_modal_spend.json,"total_usd 1.1445 (~$1.14)",$1.3,"Ledger sums to ~$1.14 (116 GPU-min), report claims ~$1.3 -- ~13% high, not just rounding."
+R260,Appendix A -- Reproducibility,mismatched,results/_modal_spend.json,"total_seconds 6979.14 (~116.3 GPU-minutes)",130,"Ledger sums to ~116 GPU-min across recorded runs, report claims ~130 -- ~12% high."
+R261,Appendix A -- Reproducibility,matched,report/report.md,"100%-agreement matrix",100%,Verbatim from Appendix A total-compute sentence; only the $/minute figures (R259/R260) diverge from ledger.
+R262,Appendix B -- Datasets models and artifacts,matched,report/report.md,"financial_phrasebank (75%-agree split), 690 test",75%,Verbatim Table 9 FPB row.
+R263,Appendix B -- Datasets models and artifacts,matched,results/summary/final_table.csv,"FPB n_samples=690 (finbert/finbert_tone/vader rows)",690,Matches final_table.csv FPB baseline rows (n=690).
+R264,Appendix B -- Datasets models and artifacts,matched,src/data_loader.py,"load_fiqa(neutral_band: float = 0.10)",0.10,configs/experiment.yaml also sets neutral_band: 0.10; matches Table 9 FiQA row.
+R265,Appendix B -- Datasets models and artifacts,matched,results/summary/ner_table.csv,"FIN n_total=98 (mistral7b/plutus8b rows)",98,Matches Table 9 FIN/Alvarado row and ner_table.csv n_total=98.
+R266,Appendix B -- Datasets models and artifacts,matched,report/report.md,"TheFinAI/plutus-8B-instruct (substitute for FinLLaMA-instruct)",8B,Verbatim Table 9 Model-under-test row.
+R267,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,"Qwen/Qwen3-8B and mistralai/Mistral-7B-Instruct-v0.3, Qwen/Qwen2.5-7B-Instruct rows present",7B,Model ids confirmed in final_table_ner.csv/final_table.csv.
+R268,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,"Qwen/Qwen3-8B and mistralai/Mistral-7B-Instruct-v0.3, Qwen/Qwen2.5-7B-Instruct rows present",7B,Duplicate 7B mention in same Table 9 cell; same evidence as R267.
+R269,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,"qwen3_8b row: Qwen/Qwen3-8B",8B,Confirmed model id in final_table_ner.csv row 8.
+R270,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,"qwen3_4b row: Qwen/Qwen3-4B-Instruct-2507",4B,Confirmed model id in final_table_ner.csv row 7.
+R271,Appendix B -- Datasets models and artifacts,matched,results/summary_ner/final_table_ner.csv,"qwen3_4b row: Qwen/Qwen3-4B-Instruct-2507",2507,Confirmed model id string in final_table_ner.csv row 7.

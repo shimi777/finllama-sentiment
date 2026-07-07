@@ -114,22 +114,74 @@ def write_run(run_dir: str, run_id: str, hf_id: str, ds: str, tpl: str, shots: i
         }, f, indent=2)
 
 
+def _split_csv_or_list(values: list[str] | None) -> list[str] | None:
+    """Accept either space-separated (`--x a b`) or comma-separated (`--x a,b`) values."""
+    if not values:
+        return None
+    out: list[str] = []
+    for v in values:
+        out.extend(part.strip() for part in v.split(",") if part.strip())
+    return out
+
+
 def main() -> None:
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--only",
+        "--only", "--models",
+        dest="models",
         nargs="+",
-        help="Only run these model short names (e.g. --only plutus8b). "
-             "Useful for running the rest of the matrix in parallel with a long-running first job.",
+        help="Only run these model short names, e.g. --only plutus8b "
+             "or --models plutus8b,mistral7b (comma- or space-separated). "
+             "Useful for running the rest of the matrix in parallel with a long-running first job, "
+             "or for an explicit cell-list experiment (see --templates/--shots/--datasets).",
+    )
+    parser.add_argument(
+        "--templates",
+        nargs="+",
+        help="Only run these template keys, e.g. --templates D,F,H (comma- or space-separated). "
+             "Overrides the default TEMPLATE_SHOTS grid for the selected templates: "
+             "combined with --shots (or SHOTS if --shots is omitted).",
+    )
+    parser.add_argument(
+        "--shots",
+        nargs="+",
+        help="Only run these shot counts, e.g. --shots 0 or --shots 0,3 (comma- or space-separated). "
+             "Applies to every template selected via --templates.",
+    )
+    parser.add_argument(
+        "--datasets",
+        nargs="+",
+        help="Only run these datasets, e.g. --datasets FPB,FiQA (comma- or space-separated).",
     )
     args = parser.parse_args()
 
-    global MODELS
-    if args.only:
-        keep = set(args.only)
+    models_filter = _split_csv_or_list(args.models)
+    templates_filter = _split_csv_or_list(args.templates)
+    shots_filter = _split_csv_or_list(args.shots)
+    datasets_filter = _split_csv_or_list(args.datasets)
+
+    global MODELS, DATASETS, TEMPLATES, TEMPLATE_SHOTS
+    if models_filter:
+        keep = set(models_filter)
         MODELS = [m for m in MODELS if m[0] in keep]
-        logger.info("--only filter: running %s", [m[0] for m in MODELS])
+        logger.info("--models filter: running %s", [m[0] for m in MODELS])
+
+    if datasets_filter:
+        DATASETS = [d for d in DATASETS if d in set(datasets_filter)]
+        logger.info("--datasets filter: running %s", DATASETS)
+
+    if templates_filter:
+        # Explicit cell list: honor requested templates even if not in the default grid.
+        TEMPLATES = list(templates_filter)
+        shots_for_filter = [int(s) for s in shots_filter] if shots_filter else SHOTS
+        TEMPLATE_SHOTS = {t: shots_for_filter for t in TEMPLATES}
+        logger.info("--templates filter: running %s x shots=%s", TEMPLATES, shots_for_filter)
+    elif shots_filter:
+        # --shots without --templates: restrict shots within the existing template grid.
+        shots_for_filter = [int(s) for s in shots_filter]
+        TEMPLATE_SHOTS = {t: [s for s in v if s in shots_for_filter] for t, v in TEMPLATE_SHOTS.items()}
+        logger.info("--shots filter: restricting to shots=%s -> %s", shots_for_filter, TEMPLATE_SHOTS)
 
     set_seed(SEED)
     logger.info("Budget at start: %s", budget_summary())

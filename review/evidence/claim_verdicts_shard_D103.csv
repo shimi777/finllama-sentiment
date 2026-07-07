@@ -1,0 +1,35 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+D103,Slide 15,matched,results/summary/final_table.csv,0.8897,0.890,Mistral FPB A 3shot f1_macro rounds to 0.890
+D104,Slide 15,matched,results/summary/final_table.csv,mistral7b/qwen25_7b,7B,Both Mistral-7B-Instruct-v0.3 and Qwen2.5-7B-Instruct are 7B models per model_hf_id
+D105,Slide 15,matched,results/summary/final_table.csv,0.6727,0.673,Qwen FiQA B 0shot f1_macro rounds to 0.673
+D106,Slide 15,non_checkable,,,110M,Parameter count of FinBERT (110M) not recorded in any artifact; model-size fact
+D107,Slide 15,matched,results/summary/final_table.csv,0.9254,0.925,FinBERT FPB f1_macro 0.9254 rounds to 0.925
+D108,Slide 15,matched,results/summary/final_table.csv,max LLM FPB f1=0.8897,8B,All 8B LLM FPB f1_macro (<=0.8897) below FinBERT's 0.9254 confirming outperform claim
+D109,Slide 15,matched,results/summary/final_table.csv,0.482,0.482,FinBERT FiQA f1_macro matches exactly
+D110,Slide 15,matched,results/summary/final_table.csv,Qwen/Qwen2.5-7B-Instruct,7B,Qwen2.5-7B-Instruct confirmed 7B model
+D111,Slide 15,matched,results/summary/final_table.csv,19.07 pts (0.6727-0.482)*100,19 points,Qwen FiQA best (0.6727) minus FinBERT (0.482) = 19.07 points rounds to 19
+D112,Slide 15,matched,results/summary/final_table.csv,0.803,0.803,Mistral FPB Template A 0-shot f1_macro exact match
+D113,Slide 15,matched,results/summary/final_table.csv,0.6889,0.689,Mistral FPB Template B 0-shot f1_macro rounds to 0.689
+D114,Slide 15,matched,results/summary/final_table.csv,11.41 pts (0.803-0.6889)*100,11-point,Computed gap 11.41 rounds to 11-point claim
+D115,Slide 15,matched,results/summary/final_table.csv,0.6727,0.673,Qwen FiQA Template B 0-shot f1_macro rounds to 0.673
+D116,Slide 15,matched,results/summary/final_table.csv,0.5785,0.578,Qwen FiQA Template A 0-shot f1_macro rounds to 0.578
+D117,Slide 15,matched,results/summary/final_table.csv,9.42 pts (0.6727-0.5785)*100,9 points,Computed gap 9.42 rounds to 9 points
+D118,Slide 15,matched,results/summary/final_table.csv,0.5966,0.597,Plutus FiQA Template A 0-shot f1_macro rounds to 0.597
+D119,Slide 15,matched,results/summary/final_table.csv,0.4322,0.432,Plutus FiQA Template B 0-shot f1_macro rounds to 0.432
+D120,Slide 15,matched,results/summary/final_table.csv,16.44 pts (0.5966-0.4322)*100,16 points,Computed gap 16.44 rounds to 16 points
+D121,Slide 20,non_checkable,,,95%,Qualitative coverage-flag threshold guidance not a specific data claim
+D122,Slide 21,matched,results/predictions/plutus8b__FPB__A__0shot__seed42;mistral7b__FPB__A__0shot__seed42;qwen25_7b__FPB__A__0shot__seed42,"e.g. FPB_00069: gold=positive,plutus=positive,mistral=neutral,qwen=neutral",gold positive/plutus-8B positive/Mistral neutral/Qwen2.5 neutral,Pattern confirmed present in raw prediction logs (multiple matching ids found)
+D123,Slide 21,matched,results/predictions/plutus8b__FPB__A__3shot__seed42;mistral7b__FPB__A__3shot__seed42,"e.g. FPB_03386: gold=negative,mistral=negative,plutus=neutral",gold negative/Mistral negative/plutus-8B neutral,Pattern confirmed present in raw prediction logs (FPB_03386 A/3shot)
+D124,Slide 22,matched,results/summary/final_table.csv,0.9254,0.925,FinBERT FPB f1_macro rounds to 0.925
+D125,Slide 22,mismatched,results/summary/confusions/finbert__FPB__seed42.json,"negative f1=0.9182, positive f1=0.9070 (neutral=0.9510)",≥0.93 on every class,Two of three per-class F1s (negative 0.918, positive 0.907) are below 0.93
+D126,Slide 22,matched,results/summary/final_table.csv,mistralai/Mistral-7B-Instruct-v0.3,7B,Mistral-7B-Instruct-v0.3 confirmed 7B
+D127,Slide 22,matched,results/summary/final_table.csv,0.8897,0.890,Mistral FPB A 3shot f1_macro rounds to 0.890
+D128,Slide 22,matched,results/summary/final_table.csv,0.9033,0.903,Mistral FPB A 3shot accuracy exact match
+D129,Slide 22,matched,results/summary/final_table.csv,mistralai/Mistral-7B-Instruct-v0.3,7B,Duplicate 7B claim confirmed same row
+D130,Slide 22,matched,results/summary/final_table.csv,Qwen/Qwen2.5-7B-Instruct,7B,Qwen2.5-7B-Instruct confirmed 7B
+D131,Slide 22,matched,results/summary/final_table.csv,0.6727,0.673,Qwen FiQA B 0shot f1_macro rounds to 0.673
+D132,Slide 22,matched,results/summary/final_table.csv,0.482,0.482,FinBERT FiQA f1_macro exact match
+D133,Slide 22,mismatched,results/summary/final_table.csv,"plutus8b FPB A/3shot coverage=0.9833; FiQA A/3shot coverage=0.97",100% parsing coverage all LLMs,Plutus8b coverage is 98.33% and 97% on two runs, not 100% as claimed
+D134,Slide 22,matched,results/summary/final_table.csv,0.4694,0.469,VADER FPB f1_macro rounds to 0.469
+D135,Slide 22,matched,results/summary/final_table.csv,min other FPB f1_macro=0.6477 (17.83pts above 0.4694),17 points,Smallest FPB gap (finbert_tone B3shot 0.6477) is 17.83 points above VADER, supports '>=17 points'
+D136,Slide 23,non_checkable,,,8B,General hand-tagging methodology tip, not a specific verifiable data claim

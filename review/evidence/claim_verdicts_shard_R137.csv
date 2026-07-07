@@ -1,0 +1,35 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+R137,6.4 Gold-label quality,matched,report/report.md Table 5,"plutus-8B (A/3-shot, financial)","8B","Model name/config label row identifier, present as-is in table."
+R138,6.4 Gold-label quality,matched,results/summary/fpb_agreement_comparison.csv,f1_75=0.8291,0.829,plutus8b FPB A/3shot rounds to 0.829.
+R139,6.4 Gold-label quality,matched,results/summary/allagree_table.csv;bootstrap_ci.csv,f1_macro=0.8508,0.851,plutus AllAgree (proper re-run) 0.8508 rounds to 0.851.
+R140,6.4 Gold-label quality,matched,derived (0.851-0.829),0.022,0.022,"Delta of table's own two cells, exact."
+R141,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,f1_75agree=0.4694,0.469,VADER 75%-agree F1 rounds to 0.469.
+R142,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,f1_allagree=0.4832,0.483,VADER AllAgree F1 rounds to 0.483.
+R143,6.4 Gold-label quality,matched,derived (0.483-0.469),0.014,0.014,Delta matches (0.0138 rounds to 0.014).
+R144,6.4 Gold-label quality,non_checkable,report/report.md,"~5-10 F1 points qualitative range",10,Qualitative descriptive range statement not a single checkable value.
+R145,6.4 Gold-label quality,matched,derived (0.928-0.832)*100,9.6,9.6,Qwen delta 75%->100% is 9.6 points exactly.
+R146,6.4 Gold-label quality,matched,derived (0.977-0.925)*100,5.2,5.2,FinBERT delta 75%->100% is 5.2 points exactly.
+R147,6.4 Gold-label quality,matched,derived (0.937-0.890)*100,4.7,4.7,Mistral delta 75%->100% is 4.7 points exactly.
+R148,6.4 Gold-label quality,matched,report/report.md Table 5 header,"75%-agree column label",75%,Table column header value literal.
+R149,6.4 Gold-label quality,matched,results/summary/agreement_comparison.csv,delta=0.0138,0.014,VADER delta rounds to 0.014 as stated.
+R150,6.4 Gold-label quality,matched,report/report.md Table 5 row label,"plutus-8B model, 8B",8B,Model name token in prose sentence.
+R151,6.4 Gold-label quality,matched,derived (0.851-0.829),0.022,0.022,plutus delta 75%->100% exact match.
+R152,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,f1_macro=0.8508,0.851,plutus AllAgree F1 rounds to 0.851.
+R153,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,f1_macro=0.9371,0.937,Mistral AllAgree F1 (A/3shot) rounds to 0.937.
+R154,6.4 Gold-label quality,matched,derived (0.937-0.851)*100,8.6,8.6 points,plutus vs Mistral AllAgree gap is 8.6 points exactly.
+R155,6.4 Gold-label quality,matched,results/summary/allagree_table.csv,f1_macro=0.9281,0.928,Qwen AllAgree F1 (A/3shot) rounds to 0.928.
+R156,6.4 Gold-label quality,matched,derived (0.928-0.851)*100,7.7,7.7,plutus vs Qwen AllAgree gap is 7.7 points exactly.
+R157,6.4 Gold-label quality,matched,derived (0.890-0.829)*100,6.1,6-point,plutus vs Mistral 75%-agree gap rounds to 6 points.
+R158,6.4 Gold-label quality,matched,derived (0.832-0.829)*100,0.3,0.3-point,plutus vs Qwen 75%-agree gap is 0.3 points exactly.
+R159,6.4 Gold-label quality,matched,report/report.md Table 5 header,75%-agree column label,75%,Table column header value literal.
+R160,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_lo/ci_hi 0.95 percentile CI,95%,Bootstrap CI is stated as 95% percentile CI (B=2000) per methodology.
+R161,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_lo=0.8058,0.806,plutus AllAgree CI lower bound rounds to 0.806.
+R162,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_hi=0.8937,0.894,plutus AllAgree CI upper bound rounds to 0.894.
+R163,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_lo=0.9082,0.908,Mistral AllAgree CI lower bound rounds to 0.908.
+R164,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_hi=0.9644,0.964,Mistral AllAgree CI upper bound rounds to 0.964.
+R165,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_lo=0.8961,0.896,Qwen AllAgree CI lower bound rounds to 0.896.
+R166,6.4 Gold-label quality,matched,results/summary/bootstrap_ci.csv,ci_hi=0.9548,0.955,Qwen AllAgree CI upper bound rounds up to 0.955.
+R167,6.4 Gold-label quality,matched,report/report.md Table 5 header,75%-agree column label,75%,Table column header value literal.
+R168,6.4 Gold-label quality,matched,report/report.md sec 6.4 + fpb_agreement_comparison.csv,eval_allagree.py cross-check described,75%,"Report explicitly describes this no-GPU filtering cross-check, consistent w/ fpb_agreement_comparison.csv."
+R169,7. Results NER,matched,results/summary_ner/final_table_ner.csv;results/summary/ner_table.csv,plutus lowest strict_f1/macro_f1 among LLMs on both FiNER-ORD and FIN,8B,plutus8b is worst LLM on both NER datasets per both tables.
+R170,7. Results NER,matched,results/summary_ner/final_table_ner.csv,n_samples=300 for all model rows,300,All FiNER-ORD rows use n_samples=300 subsample as claimed.

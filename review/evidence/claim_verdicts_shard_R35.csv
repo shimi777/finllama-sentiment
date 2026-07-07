@@ -1,0 +1,35 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+R035,3. Objective,matched,report/report.md,"4-bit (bitsandbytes) for every 7-8B model",8B,Verbatim Table 1 cell text; report.md line 103.
+R036,3. Objective,matched,report/report.md,"Two 8B models will not coexist on a 16 GB T4 otherwise.",8B,Verbatim Table 1 cell text; report.md line 103.
+R037,3. Objective,matched,report/report.md,"16 GB T4",16,Verbatim Table 1 cell text; report.md line 103.
+R038,3. Objective,matched,report/report.md,"FinLLaMA-instruct (404)",404,Matches report.md lines 106-109 list of unevaluated models.
+R039,3. Objective,matched,report/report.md,"LLaMA-3.1-8B-Instruct (gated, no access)",3.1,Matches report.md lines 106-109.
+R040,3. Objective,matched,report/report.md,"LLaMA-3.1-8B-Instruct",8B,Matches report.md lines 106-109.
+R041,3. Objective,matched,report/report.md,"FinMA-7B-full (gated, 403)",7B,Matches report.md lines 106-109.
+R042,3. Objective,matched,report/report.md,"FinMA-7B-full (gated, 403)",403,Matches report.md lines 106-109.
+R043,3. Objective,matched,report/report.md,"LLaMA-3.1-8B-Instruct",8B,Duplicate 8B mention in same sentence; still matches report.md lines 106-109.
+R044,4. System design,matched,results/summary/final_table.csv,coverage=1.0 (finbert/vader all rows),100%,"FinBERT/VADER/GLiNER coverage=1.0 in final_table.csv; report.md line 129 states ""always 100% coverage""."
+R045,4. System design,matched,report/report.md,"a hard $7 budget guard",$7,Verbatim design/config statement; report.md line 136 (not the realized spend).
+R046,5. Experimental design,matched,results/summary/final_table.csv,seed=42 (all 26 rows),42,All final_table.csv rows show seed=42; report.md line 155 "seed = 42 everywhere".
+R047,5. Experimental design,matched,results/summary/bootstrap_ci.csv,"95% CI columns ci_lo/ci_hi present, halfwidths ~0.02-0.05",95%,bootstrap_ci.csv exists with per-run 95% CIs; report.md line 157 confirms 2000 resamples.
+R048,6. Results,matched,results/summary/final_table.csv,model=finbert,FinBERT (110M),Row label matches final_table.csv finbert rows.
+R049,6. Results,matched,results/summary/final_table.csv,f1_macro=0.9254 (FPB),0.925,Rounds to printed precision; also recomputed_metrics.csv f1_macro=0.9254.
+R050,6. Results,matched,results/summary/final_table.csv,accuracy=0.9348 (FPB),0.935,"Claim column mislabels as f1_macro but is the Acc cell; rounds to 0.935."
+R051,6. Results,matched,results/summary/final_table.csv,f1_macro=0.482 (FiQA),0.482,Exact match; recomputed_metrics.csv agrees.
+R052,6. Results,matched,results/summary/final_table.csv,accuracy=0.4979 (FiQA),0.498,Acc cell rounds to 0.498.
+R053,6. Results,matched,results/summary/final_table.csv,model=finbert_tone,FinBERT-tone (110M),Row label matches final_table.csv finbert_tone rows.
+R054,6. Results,matched,results/summary/final_table.csv,f1_macro=0.8552 (FPB),0.855,Rounds to printed precision.
+R055,6. Results,matched,results/summary/final_table.csv,accuracy=0.8812 (FPB),0.881,Acc cell rounds to 0.881.
+R056,6. Results,matched,results/summary/final_table.csv,f1_macro=0.3955 (FiQA),0.396,Rounds to printed precision.
+R057,6. Results,matched,results/summary/final_table.csv,accuracy=0.3887 (FiQA),0.389,Acc cell rounds to 0.389.
+R058,6. Results,matched,results/summary/final_table.csv,model=mistral7b,Mistral-7B-Instruct-v0.3 (general),Row label matches final_table.csv mistral7b.
+R059,6. Results,matched,results/summary/final_table.csv,f1_macro=0.8897 (FPB A/3shot best cell),0.890,Best-of-template cell rounds to 0.890; recomputed_metrics.csv agrees.
+R060,6. Results,matched,results/summary/final_table.csv,accuracy=0.9033 (FPB A/3shot),0.903,Best cell rounds to 0.903.
+R061,6. Results,matched,results/summary/final_table.csv,f1_macro=0.5989 (FiQA A/0shot best cell),0.599,Best cell exact-rounds to 0.599.
+R062,6. Results,matched,results/summary/final_table.csv,accuracy=0.62 (FiQA A/0shot),0.620,Best cell exact match.
+R063,6. Results,matched,results/summary/final_table.csv,model=qwen25_7b,Qwen2.5-7B-Instruct (general),Row label matches final_table.csv qwen25_7b.
+R064,6. Results,matched,results/summary/final_table.csv,f1_macro=0.8324 (FPB A/3shot best cell),0.832,Best cell rounds to 0.832.
+R065,6. Results,matched,results/summary/final_table.csv,accuracy=0.86 (FPB A/3shot),0.860,Best cell exact match.
+R066,6. Results,matched,results/summary/final_table.csv,f1_macro=0.6727 (FiQA B/0shot best cell),0.673,Best cell rounds to 0.673.
+R067,6. Results,matched,results/summary/final_table.csv,accuracy=0.7167 (FiQA B/0shot),0.717,Best cell rounds to 0.717.
+R068,6. Results,matched,results/summary/final_table.csv,model=plutus8b,plutus-8B-instruct (financial),Row label matches final_table.csv plutus8b.

@@ -1,0 +1,153 @@
+claim_id,deck,section,sentence,metric_type,value,context_keys
+D001,main,Slide 1,Implementation Presentation  ·  30 min,time,30 min,
+D002,main,Slide 2,5-7 min,time,7 min,
+D003,main,Slide 2,8-10 min,time,10 min,
+D004,main,Slide 2,10-12 min,count,10,
+D005,main,Slide 2,10-12 min,time,12 min,
+D006,main,Slide 2,3-5 min,time,5 min,
+D007,main,Slide 4,"Specifically, on sentiment classification — and how does it compare to classical baselines (FinBERT, VADER) and other 7-8B general-purpose LLMs (Mistral, Qwen2.5)?",count,8B,FinBERT; VADER; Mistral; Qwen; FIN
+D008,main,Slide 5,We substitute TheFinAI/plutus-8B-instruct (Feb 2025) — the same group's current 8B financial-instruction-tuned model,count,8B,Instruct; plutus; FIN
+D009,main,Slide 5,We substitute TheFinAI/plutus-8B-instruct (Feb 2025) — the same group's current 8B financial-instruction-tuned model,count,8B,Instruct; plutus; FIN
+D010,main,Slide 5,"Same architecture (LLaMA-3 8B), same research direction, same goal: beat the base on financial NLP",count,8B,LLaMA; Llama; FIN
+D011,main,Slide 8,"[Table, Slide 8] row='Financial PhraseBank' col='Size' cell='690 test (sentences_75agree)'",count,690,Financial PhraseBank; FIN
+D012,main,Slide 8,"[Table, Slide 8] row='Financial PhraseBank' col='Note' cell='Annotator agreement ≥ 75% — clean test signal'",percent,75%,Financial PhraseBank; FIN
+D013,main,Slide 8,"[Table, Slide 8] row='FiQA-SA' col='Labels' cell='score ∈ [-1, 1] → 3-class with ±0.10 band'",f1_macro,0.10,FiQA; FiQA-SA
+D014,main,Slide 8,LLM matrix uses a 300-sample subsample per dataset (Modal time budget); baselines use full test sets,count,300,
+D015,main,Slide 8,Leakage caveat: both datasets predate every LLM here by 7-12 years and were almost certainly seen at pretraining time,count,12,
+D016,main,Slide 9,"Five models across three families: financial-tuned, general 7-8B LLM, and classical.",count,8B,FIN
+D017,main,Slide 9,"[Table, Slide 9] row='Financial-tuned' col='Model' cell='TheFinAI/plutus-8B-instruct'",count,8B,FIN
+D018,main,Slide 9,"[Table, Slide 9] row='Financial-tuned' col='Size / Type' cell='8B · LLaMA-3, 4-bit'",count,8B,FIN
+D019,main,Slide 9,"[Table, Slide 9] row='General-purpose LLM' col='Model' cell='mistralai/Mistral-7B-Instruct-v0.3'",count,7B,
+D020,main,Slide 9,"[Table, Slide 9] row='General-purpose LLM' col='Size / Type' cell='7B · 4-bit'",count,7B,
+D021,main,Slide 9,"[Table, Slide 9] row='General-purpose LLM' col='Model' cell='Qwen/Qwen2.5-7B-Instruct'",count,7B,
+D022,main,Slide 9,"[Table, Slide 9] row='General-purpose LLM' col='Size / Type' cell='7B · 4-bit'",count,7B,
+D023,main,Slide 9,"[Table, Slide 9] row='Classical specialised' col='Size / Type' cell='110M · BERT classifier'",count,110M,
+D024,main,Slide 9,"LLaMA-3.1-8B-Instruct skipped — gated, no access yet.",other,3.1,LLaMA-3.1-8B; Llama-3.1-8B; LLaMA; Llama; Instruct
+D025,main,Slide 9,"LLaMA-3.1-8B-Instruct skipped — gated, no access yet.",count,8B,LLaMA-3.1-8B; Llama-3.1-8B; LLaMA; Llama; Instruct
+D026,main,Slide 11,"12 LLM runs (3 models × 2 datasets × 2 templates × {0, 3}-shot) + 4 baseline runs.",count,12,template; shot
+D027,main,Slide 11,"Seed locked to 42 for every random draw: subsample, few-shot pick, baselines",count,42,few-shot; shot
+D028,main,Slide 14,"[Table, Slide 14] row='plutus-8B-instruct (focal)' col='Model' cell='plutus-8B-instruct (focal)'",count,8B,Instruct; plutus
+D029,main,Slide 14,"[Table, Slide 14] row='Mistral-7B-Instruct-v0.3' col='Model' cell='Mistral-7B-Instruct-v0.3'",count,7B,Instruct; Mistral
+D030,main,Slide 14,"[Table, Slide 14] row='Qwen2.5-7B-Instruct' col='Model' cell='Qwen2.5-7B-Instruct'",count,7B,Instruct; Qwen
+D031,main,Slide 14,Pull live numbers from results/summary/final_table.csv (visible in the dashboard at :8502).,count,8502,FIN
+D032,main,Slide 19,Below ~95% is a flag.,percent,95%,
+D033,main,Slide 20,Gold: positive  ·  plutus-8B: positive  ·  Mistral: neutral  ·  Qwen2.5: neutral,count,8B,plutus; Mistral; Qwen
+D034,main,Slide 20,Gold: negative  ·  Mistral: negative  ·  plutus-8B: neutral,count,8B,plutus; Mistral
+D035,main,Slide 21,"Tip: when hand-tagging, look for cases where plutus-8B is right but Mistral/Qwen are wrong — those are the real evidence for or against the financial-tuning hypothesis.",count,8B,plutus; Mistral; Qwen; FIN
+D036,main,Slide 23,"Notebook → script split, run-dir schema with checkpoint/resume, parser as a tested module, Modal Volume for cached weights — without these, a 12-run matrix isn't redoable.",count,12,
+D037,main,Slide 24,Add an LLM-as-judge sanity pass over a 100-sample slice — catch label noise,count,100,
+D038,main,Slide 24,Include a smaller financial model (e.g. finma-7b) and a non-financial 8B baseline of the same era for a tighter family comparison,count,8B,FIN
+D039,main,Slide 25,"[Insert a one-sentence answer to the research question once the matrix completes — e.g. 'Financial instruction tuning gave plutus-8B a [NUM]-point F1 edge over the strongest general 7B LLM on FPB, but the small specialised FinBERT still outperformed every 8B model on this in-domain task.']",f1_macro,8B,FinBERT; Instruct; plutus; FPB; FIN
+D040,main,Slide 25,"[Insert a one-sentence answer to the research question once the matrix completes — e.g. 'Financial instruction tuning gave plutus-8B a [NUM]-point F1 edge over the strongest general 7B LLM on FPB, but the small specialised FinBERT still outperformed every 8B model on this in-domain task.']",f1_macro,7B,FinBERT; Instruct; plutus; FPB; FIN
+D041,main,Slide 25,"[Insert a one-sentence answer to the research question once the matrix completes — e.g. 'Financial instruction tuning gave plutus-8B a [NUM]-point F1 edge over the strongest general 7B LLM on FPB, but the small specialised FinBERT still outperformed every 8B model on this in-domain task.']",f1_macro,8B,FinBERT; Instruct; plutus; FPB; FIN
+D042,main,Slide 26,Live dashboard · localhost:8502  (run dashboard/run.bat),count,8502,
+D043,dated,Slide 1,Implementation Presentation  ·  30 min,time,30 min,
+D044,dated,Slide 2,5-7 min,time,7 min,
+D045,dated,Slide 2,8-10 min,time,10 min,
+D046,dated,Slide 2,10-12 min,count,10,
+D047,dated,Slide 2,10-12 min,time,12 min,
+D048,dated,Slide 2,3-5 min,time,5 min,
+D049,dated,Slide 4,"Specifically, on sentiment classification — and how does it compare to classical baselines (FinBERT, VADER) and other 7-8B general-purpose LLMs (Mistral, Qwen2.5)?",count,8B,FinBERT; VADER; Mistral; Qwen; FIN
+D050,dated,Slide 4,FPB / FiQA-SA sentiment task; 4-bit inference of an 8B financial LLM vs. 7-8B general LLMs vs. classical baselines; F1-macro / accuracy reporting.,f1_macro,8B,FPB; FiQA; FiQA-SA; FIN
+D051,dated,Slide 4,FPB / FiQA-SA sentiment task; 4-bit inference of an 8B financial LLM vs. 7-8B general LLMs vs. classical baselines; F1-macro / accuracy reporting.,f1_macro,8B,FPB; FiQA; FiQA-SA; FIN
+D052,dated,Slide 4,Substituted plutus-8B-instruct (TheFinAI's 2025 successor) when FinLLaMA-instruct was unpublished; prompt templates A/B specifically chosen to measure sensitivity.,count,8B,FinLLaMA; LLaMA; Llama; Instruct; plutus; FIN; template
+D053,dated,Slide 4,"Inference only (no fine-tuning, no multimodal, no trading sim). 300-sample subsample per dataset for the LLM matrix to fit Modal T4 budget.",count,300,FIN
+D054,dated,Slide 5,We substitute TheFinAI/plutus-8B-instruct (Feb 2025) — the same group's current 8B financial-instruction-tuned model,count,8B,Instruct; plutus; FIN
+D055,dated,Slide 5,We substitute TheFinAI/plutus-8B-instruct (Feb 2025) — the same group's current 8B financial-instruction-tuned model,count,8B,Instruct; plutus; FIN
+D056,dated,Slide 5,"Same architecture (LLaMA-3 8B), same research direction, same goal: beat the base on financial NLP",count,8B,LLaMA; Llama; FIN
+D057,dated,Slide 8,"[Table, Slide 8] row='Financial PhraseBank' col='Size' cell='690 test (sentences_75agree)'",count,690,Financial PhraseBank; FIN
+D058,dated,Slide 8,"[Table, Slide 8] row='Financial PhraseBank' col='Note' cell='Annotator agreement ≥ 75% — clean test signal'",percent,75%,Financial PhraseBank; FIN
+D059,dated,Slide 8,"[Table, Slide 8] row='FiQA-SA' col='Labels' cell='score ∈ [-1, 1] → 3-class with ±0.10 band'",f1_macro,0.10,FiQA; FiQA-SA
+D060,dated,Slide 8,LLM matrix uses a 300-sample subsample per dataset (Modal time budget); baselines use full test sets,count,300,
+D061,dated,Slide 8,Leakage caveat: both datasets predate every LLM here by 7-12 years and were almost certainly seen at pretraining time,count,12,
+D062,dated,Slide 9,"Five models across three families: financial-tuned, general 7-8B LLM, and classical.",count,8B,FIN
+D063,dated,Slide 9,"[Table, Slide 9] row='Financial-tuned' col='Model' cell='TheFinAI/plutus-8B-instruct'",count,8B,FIN
+D064,dated,Slide 9,"[Table, Slide 9] row='Financial-tuned' col='Size / Type' cell='8B · LLaMA-3, 4-bit'",count,8B,FIN
+D065,dated,Slide 9,"[Table, Slide 9] row='General-purpose LLM' col='Model' cell='mistralai/Mistral-7B-Instruct-v0.3'",count,7B,
+D066,dated,Slide 9,"[Table, Slide 9] row='General-purpose LLM' col='Size / Type' cell='7B · 4-bit'",count,7B,
+D067,dated,Slide 9,"[Table, Slide 9] row='General-purpose LLM' col='Model' cell='Qwen/Qwen2.5-7B-Instruct'",count,7B,
+D068,dated,Slide 9,"[Table, Slide 9] row='General-purpose LLM' col='Size / Type' cell='7B · 4-bit'",count,7B,
+D069,dated,Slide 9,"[Table, Slide 9] row='Classical specialised' col='Size / Type' cell='110M · BERT classifier'",count,110M,
+D070,dated,Slide 9,"LLaMA-3.1-8B-Instruct skipped — gated, no access yet.",other,3.1,LLaMA-3.1-8B; Llama-3.1-8B; LLaMA; Llama; Instruct
+D071,dated,Slide 9,"LLaMA-3.1-8B-Instruct skipped — gated, no access yet.",count,8B,LLaMA-3.1-8B; Llama-3.1-8B; LLaMA; Llama; Instruct
+D072,dated,Slide 11,"12 LLM runs (3 models × 2 datasets × 2 templates × {0, 3}-shot) + 4 baseline runs.",count,12,template; shot
+D073,dated,Slide 11,"Seed locked to 42 for every random draw: subsample, few-shot pick, baselines",count,42,few-shot; shot
+D074,dated,Slide 14,"[Table, Slide 14] row='FinBERT (specialised, 110M)' col='Model' cell='FinBERT (specialised, 110M)'",count,110M,FinBERT; FIN
+D075,dated,Slide 14,"[Table, Slide 14] row='FinBERT (specialised, 110M)' col='FPB · F1m' cell='0.925'",f1_macro,0.925,FinBERT; FPB; FIN
+D076,dated,Slide 14,"[Table, Slide 14] row='FinBERT (specialised, 110M)' col='FPB · Acc' cell='0.935'",f1_macro,0.935,FinBERT; FPB; FIN
+D077,dated,Slide 14,"[Table, Slide 14] row='FinBERT (specialised, 110M)' col='FiQA · F1m' cell='0.482'",f1_macro,0.482,FinBERT; FiQA; FIN
+D078,dated,Slide 14,"[Table, Slide 14] row='FinBERT (specialised, 110M)' col='FiQA · Acc' cell='0.498'",f1_macro,0.498,FinBERT; FiQA; FIN
+D079,dated,Slide 14,"[Table, Slide 14] row='Qwen2.5-7B-Instruct' col='Model' cell='Qwen2.5-7B-Instruct'",count,7B,Instruct; Qwen
+D080,dated,Slide 14,"[Table, Slide 14] row='Qwen2.5-7B-Instruct' col='FPB · F1m' cell='0.832'",f1_macro,0.832,Instruct; Qwen; FPB
+D081,dated,Slide 14,"[Table, Slide 14] row='Qwen2.5-7B-Instruct' col='FPB · Acc' cell='0.860'",f1_macro,0.860,Instruct; Qwen; FPB
+D082,dated,Slide 14,"[Table, Slide 14] row='Qwen2.5-7B-Instruct' col='FiQA · F1m' cell='0.673'",f1_macro,0.673,Instruct; Qwen; FiQA
+D083,dated,Slide 14,"[Table, Slide 14] row='Qwen2.5-7B-Instruct' col='FiQA · Acc' cell='0.717'",f1_macro,0.717,Instruct; Qwen; FiQA
+D084,dated,Slide 14,"[Table, Slide 14] row='Mistral-7B-Instruct-v0.3' col='Model' cell='Mistral-7B-Instruct-v0.3'",count,7B,Instruct; Mistral
+D085,dated,Slide 14,"[Table, Slide 14] row='Mistral-7B-Instruct-v0.3' col='FPB · F1m' cell='0.890'",f1_macro,0.890,Instruct; Mistral; FPB
+D086,dated,Slide 14,"[Table, Slide 14] row='Mistral-7B-Instruct-v0.3' col='FPB · Acc' cell='0.903'",f1_macro,0.903,Instruct; Mistral; FPB
+D087,dated,Slide 14,"[Table, Slide 14] row='Mistral-7B-Instruct-v0.3' col='FiQA · F1m' cell='0.599'",f1_macro,0.599,Instruct; Mistral; FiQA
+D088,dated,Slide 14,"[Table, Slide 14] row='Mistral-7B-Instruct-v0.3' col='FiQA · Acc' cell='0.620'",f1_macro,0.620,Instruct; Mistral; FiQA
+D089,dated,Slide 14,"[Table, Slide 14] row='plutus-8B-instruct (focal)' col='Model' cell='plutus-8B-instruct (focal)'",count,8B,Instruct; plutus
+D090,dated,Slide 14,"[Table, Slide 14] row='plutus-8B-instruct (focal)' col='FPB · F1m' cell='0.829'",f1_macro,0.829,Instruct; plutus; FPB
+D091,dated,Slide 14,"[Table, Slide 14] row='plutus-8B-instruct (focal)' col='FPB · Acc' cell='0.851'",f1_macro,0.851,Instruct; plutus; FPB
+D092,dated,Slide 14,"[Table, Slide 14] row='plutus-8B-instruct (focal)' col='FiQA · F1m' cell='0.597'",f1_macro,0.597,Instruct; plutus; FiQA
+D093,dated,Slide 14,"[Table, Slide 14] row='plutus-8B-instruct (focal)' col='FiQA · Acc' cell='0.657'",f1_macro,0.657,Instruct; plutus; FiQA
+D094,dated,Slide 14,"[Table, Slide 14] row='VADER (lexicon)' col='FPB · F1m' cell='0.469'",f1_macro,0.469,VADER; FPB
+D095,dated,Slide 14,"[Table, Slide 14] row='VADER (lexicon)' col='FPB · Acc' cell='0.554'",f1_macro,0.554,VADER; FPB
+D096,dated,Slide 14,"[Table, Slide 14] row='VADER (lexicon)' col='FiQA · F1m' cell='0.386'",f1_macro,0.386,VADER; FiQA
+D097,dated,Slide 14,"[Table, Slide 14] row='VADER (lexicon)' col='FiQA · Acc' cell='0.423'",f1_macro,0.423,VADER; FiQA
+D098,dated,Slide 14,Green-highlighted cells: per-dataset best.  ·  Source: results/summary/final_table.csv (dashboard at :8502).,count,8502,FIN
+D099,dated,Slide 15,plutus-8B (focal financial-tuned model) scored 0.829 F1m on FPB and 0.597 on FiQA.,f1_macro,8B,plutus; FPB; FiQA; FIN
+D100,dated,Slide 15,plutus-8B (focal financial-tuned model) scored 0.829 F1m on FPB and 0.597 on FiQA.,f1_macro,0.829,plutus; FPB; FiQA; FIN
+D101,dated,Slide 15,plutus-8B (focal financial-tuned model) scored 0.829 F1m on FPB and 0.597 on FiQA.,f1_macro,0.597,plutus; FPB; FiQA; FIN
+D102,dated,Slide 15,Mistral-7B beat it on FPB (0.890) and Qwen2.5-7B beat it on FiQA (0.673).,count,7B,Mistral; Qwen; FPB; FiQA
+D103,dated,Slide 15,Mistral-7B beat it on FPB (0.890) and Qwen2.5-7B beat it on FiQA (0.673).,f1_macro,0.890,Mistral; Qwen; FPB; FiQA
+D104,dated,Slide 15,Mistral-7B beat it on FPB (0.890) and Qwen2.5-7B beat it on FiQA (0.673).,count,7B,Mistral; Qwen; FPB; FiQA
+D105,dated,Slide 15,Mistral-7B beat it on FPB (0.890) and Qwen2.5-7B beat it on FiQA (0.673).,f1_macro,0.673,Mistral; Qwen; FPB; FiQA
+D106,dated,Slide 15,On FPB the 110M specialised classifier (0.925 F1m) outperforms every 8B LLM.,f1_macro,110M,FPB
+D107,dated,Slide 15,On FPB the 110M specialised classifier (0.925 F1m) outperforms every 8B LLM.,f1_macro,0.925,FPB
+D108,dated,Slide 15,On FPB the 110M specialised classifier (0.925 F1m) outperforms every 8B LLM.,f1_macro,8B,FPB
+D109,dated,Slide 15,On FiQA it drops to 0.482 — Qwen2.5-7B beats it by 19 points.,f1_macro,0.482,Qwen; FiQA
+D110,dated,Slide 15,On FiQA it drops to 0.482 — Qwen2.5-7B beats it by 19 points.,count,7B,Qwen; FiQA
+D111,dated,Slide 15,On FiQA it drops to 0.482 — Qwen2.5-7B beats it by 19 points.,percent,19 points,Qwen; FiQA
+D112,dated,Slide 15,Mistral on FPB: Template A 0-shot 0.803 vs Template B 0-shot 0.689 — an 11-point gap from rewording alone.,f1_macro,0.803,Mistral; FPB; template; shot
+D113,dated,Slide 15,Mistral on FPB: Template A 0-shot 0.803 vs Template B 0-shot 0.689 — an 11-point gap from rewording alone.,f1_macro,0.689,Mistral; FPB; template; shot
+D114,dated,Slide 15,Mistral on FPB: Template A 0-shot 0.803 vs Template B 0-shot 0.689 — an 11-point gap from rewording alone.,percent,11-point,Mistral; FPB; template; shot
+D115,dated,Slide 15,Qwen on FiQA: Template B 0-shot 0.673 vs Template A 0-shot 0.578 — 9 points.,f1_macro,0.673,Qwen; FiQA; template; shot
+D116,dated,Slide 15,Qwen on FiQA: Template B 0-shot 0.673 vs Template A 0-shot 0.578 — 9 points.,f1_macro,0.578,Qwen; FiQA; template; shot
+D117,dated,Slide 15,Qwen on FiQA: Template B 0-shot 0.673 vs Template A 0-shot 0.578 — 9 points.,percent,9 points,Qwen; FiQA; template; shot
+D118,dated,Slide 15,Plutus on FiQA: A 0-shot 0.597 vs B 0-shot 0.432 — 16 points.,f1_macro,0.597,plutus; FiQA; shot
+D119,dated,Slide 15,Plutus on FiQA: A 0-shot 0.597 vs B 0-shot 0.432 — 16 points.,f1_macro,0.432,plutus; FiQA; shot
+D120,dated,Slide 15,Plutus on FiQA: A 0-shot 0.597 vs B 0-shot 0.432 — 16 points.,percent,16 points,plutus; FiQA; shot
+D121,dated,Slide 20,Below ~95% is a flag.,percent,95%,
+D122,dated,Slide 21,Gold: positive  ·  plutus-8B: positive  ·  Mistral: neutral  ·  Qwen2.5: neutral,count,8B,plutus; Mistral; Qwen
+D123,dated,Slide 21,Gold: negative  ·  Mistral: negative  ·  plutus-8B: neutral,count,8B,plutus; Mistral
+D124,dated,Slide 22,FinBERT on FPB: clean labels + matching domain ⇒ 0.925 F1m and ≥0.93 on every class — strongest result anywhere in the matrix.,f1_macro,0.925,FinBERT; FPB; FIN
+D125,dated,Slide 22,FinBERT on FPB: clean labels + matching domain ⇒ 0.925 F1m and ≥0.93 on every class — strongest result anywhere in the matrix.,f1_macro,0.93,FinBERT; FPB; FIN
+D126,dated,Slide 22,"Mistral-7B on FPB with 3-shot Template A: 0.890 F1m, 0.903 accuracy — closes most of the FinBERT gap and shows that a general-purpose 7B can match a specialist when shown 3 in-context examples.",f1_macro,7B,FinBERT; Mistral; FPB; FIN; template; shot
+D127,dated,Slide 22,"Mistral-7B on FPB with 3-shot Template A: 0.890 F1m, 0.903 accuracy — closes most of the FinBERT gap and shows that a general-purpose 7B can match a specialist when shown 3 in-context examples.",f1_macro,0.890,FinBERT; Mistral; FPB; FIN; template; shot
+D128,dated,Slide 22,"Mistral-7B on FPB with 3-shot Template A: 0.890 F1m, 0.903 accuracy — closes most of the FinBERT gap and shows that a general-purpose 7B can match a specialist when shown 3 in-context examples.",f1_macro,0.903,FinBERT; Mistral; FPB; FIN; template; shot
+D129,dated,Slide 22,"Mistral-7B on FPB with 3-shot Template A: 0.890 F1m, 0.903 accuracy — closes most of the FinBERT gap and shows that a general-purpose 7B can match a specialist when shown 3 in-context examples.",f1_macro,7B,FinBERT; Mistral; FPB; FIN; template; shot
+D130,dated,Slide 22,Qwen2.5-7B on FiQA Template B 0-shot: 0.673 F1m on the noisy/conversational FiQA where FinBERT collapses to 0.482 — generalist beats specialist out-of-domain.,f1_macro,7B,FinBERT; Qwen; FiQA; FIN; template; shot
+D131,dated,Slide 22,Qwen2.5-7B on FiQA Template B 0-shot: 0.673 F1m on the noisy/conversational FiQA where FinBERT collapses to 0.482 — generalist beats specialist out-of-domain.,f1_macro,0.673,FinBERT; Qwen; FiQA; FIN; template; shot
+D132,dated,Slide 22,Qwen2.5-7B on FiQA Template B 0-shot: 0.673 F1m on the noisy/conversational FiQA where FinBERT collapses to 0.482 — generalist beats specialist out-of-domain.,f1_macro,0.482,FinBERT; Qwen; FiQA; FIN; template; shot
+D133,dated,Slide 22,All LLMs hit 100% parsing coverage with our greedy + synonym-aware parser — no run was poisoned by 'bullish'/'bearish'-style outputs that would have force-mapped to neutral.,coverage,100%,
+D134,dated,Slide 22,"VADER on FPB at 0.469 F1m provides a useful 'no-learning floor' — every other model is at least 17 points above it, validating the comparison.",f1_macro,0.469,VADER; FPB
+D135,dated,Slide 22,"VADER on FPB at 0.469 F1m provides a useful 'no-learning floor' — every other model is at least 17 points above it, validating the comparison.",f1_macro,17 points,VADER; FPB
+D136,dated,Slide 23,"Tip: when hand-tagging, look for cases where plutus-8B is right but Mistral/Qwen are wrong — those are the real evidence for or against the financial-tuning hypothesis.",count,8B,plutus; Mistral; Qwen; FIN
+D137,dated,Slide 24,Live at localhost:8502 — every chart and table on these slides also updates as new runs finish.,count,8502,FIN
+D138,dated,Slide 27,"Notebook → script split, run-dir schema with checkpoint/resume, parser as a tested module, Modal Volume for cached weights — without these, a 12-run matrix isn't redoable.",count,12,
+D139,dated,Slide 28,Add an LLM-as-judge sanity pass over a 100-sample slice — catch label noise,count,100,
+D140,dated,Slide 28,Include a smaller financial model (e.g. finma-7b) and a non-financial 8B baseline of the same era for a tighter family comparison,count,8B,FIN
+D141,dated,Slide 29,Financial instruction tuning did NOT clearly help. plutus-8B scored 0.829 / 0.597 F1m on FPB / FiQA — beaten on FPB by Mistral-7B (0.890) and on FiQA by Qwen2.5-7B (0.673).,f1_macro,0.829,Instruct; plutus; Mistral; Qwen; FPB; FiQA; FIN
+D142,dated,Slide 29,Financial instruction tuning did NOT clearly help. plutus-8B scored 0.829 / 0.597 F1m on FPB / FiQA — beaten on FPB by Mistral-7B (0.890) and on FiQA by Qwen2.5-7B (0.673).,f1_macro,0.597,Instruct; plutus; Mistral; Qwen; FPB; FiQA; FIN
+D143,dated,Slide 29,Financial instruction tuning did NOT clearly help. plutus-8B scored 0.829 / 0.597 F1m on FPB / FiQA — beaten on FPB by Mistral-7B (0.890) and on FiQA by Qwen2.5-7B (0.673).,f1_macro,7B,Instruct; plutus; Mistral; Qwen; FPB; FiQA; FIN
+D144,dated,Slide 29,Financial instruction tuning did NOT clearly help. plutus-8B scored 0.829 / 0.597 F1m on FPB / FiQA — beaten on FPB by Mistral-7B (0.890) and on FiQA by Qwen2.5-7B (0.673).,f1_macro,0.890,Instruct; plutus; Mistral; Qwen; FPB; FiQA; FIN
+D145,dated,Slide 29,Financial instruction tuning did NOT clearly help. plutus-8B scored 0.829 / 0.597 F1m on FPB / FiQA — beaten on FPB by Mistral-7B (0.890) and on FiQA by Qwen2.5-7B (0.673).,f1_macro,7B,Instruct; plutus; Mistral; Qwen; FPB; FiQA; FIN
+D146,dated,Slide 29,Financial instruction tuning did NOT clearly help. plutus-8B scored 0.829 / 0.597 F1m on FPB / FiQA — beaten on FPB by Mistral-7B (0.890) and on FiQA by Qwen2.5-7B (0.673).,f1_macro,0.673,Instruct; plutus; Mistral; Qwen; FPB; FiQA; FIN
+D147,dated,Slide 29,"FinBERT (110M, in-domain trained) crushed every 8B model on FPB but lost by 19 points on FiQA.",count,110M,FinBERT; FPB; FiQA; FIN
+D148,dated,Slide 29,"FinBERT (110M, in-domain trained) crushed every 8B model on FPB but lost by 19 points on FiQA.",count,8B,FinBERT; FPB; FiQA; FIN
+D149,dated,Slide 29,"FinBERT (110M, in-domain trained) crushed every 8B model on FPB but lost by 19 points on FiQA.",percent,19 points,FinBERT; FPB; FiQA; FIN
+D150,dated,Slide 29,Don't trust LLM benchmarks reported with a single prompt — sensitivity here was 9-16 F1 points.,f1_macro,16,
+D151,dated,Slide 29,Specialised small models still beat 8B general LLMs in-domain — and the inverse on noisier text.,count,8B,
+D152,dated,Slide 30,Live dashboard · localhost:8502  (run dashboard/run.bat),count,8502,

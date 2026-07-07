@@ -1,0 +1,35 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+D035,Slide 21,non_checkable,,,8B,Qualitative hand-tagging tip about plutus/Mistral/Qwen; no metric to verify.
+D036,Slide 23,mismatched,report/report.md;results/summary/final_table.csv,24 LLM runs (3x2x2x2=24; 24 LLM rows in CSV),12,Deck says "12 LLM runs (3x2x2x2)" but formula=24 and report/CSV both say 24 runs.
+D037,Slide 24,non_checkable,,,100,Future-work suggestion (LLM-as-judge pass), not an existing artifact fact.
+D038,Slide 24,non_checkable,,,8B,Future-work suggestion (add finma-7b/non-financial 8B baseline), not a current-state claim.
+D039,Slide 25,non_checkable,review/evidence/deck_diff.md,"Slide 25 main deck is literal unresolved template text '[Insert...][NUM]-point...]'",8B,Main-deck slide 25 is an unfilled placeholder template, not an asserted number.
+D040,Slide 25,non_checkable,review/evidence/deck_diff.md,"Slide 25 main deck is literal unresolved template text '[Insert...][NUM]-point...]'",7B,Main-deck slide 25 is an unfilled placeholder template, not an asserted number.
+D041,Slide 25,non_checkable,review/evidence/deck_diff.md,"Slide 25 main deck is literal unresolved template text '[Insert...][NUM]-point...]'",8B,Main-deck slide 25 is an unfilled placeholder template, not an asserted number.
+D042,Slide 26,mismatched,dashboard/run.bat,"streamlit run dashboard\app.py with no --server.port flag -> default port 8501, no .streamlit/config.toml found",8502,run.bat has no port override; Streamlit default is 8501 not 8502.
+D043,Slide 1,non_checkable,,,30 min,Agenda timing statement; not a data claim to verify against artifacts.
+D044,Slide 2,non_checkable,,,7 min,Agenda timing statement; not a data claim to verify against artifacts.
+D045,Slide 2,non_checkable,,,10 min,Agenda timing statement; not a data claim to verify against artifacts.
+D046,Slide 2,non_checkable,,,10,Agenda timing statement; not a data claim to verify against artifacts.
+D047,Slide 2,non_checkable,,,12 min,Agenda timing statement; not a data claim to verify against artifacts.
+D048,Slide 2,non_checkable,,,5 min,Agenda timing statement; not a data claim to verify against artifacts.
+D049,Slide 4,non_checkable,,,8B,Qualitative research-question framing sentence; no specific metric asserted.
+D050,Slide 4,non_checkable,,,8B,Scope-description sentence (task/metric framing), not a specific number to check.
+D051,Slide 4,non_checkable,,,8B,Scope-description sentence (task/metric framing), not a specific number to check.
+D052,Slide 4,matched,report/report.md,"plutus-8B-instruct substituted for FinLLaMA-instruct (404/unpublished); templates A/B used to measure sensitivity",8B,report.md and deck agree: plutus-8B substituted, A/B templates test sensitivity.
+D053,Slide 4,matched,results/summary/final_table.csv;report/report.md,"300-sample LLM subsample per dataset (n_samples=300 for all LLM rows)",300,final_table.csv LLM rows all show n_samples=300, matching claim.
+D054,Slide 5,matched,report/report.md,"plutus-8B-instruct (TheFinAI's current 8B financial-instruct model) substituted for FinLLaMA-instruct",8B,report.md line 17 confirms plutus-8B-instruct as substitute, 8B model.
+D055,Slide 5,matched,report/report.md,"plutus-8B-instruct (TheFinAI's current 8B financial-instruct model) substituted for FinLLaMA-instruct",8B,Duplicate of D054 claim; same artifact support.
+D056,Slide 5,matched,report/report.md,"plutus-8B-instruct is LLaMA-3 8B architecture, same research direction as FinLLaMA-instruct",8B,report.md/model card confirm plutus is LLaMA-3-based 8B model.
+D057,Slide 8,matched,results/summary/final_table.csv,"FPB baseline rows show n_samples=690",690,final_table.csv finbert/vader FPB rows show n_samples=690, matching claim.
+D058,Slide 8,matched,report/report.md,"75%-agree FPB split described as clean/conventional test signal",75%,report.md describes FPB test as the 75%-agreement split (sentences_75agree).
+D059,Slide 8,matched,report/report.md,"FiQA continuous score bucketed to 3-class with +/-0.10 neutral band",0.10,report.md line ~34/270 and configs/experiment.yaml confirm neutral_band=0.10.
+D060,Slide 8,matched,results/summary/final_table.csv,"All LLM rows n_samples=300; baseline rows n_samples=690/1173 (full test sets)",300,final_table.csv confirms 300-sample LLM subsample vs full-set baselines.
+D061,Slide 8,non_checkable,,,12,Qualitative leakage-caveat statement about dataset age vs LLM pretraining; not independently verifiable from artifacts.
+D062,Slide 9,matched,results/summary/final_table.csv,"3 model families present: plutus-8B (financial), Mistral/Qwen (general 7-8B), FinBERT/VADER (classical)",8B,final_table.csv model roster matches the three-family framing.
+D063,Slide 9,matched,results/summary/final_table.csv,"TheFinAI/plutus-8B-instruct is the financial-tuned model in the matrix",8B,final_table.csv model_hf_id column lists TheFinAI/plutus-8B-instruct.
+D064,Slide 9,matched,results/summary/final_table.csv,"plutus8b listed as TheFinAI/plutus-8B-instruct, LLaMA-3-based, run in 4-bit per report.md",8B,report.md/model card confirm 8B LLaMA-3 4-bit quantized.
+D065,Slide 9,matched,results/summary/final_table.csv,"mistral7b = mistralai/Mistral-7B-Instruct-v0.3",7B,final_table.csv model_hf_id column lists mistralai/Mistral-7B-Instruct-v0.3.
+D066,Slide 9,matched,report/report.md,"Mistral-7B run in 4-bit quantization per report methodology",7B,report.md confirms 4-bit inference for all LLMs including Mistral-7B.
+D067,Slide 9,matched,results/summary/final_table.csv,"qwen25_7b = Qwen/Qwen2.5-7B-Instruct",7B,final_table.csv model_hf_id column lists Qwen/Qwen2.5-7B-Instruct.
+D068,Slide 9,matched,report/report.md,"Qwen2.5-7B run in 4-bit quantization per report methodology",7B,report.md confirms 4-bit inference for all LLMs including Qwen2.5-7B.

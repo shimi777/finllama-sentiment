@@ -1,0 +1,17 @@
+claim_id,section,verdict,artifact_path,artifact_value,claim_value,note
+D137,Slide 24,matched,presentation/build_deck.js,"localhost:8502","8502",Verbatim from build_deck.js line 746 slide subtitle; matches STATUS.md and screenshot_dashboard.py.
+D138,Slide 27,mismatched,results/summary/final_table.csv,"24 LLM rows (3 models x FPB/FiQA x A/B x 0/3-shot)","12","Deck text says 12-run matrix; final_table.csv shows 24 LLM cells (commit 9be517c: 24-cell LLM matrix complete)."
+D139,Slide 28,non_checkable,presentation/build_deck.js,"Add an LLM-as-judge sanity pass over a 100-sample slice","100",Verbatim proposed future work, not a measured result to check against data.
+D140,Slide 28,non_checkable,presentation/build_deck.js,"Include a smaller financial model (e.g. finma-7b) and a non-financial 8B baseline","8B",Verbatim proposed future work, not a measured result to check against data.
+D141,Slide 29,matched,results/summary/final_table.csv;review/evidence/recomputed_metrics.csv,"plutus8b FPB best f1_macro=0.8291 (A/3shot)","0.829",Both final_table.csv and recomputed_metrics.csv agree at 0.8291; rounds to 0.829.
+D142,Slide 29,matched,results/summary/final_table.csv;review/evidence/recomputed_metrics.csv,"plutus8b FiQA best f1_macro=0.5966 (A/0shot)","0.597",Both tables agree at 0.5966; rounds to 0.597.
+D143,Slide 29,matched,report/report.md,"Mistral-7B-Instruct-v0.3 (general)","7B",Model name in headline table (report.md line 177) confirms 7B designation.
+D144,Slide 29,matched,results/summary/final_table.csv;review/evidence/recomputed_metrics.csv,"mistral7b FPB best f1_macro=0.8897 (A/3shot)","0.890",Both tables agree at 0.8897; rounds to 0.890.
+D145,Slide 29,matched,report/report.md,"Qwen2.5-7B-Instruct (general)","7B",Model name in headline table (report.md line 178) confirms 7B designation.
+D146,Slide 29,matched,results/summary/final_table.csv;review/evidence/recomputed_metrics.csv,"qwen25_7b FiQA best f1_macro=0.6727 (B/0shot)","0.673",Both tables agree at 0.6727; rounds to 0.673.
+D147,Slide 29,matched,report/report.md,"FinBERT (110M, in-domain)","110M",report.md line 175 headline table states FinBERT is 110M in-domain model.
+D148,Slide 29,matched,report/report.md,"every 8B model (Mistral-7B/Qwen2.5-7B/plutus-8B)","8B",report.md headline table lists all LLM competitors as 7-8B models; consistent with claim.
+D149,Slide 29,matched,results/summary/final_table.csv,"FinBERT FiQA f1_macro=0.482; Qwen25_7b FiQA f1_macro=0.6727; gap=(0.6727-0.482)*100=19.07","19 points",Recomputed gap between FinBERT and best 8B (Qwen) on FiQA = 19.1 points; matches '19 points'.
+D150,Slide 29,matched,report/report.md,"Template A vs B F1m gaps: Mistral-FPB 11.4pt, plutus-FiQA 16.4pt, Qwen-FiQA 9.4pt","16",report.md section 6.1 table shows range 9.4-16.4 pt; claim's endpoint value 16 matches 16.4 rounded.
+D151,Slide 29,non_checkable,presentation/build_deck.js,"Specialised small models still beat 8B general LLMs in-domain — and the inverse on noisier text","8B",Qualitative interpretive summary verbatim from deck line 862; consistent with FPB/FiQA data pattern but not itself a single checkable number.
+D152,Slide 30,matched,presentation/build_deck.js,"Live dashboard localhost:8502 (run dashboard/run.bat)","8502",Verbatim from build_deck.js line 885.
